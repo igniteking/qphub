@@ -11,14 +11,32 @@ import {
   ListGroup,
   Modal,
 } from "react-bootstrap";
-import { MenuItems } from "../sidebar/nav";
 import nextConfig from "@/next.config.mjs";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Header = ({ local_varaiable, ThemeChanger }: any) => {
   const { user, isLoaded, isSignedIn } = useUser();
-  console.log(user?.imageUrl);
+  const { signOut } = useClerk();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      // Perform sign-out
+      await signOut();
+
+      // Redirect to the sign-in page
+      router.push("/sign-in");
+    } catch (error: unknown) {
+      // Handle the error gracefully
+      if (error instanceof Error) {
+        console.error("Error signing out:", error.message);
+      } else {
+        console.error("Unexpected error signing out:", error);
+      }
+    }
+  };
 
   let { basePath } = nextConfig;
 
@@ -1223,13 +1241,25 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                   </Link>
                 </li>
                 <li>
-                  <Link
+                  <button
                     className="dropdown-item d-flex align-items-center"
-                    href="#!"
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                      margin: 0,
+                      color: "inherit",
+                    }}
+                    onClick={() => {
+                      handleSignOut();
+                    }}
                   >
-                    <i className="ti ti-logout me-2 fs-18 text-warning"></i>Log
-                    Out
-                  </Link>
+                    <div className="dropdown-item d-flex align-items-center">
+                      <i className="ti ti-logout me-2 fs-18 text-warning"></i>
+                      Log Out
+                    </div>
+                  </button>
                 </li>
               </Dropdown.Menu>
             </Dropdown>
