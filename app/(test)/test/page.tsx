@@ -1,22 +1,24 @@
 "use client";
-import Link from "next/link";
-import SimpleBar from "simplebar-react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Fragment } from "react";
-import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
+
+import Backtotop from "@/components/backtotop";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Sidebar from "@/components/sidebar";
 
 const Testing = () => {
   return (
-    <Sidebar>
-      <Menu>
-        <SubMenu label="Charts">
-          <MenuItem> Pie charts </MenuItem>
-          <MenuItem> Line charts </MenuItem>
-        </SubMenu>
-        <MenuItem> Documentation </MenuItem>
-        <MenuItem> Calendar </MenuItem>
-      </Menu>
-    </Sidebar>
+    <div style={{ display: "block" }}>
+      {/* <Switcher/> */}
+      <div className="page">
+        <Header />
+        <Sidebar />
+        <div className="main-content app-content">
+          <div className="container-fluid">HELLO!</div>
+        </div>
+        <Footer />
+      </div>
+      <Backtotop />
+    </div>
   );
 };
 

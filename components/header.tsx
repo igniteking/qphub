@@ -27,6 +27,13 @@ const Header = () => {
     };
   }, []);
 
+  const showandhidebar = () => {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) {
+      sidebar.classList.toggle("hide");
+    }
+  };
+
   //Endfull screen
   return (
     <Fragment>
@@ -38,11 +45,7 @@ const Header = () => {
             {/* Start::header-element */}
             <div className="header-element">
               <div className="horizontal-logo">
-                <Link
-                  scroll={false}
-                  href="/dashboards/sales"
-                  className="header-logo"
-                >
+                <Link scroll={false} href="/dashboard/" className="header-logo">
                   <img
                     src={`/assets/images/brand-logos/desktop-logo.png`}
                     alt="logo"
@@ -75,7 +78,10 @@ const Header = () => {
                 aria-label="Hide Sidebar"
                 className="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
                 data-bs-toggle="sidebar"
-                href="#!"
+                href=""
+                onClick={() => {
+                  showandhidebar();
+                }}
               >
                 <span></span>
               </Link>
