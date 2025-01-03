@@ -1,4 +1,4 @@
-import Seo from "@/shared/seo/seo";
+import Seo from "@/shared/layout-components/seo/seo";
 import Link from "next/link";
 import React, { Fragment } from "react";
 import { Col, Row } from "react-bootstrap";
@@ -8,7 +8,7 @@ const Error404 = () => {
     <html>
       <body>
         <Fragment>
-          <Seo title={"Error - 404"} />
+          <Seo title={"Error404"} />
           <div className="page error-bg">
             {/* <!-- Start::error-page --> */}
             <div className="error-page">
