@@ -1,13 +1,18 @@
 import React from "react";
-import { CDBSidebar } from "cdbreact";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 
 const Testing = () => {
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <CDBSidebar textColor="#fff" backgroundColor="#333" className={""} breakpoint={0} toggled={false} minWidth={""} maxWidth={""}>
-        <div>Test Sidebar</div>
-      </CDBSidebar>
-    </div>
+    <Sidebar>
+      <Menu>
+        <SubMenu label="Charts">
+          <MenuItem> Pie charts </MenuItem>
+          <MenuItem> Line charts </MenuItem>
+        </SubMenu>
+        <MenuItem> Documentation </MenuItem>
+        <MenuItem> Calendar </MenuItem>
+      </Menu>
+    </Sidebar>
   );
 };
 
