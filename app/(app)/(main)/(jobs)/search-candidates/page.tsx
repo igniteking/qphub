@@ -736,6 +736,36 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                   <div className="btn-list float-end">
                     <OverlayTrigger
                       placement="top"
+                      overlay={<Tooltip>Email sent : 12</Tooltip>}
+                    >
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        <span className="fs-14">
+                          <i className="bi bi-envelope-arrow-up text-muted me-1"></i>{" "}
+                          12
+                        </span>
+                      </Link>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>No. of Calls : 12</Tooltip>}
+                    >
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        <span className="fs-14">
+                          <i className="bi bi-telephone-outbound text-muted me-1"></i>{" "}
+                          12
+                        </span>
+                      </Link>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      placement="top"
                       overlay={<Tooltip>Download Resume</Tooltip>}
                     >
                       <Link
@@ -751,7 +781,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </OverlayTrigger>
                     <OverlayTrigger
                       placement="top"
-                      overlay={<Tooltip>Add to Wishlist</Tooltip>}
+                      overlay={<Tooltip>Add to Shortlist</Tooltip>}
                     >
                       <Link
                         scroll={false}
@@ -884,9 +914,18 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       </span>
                     </Link>
                   </div>
+                  <div className="d-flex align-items-center flex-wrap gap-3 mb-4 text-muted">
+                    Est amet sit vero sanctus labore no sed ipsum ipsum nonumy.
+                    Sit ipsum sanctus ea magna est. Aliquyam sed amet. Kasd diam
+                    rebum sit ipsum ipsum erat et kasd.Est amet sit vero sanctus
+                    labore no sed ipsum ipsum nonumy vero sanctus labore.A
+                    officiis optio temporibus minima facilis.
+                  </div>
                   <div className="d-flex align-items-center flex-wrap gap-3">
                     <p className="mb-0 flex-grow-1">
-                      <span className="text-muted">Package (Yearly) :</span>
+                      <span className="text-muted">
+                        Current Package (Yearly) :
+                      </span>
                       <OverlayTrigger
                         placement="top"
                         overlay={<Tooltip>Current</Tooltip>}
@@ -970,13 +1009,32 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                           bond accepted
                         </Link>
                       </OverlayTrigger>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge badge-md rounded-pill bg-primary-transparent"
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>Exp : 2 Years</Tooltip>}
                       >
-                        <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
-                      </Link>
+                        <Link
+                          scroll={false}
+                          href="#!"
+                          className="badge badge-md rounded-pill bg-primary-transparent"
+                        >
+                          <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
+                        </Link>
+                      </OverlayTrigger>{" "}
+                      ||{" "}
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>Nationality : Indian</Tooltip>}
+                      >
+                        <Link
+                          scroll={false}
+                          href="#!"
+                          className="badge badge-md rounded-pill bg-secondary-transparent"
+                        >
+                          <i className="bi bi-briefcase me-1"></i>Nationality :
+                          Indian
+                        </Link>
+                      </OverlayTrigger>
                     </div>
                   </div>
                 </Card.Footer>
