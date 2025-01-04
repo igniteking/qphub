@@ -276,7 +276,7 @@ export const MenuItems: any = [
     children: [
       {
         title: "Search Candidates",
-        path: "/search-candidate/",
+        path: "/search-candidates/",
         type: "link",
         active: false,
         selected: false,
