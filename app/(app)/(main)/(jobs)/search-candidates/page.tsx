@@ -944,7 +944,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                             {" "}
                             $2,300
                           </span>
-                        </OverlayTrigger>
+                        </OverlayTrigger>{" "}
                         -
                         <OverlayTrigger
                           placement="top"
