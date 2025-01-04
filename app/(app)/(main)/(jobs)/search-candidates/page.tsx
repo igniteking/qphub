@@ -736,7 +736,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                   <div className="btn-list float-end">
                     <OverlayTrigger
                       placement="top"
-                      overlay={<Tooltip>Email sent : 12</Tooltip>}
+                      overlay={<Tooltip>email@email.com</Tooltip>}
                     >
                       <Link
                         scroll={false}
@@ -751,7 +751,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </OverlayTrigger>
                     <OverlayTrigger
                       placement="top"
-                      overlay={<Tooltip>No. of Calls : 12</Tooltip>}
+                      overlay={<Tooltip>+91-1234567890</Tooltip>}
                     >
                       <Link
                         scroll={false}
@@ -921,43 +921,105 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     labore no sed ipsum ipsum nonumy vero sanctus labore.A
                     officiis optio temporibus minima facilis.
                   </div>
-                  <div className="d-flex align-items-center flex-wrap gap-3">
-                    <p className="mb-0 flex-grow-1">
-                      <span className="text-muted">
-                        Current Package (Yearly) :
-                      </span>
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Current</Tooltip>}
-                      >
-                        <span
-                          className="fw-medium"
-                          data-bs-toggle="tooltip"
-                          title="Current"
-                        >
+                  <Row>
+                    <Col lg={6}>
+                      <p className="mb-0 flex-grow-1">
+                        <span className="text-muted">Education :</span>
+                        <span className="fw-medium" data-bs-toggle="tooltip">
                           {" "}
-                          $2,300
+                          B.TECH Architecture
                         </span>
-                      </OverlayTrigger>
-                      -
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Expected</Tooltip>}
-                      >
-                        <span
-                          className="fw-medium"
-                          data-bs-toggle="tooltip"
-                          title="Expected"
+                      </p>
+                      <p className="mb-0 flex-grow-1">
+                        <span className="text-muted">Package (Yearly) :</span>
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Current</Tooltip>}
                         >
+                          <span
+                            className="fw-medium"
+                            data-bs-toggle="tooltip"
+                            title="Current"
+                          >
+                            {" "}
+                            $2,300
+                          </span>
+                        </OverlayTrigger>
+                        -
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Expected</Tooltip>}
+                        >
+                          <span
+                            className="fw-medium"
+                            data-bs-toggle="tooltip"
+                            title="Expected"
+                          >
+                            {" "}
+                            $3,678
+                          </span>
+                        </OverlayTrigger>
+                      </p>
+                    </Col>
+                    <Col lg={6}>
+                      <p className="mb-0">
+                        <span className="text-muted"> Prefered Location :</span>{" "}
+                        <span className="fw-medium">
                           {" "}
-                          $3,678
+                          Jaipur, Delhi, Mumbai, Kolkata, Gurugram
                         </span>
-                      </OverlayTrigger>
-                    </p>
-                    <p className="mb-0">
-                      <span className="text-muted"> Languages :</span>{" "}
-                      <span className="fw-medium"> English, Hindi, Telugu</span>
-                    </p>
+                      </p>
+                      <p className="mb-0">
+                        <span className="text-muted"> Languages :</span>{" "}
+                        <span className="fw-medium">
+                          {" "}
+                          English, Hindi, Telugu
+                        </span>
+                      </p>
+                    </Col>
+                  </Row>
+
+                  <div className="mt-1">
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>1 year bond accepted</Tooltip>}
+                    >
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge badge-md rounded-pill bg-info-transparent me-1"
+                        data-bs-toggle="tooltip"
+                        title="1 year bond accepted"
+                      >
+                        <i className="bi bi-hand-thumbs-up me-1"></i>1 year bond
+                        accepted
+                      </Link>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Exp : 2 Years</Tooltip>}
+                    >
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge badge-md rounded-pill bg-primary-transparent me-1"
+                      >
+                        <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
+                      </Link>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Nationality : Indian</Tooltip>}
+                    >
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge badge-md rounded-pill bg-secondary-transparent"
+                      >
+                        <i className="bi bi-briefcase me-1"></i>
+                        Nationality : Indian
+                      </Link>
+                    </OverlayTrigger>
                   </div>
                 </Card.Body>
                 <Card.Footer>
@@ -969,21 +1031,21 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                         href="#!"
                         className="badge rounded-pill bg-light text-default me-1"
                       >
-                        HTML
+                        Python
                       </Link>
                       <Link
                         scroll={false}
                         href="#!"
                         className="badge rounded-pill bg-light text-default me-1"
                       >
-                        CSS
+                        Java
                       </Link>
                       <Link
                         scroll={false}
                         href="#!"
                         className="badge rounded-pill bg-light text-default me-1"
                       >
-                        Javascript
+                        React
                       </Link>
                       <Link
                         scroll={false}
@@ -992,49 +1054,6 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       >
                         More
                       </Link>
-                    </div>
-                    <div>
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>1 year bond accepted</Tooltip>}
-                      >
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge badge-md rounded-pill bg-info-transparent me-1"
-                          data-bs-toggle="tooltip"
-                          title="1 year bond accepted"
-                        >
-                          <i className="bi bi-hand-thumbs-up me-1"></i>1 year
-                          bond accepted
-                        </Link>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Exp : 2 Years</Tooltip>}
-                      >
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge badge-md rounded-pill bg-primary-transparent"
-                        >
-                          <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
-                        </Link>
-                      </OverlayTrigger>{" "}
-                      ||{" "}
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Nationality : Indian</Tooltip>}
-                      >
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge badge-md rounded-pill bg-secondary-transparent"
-                        >
-                          <i className="bi bi-briefcase me-1"></i>Nationality :
-                          Indian
-                        </Link>
-                      </OverlayTrigger>
                     </div>
                   </div>
                 </Card.Footer>
