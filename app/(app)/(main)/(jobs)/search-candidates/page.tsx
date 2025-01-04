@@ -54,7 +54,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
       {/* Page Header Close */}
       {/* Start::row-1 */}
       <Row>
-        <Col xxl={4} xl={4}>
+        <Col xxl={3} xl={3}>
           <Card className="custom-card products-navigation-card">
             <Card.Body className="p-0">
               <div className="px-2 py-4 px-sm-4 border-bottom">
@@ -627,7 +627,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
             </Card.Body>
           </Card>
         </Col>
-        <Col xxl={8} xl={8}>
+        <Col xxl={9} xl={9}>
           <div className="row align-items-center">
             <Col lg={12}>
               <Card className="custom-card border-0 shadow-none">
@@ -730,7 +730,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -788,10 +788,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Charlotte
                           <OverlayTrigger
@@ -851,32 +848,40 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       href="#!"
                       className="badge rounded-pill bg-light text-default me-1"
                     >
-                      <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
-                      Graduate
+                      <span className="fs-14">
+                        <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
+                        Graduate
+                      </span>
                     </Link>
                     <Link
                       scroll={false}
                       href="#!"
                       className="badge rounded-pill bg-light text-default me-1"
                     >
-                      <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
-                      flexible-shift
+                      <span className="fs-14">
+                        <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
+                        flexible-shift
+                      </span>
                     </Link>
                     <Link
                       scroll={false}
                       href="#!"
                       className="badge rounded-pill bg-light text-default me-1"
                     >
-                      <i className="bi bi-clock text-muted me-1"></i> Immediate
-                      Joinee
+                      <span className="fs-14">
+                        <i className="bi bi-clock text-muted me-1"></i>{" "}
+                        Immediate Joinee
+                      </span>
                     </Link>
                     <Link
                       scroll={false}
                       href="#!"
                       className="badge rounded-pill bg-light text-default me-1"
                     >
-                      <i className="bi bi-broadcast text-muted me-1"></i> Good
-                      at English
+                      <span className="fs-14">
+                        <i className="bi bi-broadcast text-muted me-1"></i> Good
+                        at English
+                      </span>
                     </Link>
                   </div>
                   <div className="d-flex align-items-center flex-wrap gap-3">
@@ -977,7 +982,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -1035,10 +1040,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Isabella
                           <OverlayTrigger
@@ -1217,7 +1219,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -1281,10 +1283,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Abigail
                           <OverlayTrigger
@@ -1454,7 +1453,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -1512,10 +1511,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Abigail
                           <OverlayTrigger
@@ -1680,7 +1676,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -1738,10 +1734,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Jack Miller
                           <OverlayTrigger
@@ -1920,7 +1913,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -1984,10 +1977,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Christopher
                           <OverlayTrigger
@@ -2143,7 +2133,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -2201,10 +2191,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Scarlett
                           <OverlayTrigger
@@ -2390,7 +2377,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -2448,10 +2435,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Victoria
                           <OverlayTrigger
@@ -2630,7 +2614,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -2688,10 +2672,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           {" "}
                           Olivia
                           <OverlayTrigger
@@ -2861,7 +2842,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                 </Card.Footer>
               </Card>
             </Col>
-            <Col xl={6}>
+            <Col xl={12}>
               <Card className="custom-card">
                 <Card.Body>
                   <div className="btn-list float-end">
@@ -2919,10 +2900,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                     </div>
                     <div>
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
-                        <Link
-                          scroll={false}
-                          href="/candidate-details/"
-                        >
+                        <Link scroll={false} href="/candidate-details/">
                           Emily
                           <OverlayTrigger
                             placement="top"
