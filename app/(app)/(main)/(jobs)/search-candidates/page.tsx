@@ -790,7 +790,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Charlotte
@@ -1037,7 +1037,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Isabella
@@ -1283,7 +1283,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Abigail
@@ -1514,7 +1514,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Abigail
@@ -1740,7 +1740,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Jack Miller
@@ -1986,7 +1986,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Christopher
@@ -2203,7 +2203,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Scarlett
@@ -2450,7 +2450,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Victoria
@@ -2690,7 +2690,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           {" "}
                           Olivia
@@ -2921,7 +2921,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       <h5 className="fw-medium mb-0 d-flex align-items-center">
                         <Link
                           scroll={false}
-                          href="/apps/jobs/candidatedetails/"
+                          href="/apps/jobs/candidate-details/"
                         >
                           Emily
                           <OverlayTrigger
