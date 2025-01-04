@@ -4,39 +4,15 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import { ThemeChanger } from "../../redux/action";
 import { connect } from "react-redux";
 import store from "@/shared/redux/store";
-import {
-  Button,
-  Dropdown,
-  InputGroup,
-  ListGroup,
-  Modal,
-} from "react-bootstrap";
+import { Button, Dropdown, InputGroup, Modal } from "react-bootstrap";
 import nextConfig from "@/next.config.mjs";
-import { useClerk, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useClerk } from "@clerk/nextjs";
 
 const Header = ({ local_varaiable, ThemeChanger }: any) => {
-  const { user, isLoaded, isSignedIn } = useUser();
+  const { user } = useUser();
   const { signOut } = useClerk();
-  const router = useRouter();
-
-  const handleSignOut = async () => {
-    try {
-      // Perform sign-out
-      await signOut();
-
-      // Redirect to the sign-in page
-      router.push("/sign-in");
-    } catch (error: unknown) {
-      // Handle the error gracefully
-      if (error instanceof Error) {
-        console.error("Error signing out:", error.message);
-      } else {
-        console.error("Unexpected error signing out:", error);
-      }
-    }
-  };
 
   let { basePath } = nextConfig;
 
@@ -1243,19 +1219,9 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                 <li>
                   <button
                     className="dropdown-item d-flex align-items-center"
-                    style={{
-                      backgroundColor: "transparent",
-                      border: "none",
-                      cursor: "pointer",
-                      padding: 0,
-                      margin: 0,
-                      color: "inherit",
-                    }}
-                    onClick={() => {
-                      handleSignOut();
-                    }}
+                    onClick={() => signOut({ redirectUrl: "/sign-in/" })}
                   >
-                    <div className="dropdown-item d-flex align-items-center">
+                    <div className="d-flex align-items-center">
                       <i className="ti ti-logout me-2 fs-18 text-warning"></i>
                       Log Out
                     </div>

@@ -3,7 +3,7 @@ import Seo from "@/shared/layout-components/seo/seo";
 import { SignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import React, { Fragment, useState } from "react";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 const SigninCover = () => {
   const [passwordshow1, setpasswordshow1] = useState(false);
@@ -39,7 +39,7 @@ const SigninCover = () => {
         <Col xxl={7} xl={7} className="">
           <Row className="justify-content-center align-items-center h-100">
             <Col xxl={6} xl={9} lg={6} md={6} sm={8} className="col-12">
-              <SignIn redirectUrl={"/dashboard/"} />
+              <SignIn afterSignInUrl="/dashboard"  />
             </Col>
           </Row>
         </Col>
