@@ -428,36 +428,24 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
             {/* Start::header-element */}
             <div className="header-element">
               <div className="horizontal-logo">
-                <Link
-                  scroll={false}
-                  href="/dashboards/sales"
-                  className="header-logo"
-                >
+                <Link scroll={false} href="/dashboard/" className="header-logo">
                   <img
-                    src={`${
-                      process.env.NODE_ENV === "production" ? basePath : ""
-                    }/assets/images/brand-logos/desktop-logo.png`}
+                    src={`/logo/main-fav-sheield.png`}
                     alt="logo"
                     className="desktop-logo"
                   />
                   <img
-                    src={`${
-                      process.env.NODE_ENV === "production" ? basePath : ""
-                    }/assets/images/brand-logos/toggle-logo.png`}
+                    src={`/logo/main-fav-dark.png`}
                     alt="logo"
                     className="toggle-logo"
                   />
                   <img
-                    src={`${
-                      process.env.NODE_ENV === "production" ? basePath : ""
-                    }/assets/images/brand-logos/desktop-dark.png`}
+                    src={`/logo/main-fav-sheield.png`}
                     alt="logo"
                     className="desktop-dark"
                   />
                   <img
-                    src={`${
-                      process.env.NODE_ENV === "production" ? basePath : ""
-                    }/assets/images/brand-logos/toggle-dark.png`}
+                    src={`/logo/main-fav-sheield.png`}
                     alt="logo"
                     className="toggle-dark"
                   />
