@@ -7,18 +7,19 @@ import {
   Card,
   Col,
   ListGroup,
+  Nav,
   Offcanvas,
   OverlayTrigger,
   Row,
+  Tab,
   Tooltip,
 } from "react-bootstrap";
 import Seo from "@/shared/layout-components/seo/seo";
 import Pageheader from "@/shared/layout-components/page-header/pageheader";
+import CandidateDetailsCard from "@/components/candidate-details-page/CandidateDetailsCard";
+import CandidateDetailsComment from "@/components/candidate-details-page/CandidateDetailsComment";
+import CandidateInternalData from "@/components/candidate-details-page/CandidateInternalData";
 const Candidatedetails = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <Fragment>
       {/* Page Header */}
@@ -32,16 +33,7 @@ const Candidatedetails = () => {
         ]}
         customElements={
           <div className="btn-list">
-            <Button
-              variant="secondary"
-              type="button"
-              data-bs-toggle="offcanvas"
-              onClick={handleShow}
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
-            >
-              <i className="bi bi-chat-square-dots me-1"></i> Show Comments
-            </Button>
+            <CandidateDetailsComment />
             <Link scroll={false} href="#!" className="btn btn-primary">
               <i className="bi bi-download me-1"></i> Download CV
             </Link>
@@ -65,561 +57,10 @@ const Candidatedetails = () => {
       {/* Page Header Close */}
 
       {/* Start::row-2 */}
-      <Offcanvas
-        placement="end"
-        show={show}
-        onHide={handleClose}
-        className="offcanvas offcanvas-end"
-        tabindex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel1"
-      >
-        <Offcanvas.Header
-          closeButton
-          className="border-bottom border-block-end-dashed"
-        >
-          <h5 className="offcanvas-title" id="offcanvasRightLabel1">
-            Comments
-          </h5>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="p-0">
-          <div>
-            <ListGroup as="ul" className="list-group-flush mb-0">
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-primary avatar-rounded">
-                      NW
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      New Website Created
-                      <span className="badge bg-light text-muted float-end">
-                        20 Nov 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      30 mins ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-danger avatar-rounded">
-                      CH
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Prepare for the new project
-                      <span className="badge bg-light text-muted float-end">
-                        3 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      2 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-info avatar-rounded">
-                      S
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Decide the live discussion
-                      <span className="badge bg-light text-muted float-end">
-                        17 Feb 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      3 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md avatar-rounded">
-                      <img src="../../assets/images/faces/12.jpg" alt="" />
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Meeting at 3:00 pm
-                      <span className="badge bg-light text-muted float-end">
-                        29 Dec 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      4 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-success avatar-rounded">
-                      RC
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Prepare for presentation
-                      <span className="badge bg-light text-muted float-end">
-                        31 Dec 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      4 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md avatar-rounded">
-                      <img src="../../assets/images/faces/1.jpg" alt="" />
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Brenda New product launching
-                      <span className="badge bg-light text-muted float-end">
-                        1 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      7 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-secondary avatar-rounded">
-                      M
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Medeleine Hey! there i'm available
-                      <span className="badge bg-light text-muted float-end">
-                        5 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      3 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-info avatar-rounded">
-                      OL
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Olivia New schedule release
-                      <span className="badge bg-light text-muted float-end">
-                        6 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      45 mins ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-warning avatar-rounded">
-                      A
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Kamala Preparing for new admin launch
-                      <span className="badge bg-light text-muted float-end">
-                        7 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      28 mins ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md avatar-rounded">
-                      <img src="../../assets/images/faces/6.jpg" alt="" />
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Oisha Meeting with clinet for dinner
-                      <span className="badge bg-light text-muted float-end">
-                        10 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      14 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-danger avatar-rounded">
-                      CH
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Prepare for the new project
-                      <span className="badge bg-light text-muted float-end">
-                        3 Jan 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      2 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-info avatar-rounded">
-                      S
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Decide the live discussion
-                      <span className="badge bg-light text-muted float-end">
-                        17 Feb 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      3 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md avatar-rounded">
-                      <img src="../../assets/images/faces/14.jpg" alt="" />
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Meeting at 3:00 pm
-                      <span className="badge bg-light text-muted float-end">
-                        29 Dec 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      4 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li">
-                <div className="d-flex align-items-center">
-                  <div className="me-2">
-                    <span className="avatar avatar-md bg-success avatar-rounded">
-                      RC
-                    </span>
-                  </div>
-                  <div className="flex-fill">
-                    <p className="fw-medium mb-0">
-                      Prepare for presentation
-                      <span className="badge bg-light text-muted float-end">
-                        31 Dec 2024
-                      </span>
-                    </p>
-                    <span className="fs-12 text-muted">
-                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
-                      4 hrs ago
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-            </ListGroup>
-          </div>
-        </Offcanvas.Body>
-      </Offcanvas>
       <Row>
         <Col lg={8}>
-          <Col xl={12}>
-            <Card className="custom-card">
-              <Card.Body>
-                <div className="btn-list float-end">
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip>email@email.com</Tooltip>}
-                  >
-                    <Link
-                      scroll={false}
-                      href="#!"
-                      className="badge rounded-pill bg-light text-default me-1"
-                    >
-                      <span className="fs-14">
-                        <i className="bi bi-envelope-arrow-up text-muted me-1"></i>{" "}
-                        12
-                      </span>
-                    </Link>
-                  </OverlayTrigger>
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip>+91-1234567890</Tooltip>}
-                  >
-                    <Link
-                      scroll={false}
-                      href="#!"
-                      className="badge rounded-pill bg-light text-default me-1"
-                    >
-                      <span className="fs-14">
-                        <i className="bi bi-telephone-outbound text-muted me-1"></i>{" "}
-                        12
-                      </span>
-                    </Link>
-                  </OverlayTrigger>
-                </div>
-                <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
-                  <div>
-                    <span className="avatar avatar-lg avatar-rounded">
-                      <img src="../../../assets/images/faces/1.jpg" alt="" />
-                    </span>
-                  </div>
-                  <div>
-                    <h5 className="fw-medium mb-0 d-flex align-items-center">
-                      <Link scroll={false} href="/candidate-details/">
-                        {" "}
-                        Charlotte
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={<Tooltip>Verified candidate</Tooltip>}
-                        >
-                          <i
-                            className="bi bi-check-circle-fill text-success fs-16 ms-1 ms-1"
-                            data-bs-toggle="tooltip"
-                            title="Verified candidate"
-                          ></i>
-                        </OverlayTrigger>
-                      </Link>
-                    </h5>
-                    <div className="d-flex gap-2 flex-wrap">
-                      <Link scroll={false} href="#!">
-                        UI Developer
-                      </Link>
-                      <p className="mb-0 fs-12 text-muted">
-                        <i className="bi bi-geo-alt fs-11"></i> Kondapur,
-                        Hyderabad
-                      </p>
-                    </div>
-                    <div className="d-flex align-items-center fs-12 text-muted flex-wrap">
-                      <p className="fs-12 mb-0">Ratings : </p>
-                      <div className="min-w-fit-content ms-2">
-                        <span className="text-warning">
-                          <i className="bi bi-star-fill"></i>
-                        </span>
-                        <span className="text-warning">
-                          <i className="bi bi-star-fill"></i>
-                        </span>
-                        <span className="text-warning">
-                          <i className="bi bi-star-fill"></i>
-                        </span>
-                        <span className="text-warning">
-                          <i className="bi bi-star-fill"></i>
-                        </span>
-                        <span className="text-warning">
-                          <i className="bi bi-star-half"></i>
-                        </span>
-                      </div>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="ms-1 min-w-fit-content text-muted"
-                      >
-                        <span>(142)</span>
-                        <span>Ratings</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="popular-tags mb-4">
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge rounded-pill bg-light text-default me-1"
-                  >
-                    <span className="fs-14">
-                      <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
-                      Graduate
-                    </span>
-                  </Link>
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge rounded-pill bg-light text-default me-1"
-                  >
-                    <span className="fs-14">
-                      <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
-                      flexible-shift
-                    </span>
-                  </Link>
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge rounded-pill bg-light text-default me-1"
-                  >
-                    <span className="fs-14">
-                      <i className="bi bi-clock text-muted me-1"></i> Immediate
-                      Joinee
-                    </span>
-                  </Link>
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge rounded-pill bg-light text-default me-1"
-                  >
-                    <span className="fs-14">
-                      <i className="bi bi-broadcast text-muted me-1"></i> Good
-                      at English
-                    </span>
-                  </Link>
-                </div>
-                <Row>
-                  <Col lg={6}>
-                    <p className="mb-0 flex-grow-1">
-                      <span className="text-muted">Education :</span>
-                      <span className="fw-medium" data-bs-toggle="tooltip">
-                        {" "}
-                        B.TECH Architecture
-                      </span>
-                    </p>
-                    <p className="mb-0 flex-grow-1">
-                      <span className="text-muted">Package (Yearly) :</span>
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Current</Tooltip>}
-                      >
-                        <span
-                          className="fw-medium"
-                          data-bs-toggle="tooltip"
-                          title="Current"
-                        >
-                          {" "}
-                          $2,300
-                        </span>
-                      </OverlayTrigger>{" "}
-                      -
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Expected</Tooltip>}
-                      >
-                        <span
-                          className="fw-medium"
-                          data-bs-toggle="tooltip"
-                          title="Expected"
-                        >
-                          {" "}
-                          $3,678
-                        </span>
-                      </OverlayTrigger>
-                    </p>
-                  </Col>
-                  <Col lg={6}>
-                    <p className="mb-0">
-                      <span className="text-muted"> Current Comapny :</span>{" "}
-                      <span className="fw-medium"> BIMQP</span>
-                    </p>
-                    <p className="mb-0">
-                      <span className="text-muted"> Languages :</span>{" "}
-                      <span className="fw-medium"> English, Hindi, Telugu</span>
-                    </p>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <OverlayTrigger
-                  placement="top"
-                  overlay={<Tooltip>1 year bond accepted</Tooltip>}
-                >
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge badge-md rounded-pill bg-info-transparent me-1"
-                    data-bs-toggle="tooltip"
-                    title="1 year bond accepted"
-                  >
-                    <i className="bi bi-hand-thumbs-up me-1"></i>1 year bond
-                    accepted
-                  </Link>
-                </OverlayTrigger>
-                <OverlayTrigger
-                  placement="top"
-                  overlay={<Tooltip>Exp : 2 Years</Tooltip>}
-                >
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge badge-md rounded-pill bg-primary-transparent me-1"
-                  >
-                    <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
-                  </Link>
-                </OverlayTrigger>
-                <OverlayTrigger
-                  placement="top"
-                  overlay={<Tooltip>Nationality : Indian</Tooltip>}
-                >
-                  <Link
-                    scroll={false}
-                    href="#!"
-                    className="badge badge-md rounded-pill bg-secondary-transparent"
-                  >
-                    <i className="bi bi-briefcase me-1"></i>
-                    Nationality : Indian
-                  </Link>
-                </OverlayTrigger>
-              </Card.Footer>
-            </Card>
-          </Col>
+          <CandidateDetailsCard />
+          <CandidateInternalData />
           <Card className="custom-card">
             <Card.Header>
               <Card.Title>Candidate Profile Information</Card.Title>
@@ -905,23 +346,41 @@ const Candidatedetails = () => {
               <Card.Title>Tools Used</Card.Title>
             </Card.Header>
             <Card.Body className="d-flex flex-wrap gap-2">
-              <span className="avatar me-2 avatar-rounded bg-white shadow-sm border p-2">
-                <img src="../../../assets/images/company-logos/1.png" alt="" />
+              <span className="avatar avatar-rounded me-3 bg-white shadow-sm border p-2">
+                <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
+                  2+
+                </span>
               </span>
-              <span className="avatar me-2 avatar-rounded bg-white shadow-sm border p-2">
-                <img src="../../../assets/images/company-logos/2.png" alt="" />
+              <span className="avatar avatar-rounded me-3 bg-white shadow-sm border p-2">
+                <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
+                  4+
+                </span>
               </span>
-              <span className="avatar me-2 avatar-rounded bg-white shadow-sm border p-2">
-                <img src="../../../assets/images/company-logos/3.png" alt="" />
+              <span className="avatar avatar-rounded me-3 bg-white shadow-sm border p-2">
+                <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
+                  1+
+                </span>
               </span>
-              <span className="avatar me-2 avatar-rounded bg-white shadow-sm border p-2">
-                <img src="../../../assets/images/company-logos/4.png" alt="" />
+              <span className="avatar avatar-rounded me-3 bg-white shadow-sm border p-2">
+                <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
+                  7+
+                </span>
               </span>
-              <span className="avatar me-2 avatar-rounded bg-white shadow-sm border p-2">
-                <img src="../../../assets/images/company-logos/5.png" alt="" />
+              <span className="avatar avatar-rounded me-3 bg-white shadow-sm border p-2">
+                <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
+                  12+
+                </span>
               </span>
               <span className="avatar avatar-rounded bg-white shadow-sm border p-2">
-                <img src="../../../assets/images/company-logos/6.png" alt="" />
+                <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
+                  25+
+                </span>
               </span>
             </Card.Body>
           </Card>
