@@ -62,6 +62,7 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
       ThemeChanger({ ...theme, iconOverlay: "open" });
     }
   }
+
   function Outhover() {
     const theme = store.getState();
     if (
@@ -617,6 +618,7 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
       }
     }
   }
+
   function closeOtherMenus(MenuItems: any, targetObject: any) {
     for (const item of MenuItems) {
       if (item !== targetObject) {
@@ -627,6 +629,7 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
       }
     }
   }
+
   function findParent(MenuItems: any, targetObject: any) {
     for (const item of MenuItems) {
       if (item.children && item.children.includes(targetObject)) {
@@ -697,6 +700,7 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
       }
     }
   }
+
   function handleAttributeChange(mutationsList: any) {
     for (const mutation of mutationsList) {
       if (
@@ -716,11 +720,13 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
       }
     }
   }
+
   const handleClick = (event: any) => {
     // Your logic here
     event.preventDefault(); // Prevents the default anchor behavior (navigation)
     // ... other logic you want to perform on click
   };
+
   return (
     <Fragment>
       <div
@@ -737,31 +743,31 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
       >
         {/* Start::main-sidebar-header  */}
         <div className="main-sidebar-header">
-          <Link scroll={false} href="/dashboards/" className="header-logo">
+          <Link scroll={false} href="/dashboard/" className="header-logo">
             <Image
               width={100}
-              height={150}
+              height={100}
               src={`/logo/main-dark.png`}
               alt="logo"
               className="desktop-logo"
             />
             <Image
               width={100}
-              height={150}
+              height={100}
               src={`/logo/main-dark.png`}
               alt="logo"
               className="toggle-dark"
             />
             <Image
-              width={200}
-              height={200}
+              width={100}
+              height={100}
               src={`/logo/main.png`}
               alt="logo"
               className="desktop-dark"
             />
             <Image
               width={100}
-              height={150}
+              height={100}
               src={`/logo/main.png`}
               alt="logo"
               className="toggle-logo"
