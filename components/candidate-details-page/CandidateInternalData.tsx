@@ -1,12 +1,8 @@
-import Link from "next/link";
 import React, { useState } from "react";
+import getSymbolFromCurrency from "currency-symbol-map";
 import {
-  Button,
   Card,
   Col,
-  Form,
-  InputGroup,
-  Modal,
   Nav,
   OverlayTrigger,
   Row,

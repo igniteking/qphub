@@ -1,4 +1,5 @@
-import React from "react";
+import getSymbolFromCurrency from "currency-symbol-map";
+import React, { useState } from "react";
 import { Modal, Form, Row, Col, InputGroup, Button } from "react-bootstrap";
 
 interface SalaryModalProps {
@@ -22,6 +23,12 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
   handleMonthlyChange,
   handleYearlyChange,
 }) => {
+  const [currencyLogo, setCurrencyLogo] = useState();
+  const handleCurrencyLogo = () => {
+    const logo = getSymbolFromCurrency("USD");
+    setCurrencyLogo(logo);
+  };
+
   return (
     <Modal
       show={show}
@@ -38,7 +45,11 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
         <Form.Select aria-label="Default select example">
           <option>Select Currency here</option>
           {currencyOptions.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option
+              key={option.value}
+              onChange={handleCurrencyLogo}
+              value={option.value}
+            >
               {option.label}
             </option>
           ))}
@@ -47,7 +58,7 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
           <Col className="mt-3" xl={6} lg={6} md={6} sm={12}>
             <Form.Label htmlFor={`${title}-monthly`}>Monthly</Form.Label>
             <InputGroup className="flex-nowrap">
-              <InputGroup.Text>$</InputGroup.Text>
+              <InputGroup.Text>{currencyLogo}</InputGroup.Text>
               <Form.Control
                 id={`${title}-monthly`}
                 type="number"
@@ -60,7 +71,7 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
           <Col className="mt-3" xl={6} lg={6} md={6} sm={12}>
             <Form.Label htmlFor={`${title}-yearly`}>Yearly</Form.Label>
             <InputGroup className="flex-nowrap">
-              <InputGroup.Text>$</InputGroup.Text>
+              <InputGroup.Text>{currencyLogo}</InputGroup.Text>
               <Form.Control
                 id={`${title}-yearly`}
                 type="number"
