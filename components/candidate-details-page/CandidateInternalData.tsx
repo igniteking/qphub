@@ -34,7 +34,7 @@ const CandidateInternalData = () => {
 
   return (
     <Row>
-      <SalaryModal
+      <SalaryModa
         show={showModal1}
         onHide={() => setShowModal1(false)}
         title="Previous Salary"
