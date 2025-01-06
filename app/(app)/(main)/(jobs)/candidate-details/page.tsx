@@ -9,10 +9,10 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
 import Seo from "@/shared/layout-components/seo/seo";
 import Pageheader from "@/shared/layout-components/page-header/pageheader";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 const Candidatedetails = () => {
   return (
     <Fragment>
