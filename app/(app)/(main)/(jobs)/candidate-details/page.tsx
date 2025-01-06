@@ -1,19 +1,24 @@
 "use client";
 import Link from "next/link";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
+  Badge,
   Button,
   Card,
   Col,
+  ListGroup,
+  Offcanvas,
   OverlayTrigger,
   Row,
   Tooltip,
 } from "react-bootstrap";
 import Seo from "@/shared/layout-components/seo/seo";
 import Pageheader from "@/shared/layout-components/page-header/pageheader";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
 const Candidatedetails = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <Fragment>
       {/* Page Header */}
@@ -21,62 +26,448 @@ const Candidatedetails = () => {
       <Pageheader
         Heading="Candidate Details"
         Pages={[
-          { title: "Apps", active: true },
+          { title: "Zazla", active: true },
           { title: "Jobs", active: true },
           { title: "Candidate Details", active: false },
         ]}
+        customElements={
+          <div className="btn-list">
+            <Button
+              variant="secondary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              onClick={handleShow}
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              <i className="bi bi-chat-square-dots me-1"></i> Show Comments
+            </Button>
+            <Link scroll={false} href="#!" className="btn btn-primary">
+              <i className="bi bi-download me-1"></i> Download CV
+            </Link>
+            <Link
+              scroll={false}
+              href="#!"
+              className="btn btn-icon btn-primary-light btn-wave"
+            >
+              <i className="ri-heart-line fs-13"></i>
+            </Link>
+            <Link
+              scroll={false}
+              href="#!"
+              className="btn btn-icon btn-primary-light btn-wave"
+            >
+              <i className="ri-share-line"></i>
+            </Link>
+          </div>
+        }
       />
       {/* Page Header Close */}
 
       {/* Start::row-2 */}
-      <Row>
-        <Col lg={8}>
-          <Card className="custom-card">
-            <Card.Body>
-              <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
-                <div className="d-flex flex-wrap gap-2">
-                  <div>
-                    <span className="avatar avatar-xxl avatar-rounded">
-                      <img
-                        src="../../../assets/images/faces/1.jpg"
-                        className="rounded-circle img-fluid"
-                        alt=""
-                      />
+      <Offcanvas
+        placement="end"
+        show={show}
+        onHide={handleClose}
+        className="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel1"
+      >
+        <Offcanvas.Header
+          closeButton
+          className="border-bottom border-block-end-dashed"
+        >
+          <h5 className="offcanvas-title" id="offcanvasRightLabel1">
+            Comments
+          </h5>
+        </Offcanvas.Header>
+        <Offcanvas.Body className="p-0">
+          <div>
+            <ListGroup as="ul" className="list-group-flush mb-0">
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-primary avatar-rounded">
+                      NW
                     </span>
                   </div>
-                  <div className="ms-3">
-                    <h4 className="fw-medium mb-0 d-flex align-items-center">
-                      <a href="#!">
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      New Website Created
+                      <span className="badge bg-light text-muted float-end">
+                        20 Nov 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      30 mins ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-danger avatar-rounded">
+                      CH
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Prepare for the new project
+                      <span className="badge bg-light text-muted float-end">
+                        3 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      2 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-info avatar-rounded">
+                      S
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Decide the live discussion
+                      <span className="badge bg-light text-muted float-end">
+                        17 Feb 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      3 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md avatar-rounded">
+                      <img src="../../assets/images/faces/12.jpg" alt="" />
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Meeting at 3:00 pm
+                      <span className="badge bg-light text-muted float-end">
+                        29 Dec 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      4 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-success avatar-rounded">
+                      RC
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Prepare for presentation
+                      <span className="badge bg-light text-muted float-end">
+                        31 Dec 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      4 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md avatar-rounded">
+                      <img src="../../assets/images/faces/1.jpg" alt="" />
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Brenda New product launching
+                      <span className="badge bg-light text-muted float-end">
+                        1 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      7 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-secondary avatar-rounded">
+                      M
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Medeleine Hey! there i'm available
+                      <span className="badge bg-light text-muted float-end">
+                        5 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      3 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-info avatar-rounded">
+                      OL
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Olivia New schedule release
+                      <span className="badge bg-light text-muted float-end">
+                        6 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      45 mins ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-warning avatar-rounded">
+                      A
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Kamala Preparing for new admin launch
+                      <span className="badge bg-light text-muted float-end">
+                        7 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      28 mins ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md avatar-rounded">
+                      <img src="../../assets/images/faces/6.jpg" alt="" />
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Oisha Meeting with clinet for dinner
+                      <span className="badge bg-light text-muted float-end">
+                        10 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      14 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-danger avatar-rounded">
+                      CH
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Prepare for the new project
+                      <span className="badge bg-light text-muted float-end">
+                        3 Jan 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      2 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-info avatar-rounded">
+                      S
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Decide the live discussion
+                      <span className="badge bg-light text-muted float-end">
+                        17 Feb 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      3 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md avatar-rounded">
+                      <img src="../../assets/images/faces/14.jpg" alt="" />
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Meeting at 3:00 pm
+                      <span className="badge bg-light text-muted float-end">
+                        29 Dec 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      4 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                <div className="d-flex align-items-center">
+                  <div className="me-2">
+                    <span className="avatar avatar-md bg-success avatar-rounded">
+                      RC
+                    </span>
+                  </div>
+                  <div className="flex-fill">
+                    <p className="fw-medium mb-0">
+                      Prepare for presentation
+                      <span className="badge bg-light text-muted float-end">
+                        31 Dec 2024
+                      </span>
+                    </p>
+                    <span className="fs-12 text-muted">
+                      <i className="ri-time-line align-middle me-1 d-inline-block"></i>
+                      4 hrs ago
+                    </span>
+                  </div>
+                </div>
+              </ListGroup.Item>
+            </ListGroup>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
+      <Row>
+        <Col lg={8}>
+          <Col xl={12}>
+            <Card className="custom-card">
+              <Card.Body>
+                <div className="btn-list float-end">
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>email@email.com</Tooltip>}
+                  >
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <span className="fs-14">
+                        <i className="bi bi-envelope-arrow-up text-muted me-1"></i>{" "}
+                        12
+                      </span>
+                    </Link>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>+91-1234567890</Tooltip>}
+                  >
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <span className="fs-14">
+                        <i className="bi bi-telephone-outbound text-muted me-1"></i>{" "}
+                        12
+                      </span>
+                    </Link>
+                  </OverlayTrigger>
+                </div>
+                <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
+                  <div>
+                    <span className="avatar avatar-lg avatar-rounded">
+                      <img src="../../../assets/images/faces/1.jpg" alt="" />
+                    </span>
+                  </div>
+                  <div>
+                    <h5 className="fw-medium mb-0 d-flex align-items-center">
+                      <Link scroll={false} href="/candidate-details/">
                         {" "}
                         Charlotte
                         <OverlayTrigger
                           placement="top"
                           overlay={<Tooltip>Verified candidate</Tooltip>}
                         >
-                          <i className="bi bi-check-circle-fill text-success fs-16 ms-1"></i>
+                          <i
+                            className="bi bi-check-circle-fill text-success fs-16 ms-1 ms-1"
+                            data-bs-toggle="tooltip"
+                            title="Verified candidate"
+                          ></i>
                         </OverlayTrigger>
-                      </a>
-                    </h4>
-                    <Link scroll={false} href="#!" className="fw-medium">
-                      <i className="bi bi-briefcase me-1"></i> Software
-                      Developer
-                    </Link>
-                    <div className="d-flex flex-wrap gap-2 align-items-center fs-11 text-muted">
-                      <p className="fs-11 mb-0">Ratings : </p>
+                      </Link>
+                    </h5>
+                    <div className="d-flex gap-2 flex-wrap">
+                      <Link scroll={false} href="#!">
+                        UI Developer
+                      </Link>
+                      <p className="mb-0 fs-12 text-muted">
+                        <i className="bi bi-geo-alt fs-11"></i> Kondapur,
+                        Hyderabad
+                      </p>
+                    </div>
+                    <div className="d-flex align-items-center fs-12 text-muted flex-wrap">
+                      <p className="fs-12 mb-0">Ratings : </p>
                       <div className="min-w-fit-content ms-2">
-                        <span className="text-warning me-1">
+                        <span className="text-warning">
                           <i className="bi bi-star-fill"></i>
                         </span>
-                        <span className="text-warning me-1">
+                        <span className="text-warning">
                           <i className="bi bi-star-fill"></i>
                         </span>
-                        <span className="text-warning me-1">
+                        <span className="text-warning">
                           <i className="bi bi-star-fill"></i>
                         </span>
-                        <span className="text-warning me-1">
+                        <span className="text-warning">
                           <i className="bi bi-star-fill"></i>
                         </span>
-                        <span className="text-warning me-1">
+                        <span className="text-warning">
                           <i className="bi bi-star-half"></i>
                         </span>
                       </div>
@@ -89,81 +480,146 @@ const Candidatedetails = () => {
                         <span>Ratings</span>
                       </Link>
                     </div>
-                    <div className="d-flex fs-14 mt-3">
-                      <div>
-                        <p className="mb-1">
-                          <i className="bi bi-geo-alt me-2"></i>Banglore,
-                          Karnataka
-                        </p>
-                        <p>
-                          <i className="bi bi-briefcase me-2"></i>1 Year
-                          Experience
-                        </p>
-                      </div>
-                      <div className="ms-4">
-                        <p className="mb-1">
-                          <i className="bi bi-coin me-2"></i>Package (Yearly) :
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Current Salary</Tooltip>}
-                          >
-                            <span className="fw-medium ms-1 d-inline-flex">
-                              $10,000
-                            </span>
-                          </OverlayTrigger>
-                          -
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Expected Salary</Tooltip>}
-                          >
-                            <span className="fw-medium">$20,000</span>
-                          </OverlayTrigger>
-                        </p>
-                        <p>
-                          <i className="bi bi-mortarboard me-2"></i>Graduate
-                        </p>
-                      </div>
-                    </div>
-                    <div className="popular-tags">
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-info-transparent me-1"
-                      >
-                        <i className="bi bi-moon-stars me-1"></i>Full Time
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-danger-transparent"
-                      >
-                        <i className="bi bi-clock me-1"></i> Immediate Joinee
-                      </Link>
-                    </div>
                   </div>
                 </div>
-                <div className="btn-list">
-                  <Link scroll={false} href="#!" className="btn btn-primary">
-                    <i className="bi bi-download me-1"></i> Download CV
+                <div className="popular-tags mb-4">
+                  <Link
+                    scroll={false}
+                    href="#!"
+                    className="badge rounded-pill bg-light text-default me-1"
+                  >
+                    <span className="fs-14">
+                      <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
+                      Graduate
+                    </span>
                   </Link>
                   <Link
                     scroll={false}
                     href="#!"
-                    className="btn btn-icon btn-primary-light btn-wave"
+                    className="badge rounded-pill bg-light text-default me-1"
                   >
-                    <i className="ri-heart-line fs-13"></i>
+                    <span className="fs-14">
+                      <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
+                      flexible-shift
+                    </span>
                   </Link>
                   <Link
                     scroll={false}
                     href="#!"
-                    className="btn btn-icon btn-primary-light btn-wave"
+                    className="badge rounded-pill bg-light text-default me-1"
                   >
-                    <i className="ri-share-line"></i>
+                    <span className="fs-14">
+                      <i className="bi bi-clock text-muted me-1"></i> Immediate
+                      Joinee
+                    </span>
+                  </Link>
+                  <Link
+                    scroll={false}
+                    href="#!"
+                    className="badge rounded-pill bg-light text-default me-1"
+                  >
+                    <span className="fs-14">
+                      <i className="bi bi-broadcast text-muted me-1"></i> Good
+                      at English
+                    </span>
                   </Link>
                 </div>
-              </div>
-            </Card.Body>
-          </Card>
+                <Row>
+                  <Col lg={6}>
+                    <p className="mb-0 flex-grow-1">
+                      <span className="text-muted">Education :</span>
+                      <span className="fw-medium" data-bs-toggle="tooltip">
+                        {" "}
+                        B.TECH Architecture
+                      </span>
+                    </p>
+                    <p className="mb-0 flex-grow-1">
+                      <span className="text-muted">Package (Yearly) :</span>
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>Current</Tooltip>}
+                      >
+                        <span
+                          className="fw-medium"
+                          data-bs-toggle="tooltip"
+                          title="Current"
+                        >
+                          {" "}
+                          $2,300
+                        </span>
+                      </OverlayTrigger>{" "}
+                      -
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>Expected</Tooltip>}
+                      >
+                        <span
+                          className="fw-medium"
+                          data-bs-toggle="tooltip"
+                          title="Expected"
+                        >
+                          {" "}
+                          $3,678
+                        </span>
+                      </OverlayTrigger>
+                    </p>
+                  </Col>
+                  <Col lg={6}>
+                    <p className="mb-0">
+                      <span className="text-muted"> Current Comapny :</span>{" "}
+                      <span className="fw-medium"> BIMQP</span>
+                    </p>
+                    <p className="mb-0">
+                      <span className="text-muted"> Languages :</span>{" "}
+                      <span className="fw-medium"> English, Hindi, Telugu</span>
+                    </p>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>1 year bond accepted</Tooltip>}
+                >
+                  <Link
+                    scroll={false}
+                    href="#!"
+                    className="badge badge-md rounded-pill bg-info-transparent me-1"
+                    data-bs-toggle="tooltip"
+                    title="1 year bond accepted"
+                  >
+                    <i className="bi bi-hand-thumbs-up me-1"></i>1 year bond
+                    accepted
+                  </Link>
+                </OverlayTrigger>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>Exp : 2 Years</Tooltip>}
+                >
+                  <Link
+                    scroll={false}
+                    href="#!"
+                    className="badge badge-md rounded-pill bg-primary-transparent me-1"
+                  >
+                    <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
+                  </Link>
+                </OverlayTrigger>
+                <OverlayTrigger
+                  placement="top"
+                  overlay={<Tooltip>Nationality : Indian</Tooltip>}
+                >
+                  <Link
+                    scroll={false}
+                    href="#!"
+                    className="badge badge-md rounded-pill bg-secondary-transparent"
+                  >
+                    <i className="bi bi-briefcase me-1"></i>
+                    Nationality : Indian
+                  </Link>
+                </OverlayTrigger>
+              </Card.Footer>
+            </Card>
+          </Col>
           <Card className="custom-card">
             <Card.Header>
               <Card.Title>Candidate Profile Information</Card.Title>
@@ -471,18 +927,197 @@ const Candidatedetails = () => {
           </Card>
           <Card className="custom-card">
             <Card.Header>
-              <Card.Title>Languages</Card.Title>
+              <Card.Title>Location</Card.Title>
             </Card.Header>
             <Card.Body>
               <p>
-                <span className="fw-medium">English : </span>Fluent
+                <span className="fw-medium">Jaipur : </span>Current / Preferred
               </p>
               <p>
-                <span className="fw-medium">Hindi : </span>Intermediate
+                <span className="fw-medium">Delhi : </span>Preferred
               </p>
               <p className="mb-0">
-                <span className="fw-medium">Telugu : </span>Expert
+                <span className="fw-medium">Mumbai : </span>Preferred
               </p>
+            </Card.Body>
+          </Card>
+          <Card className="custom-card">
+            <Card.Header>
+              <Card.Title>Languages</Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <Row className="align-items-center">
+                <Col
+                  lg={3}
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <span className="fw-medium">English :</span>
+                </Col>
+                <Col lg={9} className="d-flex justify-content-between">
+                  <Button
+                    variant="outline-primary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Read{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Write{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Speak{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                </Col>
+              </Row>
+              <Row className="align-items-center">
+                <Col
+                  lg={3}
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <span className="fw-medium">Hindi :</span>
+                </Col>
+                <Col lg={9} className="d-flex justify-content-between">
+                  <Button
+                    variant="outline-primary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Read{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Write{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Speak{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                </Col>
+              </Row>
+              <Row className="align-items-center">
+                <Col
+                  lg={3}
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <span className="fw-medium">Tamil :</span>
+                </Col>
+                <Col lg={9} className="d-flex justify-content-between">
+                  <Button
+                    variant="outline-primary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Read{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Write{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Speak{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                </Col>
+              </Row>
+              <Row className="align-items-center">
+                <Col
+                  lg={3}
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <span className="fw-medium">Telugu :</span>
+                </Col>
+                <Col lg={9} className="d-flex justify-content-between">
+                  <Button
+                    variant="outline-primary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Read{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Write{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    type="button"
+                    size="sm"
+                    className="btn my-1"
+                  >
+                    Speak{" "}
+                    <Badge bg="" className="badge ms-2">
+                      4
+                    </Badge>
+                  </Button>
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
           <Card className="custom-card overflow-hidden">
@@ -638,620 +1273,597 @@ const Candidatedetails = () => {
             <p className="">
               Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
             </p>
-            <Swiper
-              className="swiper-related-jobs"
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{ delay: 2500, disableOnInteraction: false }}
-              navigation={true}
-              modules={[Autoplay, Navigation]}
-            >
-              <SwiperSlide>
-                <Card className="custom-card">
-                  <Card.Body>
-                    <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
-                      <div>
-                        <span className="avatar avatar-lg avatar-rounded">
-                          <img
-                            src="../../../assets/images/faces/1.jpg"
-                            alt=""
-                          />
-                        </span>
-                      </div>
-                      <div className="flex-fill">
-                        <h5 className="fw-medium mb-0 d-flex align-items-center">
-                          <a href="#!">
-                            {" "}
-                            Brenda Simpson
-                            <OverlayTrigger
-                              placement="top"
-                              overlay={<Tooltip>Verified candidate</Tooltip>}
-                            >
-                              <i className="bi bi-check-circle-fill text-success fs-16 ms-1 d-inline-flex"></i>
-                            </OverlayTrigger>
-                          </a>
-                        </h5>
-                        <div className="d-flex gap-2">
-                          <Link scroll={false} href="#!">
-                            Software Developer
-                          </Link>
-                          <p className="mb-0 fs-12 text-muted">
-                            <i className="bi bi-geo-alt fs-11"></i> Kondapur,
-                            Hyderabad
-                          </p>
-                        </div>
-                        <div className="d-flex align-items-center fs-12 text-muted flex-wrap">
-                          <p className="fs-12 mb-0">Ratings : </p>
-                          <div className="min-w-fit-content ms-2">
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-half"></i>
-                            </span>
-                          </div>
-                          <Link
-                            scroll={false}
-                            href="#!"
-                            className="ms-1 min-w-fit-content text-muted"
-                          >
-                            <span>(142)</span>
-                            <span>Ratings</span>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className="btn-list">
-                        <span className="fw-medium">$10,000</span>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-primary text-fixed-white ms-1"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Download Resume</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-download-2-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-light text-default"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Add to Wishlist</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-heart-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-light text-default"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>View Profile</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-eye-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                      </div>
+            <div className="swiper-related-jobs">
+              <Card className="custom-card">
+                <Card.Body>
+                  <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
+                    <div>
+                      <span className="avatar avatar-lg avatar-rounded">
+                        <img src="../../../assets/images/faces/1.jpg" alt="" />
+                      </span>
                     </div>
-                    <div className="popular-tags">
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
-                        Graduate
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
-                        flexible-shift
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-clock text-muted me-1"></i>{" "}
-                        Immediate Joinee
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-broadcast text-muted me-1"></i> Good
-                        at English
-                      </Link>
-                    </div>
-                  </Card.Body>
-                  <Card.Footer>
-                    <div className="d-flex align-items-center gap-3 flex-wrap">
-                      <h6 className="mb-0 fw-medium">Skills :</h6>
-                      <div className="popular-tags flex-grow-1">
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          HTML
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          CSS
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          Javascript
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          Angular
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-primary-transparent"
-                        >
-                          <i className="bi bi-plus"></i> More
-                        </Link>
-                      </div>
-                      <div>
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={<Tooltip>1 year bond accepted</Tooltip>}
-                        >
-                          <Link
-                            scroll={false}
-                            href="#!"
-                            className="badge badge-md rounded-pill bg-info-transparent"
-                          >
-                            <i className="bi bi-hand-thumbs-up me-1"></i>1 year
-                            bond accepted
-                          </Link>
-                        </OverlayTrigger>
-
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge badge-md rounded-pill bg-primary-transparent"
-                        >
-                          <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
-                        </Link>
-                      </div>
-                    </div>
-                  </Card.Footer>
-                </Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card className="custom-card">
-                  <Card.Body>
-                    <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
-                      <div>
-                        <span className="avatar avatar-lg avatar-rounded">
-                          <img
-                            src="../../../assets/images/faces/3.jpg"
-                            alt=""
-                          />
-                        </span>
-                      </div>
-                      <div className="flex-fill">
-                        <h5 className="fw-medium mb-0 d-flex align-items-center">
+                    <div className="flex-fill">
+                      <h5 className="fw-medium mb-0 d-flex align-items-center">
+                        <a href="#!">
+                          {" "}
+                          Brenda Simpson
                           <OverlayTrigger
                             placement="top"
                             overlay={<Tooltip>Verified candidate</Tooltip>}
                           >
-                            <a href="#!">
-                              {" "}
-                              Dwayne Stort
-                              <i className="bi bi-check-circle-fill text-success fs-16 ms-1 d-inline-flex"></i>
-                            </a>
+                            <i className="bi bi-check-circle-fill text-success fs-16 ms-1 d-inline-flex"></i>
                           </OverlayTrigger>
-                        </h5>
-                        <div className="d-flex gap-2">
-                          <Link scroll={false} href="#!">
-                            Web Developer
-                          </Link>
-                          <p className="mb-0 fs-12 text-muted">
-                            <i className="bi bi-geo-alt fs-11"></i> Gachibowli,
-                            Hyderabad
-                          </p>
-                        </div>
-                        <div className="d-flex align-items-center fs-12 text-muted  flex-wrap">
-                          <p className="fs-12 mb-0">Ratings : </p>
-                          <div className="min-w-fit-content ms-2">
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star"></i>
-                            </span>
-                          </div>
-                          <Link
-                            scroll={false}
-                            href="#!"
-                            className="mb-0 ms-1 min-w-fit-content text-muted"
-                          >
-                            <span>(35)</span>
-                            <span>Ratings</span>
-                          </Link>
-                        </div>
+                        </a>
+                      </h5>
+                      <div className="d-flex gap-2">
+                        <Link scroll={false} href="#!">
+                          Software Developer
+                        </Link>
+                        <p className="mb-0 fs-12 text-muted">
+                          <i className="bi bi-geo-alt fs-11"></i> Kondapur,
+                          Hyderabad
+                        </p>
                       </div>
-                      <div className="btn-list">
+                      <div className="d-flex align-items-center fs-12 text-muted flex-wrap">
+                        <p className="fs-12 mb-0">Ratings : </p>
+                        <div className="min-w-fit-content ms-2">
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-half"></i>
+                          </span>
+                        </div>
                         <Link
                           scroll={false}
                           href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-primary text-fixed-white ms-1"
+                          className="ms-1 min-w-fit-content text-muted"
                         >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Download Resume</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-download-2-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-light text-default"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Add to Wishlist</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-heart-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-light text-default"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>View Profile</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-eye-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
+                          <span>(142)</span>
+                          <span>Ratings</span>
                         </Link>
                       </div>
                     </div>
-                    <div className="popular-tags">
+                    <div className="btn-list">
+                      <span className="fw-medium">$10,000</span>
                       <Link
                         scroll={false}
                         href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
+                        className="avatar avatar-sm avatar-rounded bg-primary text-fixed-white ms-1"
                       >
-                        <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
-                        Post Graduate
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
-                        flexible-shift
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-clock text-muted me-1"></i> Within
-                        10 Days
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-broadcast text-muted me-1"></i> Good
-                        at English
-                      </Link>
-                    </div>
-                  </Card.Body>
-                  <Card.Footer>
-                    <div className="d-flex align-items-center gap-3 flex-wrap">
-                      <h6 className="mb-0 fw-medium">Skills :</h6>
-                      <div className="popular-tags flex-grow-1">
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          React
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          Javascript
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          React Navtive
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-primary-transparent"
-                        >
-                          <i className="bi bi-plus"></i> More
-                        </Link>
-                      </div>
-                      <div>
                         <OverlayTrigger
                           placement="top"
-                          overlay={<Tooltip>2 years bond accepted</Tooltip>}
+                          overlay={<Tooltip>Download Resume</Tooltip>}
                         >
-                          <Link
-                            scroll={false}
-                            href="#!"
-                            className="badge badge-md rounded-pill bg-info-transparent me-1"
-                          >
-                            <i className="bi bi-hand-thumbs-up me-1"></i>2 years
-                            bond accepted
-                          </Link>
+                          <span>
+                            <i className="ri-download-2-line fs-13 align-middle"></i>
+                          </span>
                         </OverlayTrigger>
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="avatar avatar-sm avatar-rounded bg-light text-default"
+                      >
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Add to Wishlist</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-heart-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="avatar avatar-sm avatar-rounded bg-light text-default"
+                      >
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>View Profile</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-eye-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="popular-tags">
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
+                      Graduate
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
+                      flexible-shift
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-clock text-muted me-1"></i> Immediate
+                      Joinee
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-broadcast text-muted me-1"></i> Good
+                      at English
+                    </Link>
+                  </div>
+                </Card.Body>
+                <Card.Footer>
+                  <div className="d-flex align-items-center gap-3 flex-wrap">
+                    <h6 className="mb-0 fw-medium">Skills :</h6>
+                    <div className="popular-tags flex-grow-1">
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        HTML
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        CSS
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        Javascript
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        Angular
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-primary-transparent"
+                      >
+                        <i className="bi bi-plus"></i> More
+                      </Link>
+                    </div>
+                    <div>
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>1 year bond accepted</Tooltip>}
+                      >
                         <Link
                           scroll={false}
                           href="#!"
-                          className="badge badge-md rounded-pill bg-primary-transparent"
+                          className="badge badge-md rounded-pill bg-info-transparent"
                         >
-                          <i className="bi bi-briefcase me-1"></i>Exp : 4 Years
+                          <i className="bi bi-hand-thumbs-up me-1"></i>1 year
+                          bond accepted
                         </Link>
-                      </div>
+                      </OverlayTrigger>
+
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge badge-md rounded-pill bg-primary-transparent"
+                      >
+                        <i className="bi bi-briefcase me-1"></i>Exp : 2 Years
+                      </Link>
                     </div>
-                  </Card.Footer>
-                </Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card className="custom-card">
-                  <Card.Body>
-                    <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
-                      <div>
-                        <span className="avatar avatar-lg avatar-rounded">
-                          <img
-                            src="../../../assets/images/faces/21.jpg"
-                            alt=""
-                          />
-                        </span>
-                      </div>
-                      <div className="flex-fill">
-                        <h5 className="fw-medium mb-0 d-flex align-items-center">
+                  </div>
+                </Card.Footer>
+              </Card>
+              <Card className="custom-card">
+                <Card.Body>
+                  <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
+                    <div>
+                      <span className="avatar avatar-lg avatar-rounded">
+                        <img src="../../../assets/images/faces/3.jpg" alt="" />
+                      </span>
+                    </div>
+                    <div className="flex-fill">
+                      <h5 className="fw-medium mb-0 d-flex align-items-center">
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Verified candidate</Tooltip>}
+                        >
                           <a href="#!">
                             {" "}
-                            Jasmine Kova
-                            <OverlayTrigger
-                              placement="top"
-                              overlay={<Tooltip>Verified candidate</Tooltip>}
-                            >
-                              <i
-                                className="bi bi-check-circle-fill text-success fs-16 ms-1 d-inline-flex"
-                                title="Verified candidate"
-                              ></i>
-                            </OverlayTrigger>
+                            Dwayne Stort
+                            <i className="bi bi-check-circle-fill text-success fs-16 ms-1 d-inline-flex"></i>
                           </a>
-                        </h5>
-                        <div className="d-flex gap-2">
-                          <Link scroll={false} href="#!">
-                            Python Developer
-                          </Link>
-                          <p className="mb-0 fs-12 text-muted">
-                            <i className="bi bi-geo-alt fs-11"></i> Gachibowli,
-                            Chennai
-                          </p>
+                        </OverlayTrigger>
+                      </h5>
+                      <div className="d-flex gap-2">
+                        <Link scroll={false} href="#!">
+                          Web Developer
+                        </Link>
+                        <p className="mb-0 fs-12 text-muted">
+                          <i className="bi bi-geo-alt fs-11"></i> Gachibowli,
+                          Hyderabad
+                        </p>
+                      </div>
+                      <div className="d-flex align-items-center fs-12 text-muted  flex-wrap">
+                        <p className="fs-12 mb-0">Ratings : </p>
+                        <div className="min-w-fit-content ms-2">
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star"></i>
+                          </span>
                         </div>
-                        <div className="d-flex align-items-center fs-12 text-muted  flex-wrap">
-                          <p className="fs-12 mb-0">Ratings : </p>
-                          <div className="min-w-fit-content ms-2">
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star-fill"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star"></i>
-                            </span>
-                            <span className="text-warning me-1">
-                              <i className="bi bi-star"></i>
-                            </span>
-                          </div>
-                          <Link
-                            scroll={false}
-                            href="#!"
-                            className="mb-0 ms-1 min-w-fit-content text-muted"
+                        <Link
+                          scroll={false}
+                          href="#!"
+                          className="mb-0 ms-1 min-w-fit-content text-muted"
+                        >
+                          <span>(35)</span>
+                          <span>Ratings</span>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="btn-list">
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="avatar avatar-sm avatar-rounded bg-primary text-fixed-white ms-1"
+                      >
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Download Resume</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-download-2-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="avatar avatar-sm avatar-rounded bg-light text-default"
+                      >
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Add to Wishlist</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-heart-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="avatar avatar-sm avatar-rounded bg-light text-default"
+                      >
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>View Profile</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-eye-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="popular-tags">
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-mortarboard text-muted me-1"></i> Post
+                      Graduate
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
+                      flexible-shift
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-clock text-muted me-1"></i> Within 10
+                      Days
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-broadcast text-muted me-1"></i> Good
+                      at English
+                    </Link>
+                  </div>
+                </Card.Body>
+                <Card.Footer>
+                  <div className="d-flex align-items-center gap-3 flex-wrap">
+                    <h6 className="mb-0 fw-medium">Skills :</h6>
+                    <div className="popular-tags flex-grow-1">
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        React
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        Javascript
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        React Navtive
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-primary-transparent"
+                      >
+                        <i className="bi bi-plus"></i> More
+                      </Link>
+                    </div>
+                    <div>
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>2 years bond accepted</Tooltip>}
+                      >
+                        <Link
+                          scroll={false}
+                          href="#!"
+                          className="badge badge-md rounded-pill bg-info-transparent me-1"
+                        >
+                          <i className="bi bi-hand-thumbs-up me-1"></i>2 years
+                          bond accepted
+                        </Link>
+                      </OverlayTrigger>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge badge-md rounded-pill bg-primary-transparent"
+                      >
+                        <i className="bi bi-briefcase me-1"></i>Exp : 4 Years
+                      </Link>
+                    </div>
+                  </div>
+                </Card.Footer>
+              </Card>
+              <Card className="custom-card">
+                <Card.Body>
+                  <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
+                    <div>
+                      <span className="avatar avatar-lg avatar-rounded">
+                        <img src="../../../assets/images/faces/21.jpg" alt="" />
+                      </span>
+                    </div>
+                    <div className="flex-fill">
+                      <h5 className="fw-medium mb-0 d-flex align-items-center">
+                        <a href="#!">
+                          {" "}
+                          Jasmine Kova
+                          <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>Verified candidate</Tooltip>}
                           >
-                            <span>(56)</span>
-                            <span>Ratings</span>
-                          </Link>
+                            <i
+                              className="bi bi-check-circle-fill text-success fs-16 ms-1 d-inline-flex"
+                              title="Verified candidate"
+                            ></i>
+                          </OverlayTrigger>
+                        </a>
+                      </h5>
+                      <div className="d-flex gap-2">
+                        <Link scroll={false} href="#!">
+                          Python Developer
+                        </Link>
+                        <p className="mb-0 fs-12 text-muted">
+                          <i className="bi bi-geo-alt fs-11"></i> Gachibowli,
+                          Chennai
+                        </p>
+                      </div>
+                      <div className="d-flex align-items-center fs-12 text-muted  flex-wrap">
+                        <p className="fs-12 mb-0">Ratings : </p>
+                        <div className="min-w-fit-content ms-2">
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star-fill"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star"></i>
+                          </span>
+                          <span className="text-warning me-1">
+                            <i className="bi bi-star"></i>
+                          </span>
                         </div>
-                      </div>
-                      <div className="btn-list">
                         <Link
                           scroll={false}
                           href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-primary text-fixed-white ms-1"
+                          className="mb-0 ms-1 min-w-fit-content text-muted"
                         >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Download Resume</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-download-2-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-light text-default"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>Add to Wishlist</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-heart-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="avatar avatar-sm avatar-rounded bg-light text-default"
-                        >
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={<Tooltip>View Profile</Tooltip>}
-                          >
-                            <span>
-                              <i className="ri-eye-line fs-13 align-middle"></i>
-                            </span>
-                          </OverlayTrigger>
+                          <span>(56)</span>
+                          <span>Ratings</span>
                         </Link>
                       </div>
                     </div>
-                    <div className="popular-tags">
+                    <div className="btn-list">
                       <Link
                         scroll={false}
                         href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
+                        className="avatar avatar-sm avatar-rounded bg-primary text-fixed-white ms-1"
                       >
-                        <i className="bi bi-mortarboard text-muted me-1"></i>{" "}
-                        MBA
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Download Resume</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-download-2-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
                       </Link>
                       <Link
                         scroll={false}
                         href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
+                        className="avatar avatar-sm avatar-rounded bg-light text-default"
                       >
-                        <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
-                        Day-shift
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Add to Wishlist</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-heart-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
                       </Link>
                       <Link
                         scroll={false}
                         href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
+                        className="avatar avatar-sm avatar-rounded bg-light text-default"
                       >
-                        <i className="bi bi-clock text-muted me-1"></i> Within
-                        30 Days
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href="#!"
-                        className="badge rounded-pill bg-light text-default me-1"
-                      >
-                        <i className="bi bi-broadcast text-muted me-1"></i> Avg
-                        at English
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>View Profile</Tooltip>}
+                        >
+                          <span>
+                            <i className="ri-eye-line fs-13 align-middle"></i>
+                          </span>
+                        </OverlayTrigger>
                       </Link>
                     </div>
-                  </Card.Body>
-                  <Card.Footer>
-                    <div className="d-flex align-items-center gap-3 flex-wrap">
-                      <h6 className="mb-0 fw-medium">Skills :</h6>
-                      <div className="popular-tags flex-grow-1">
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          Python
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          Java
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-light text-default me-1"
-                        >
-                          React
-                        </Link>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge rounded-pill bg-primary-transparent"
-                        >
-                          <i className="bi bi-plus"></i> More
-                        </Link>
-                      </div>
-                      <div>
-                        <Link
-                          scroll={false}
-                          href="#!"
-                          className="badge badge-md rounded-pill bg-primary-transparent"
-                        >
-                          <i className="bi bi-briefcase me-1"></i>Exp : 5 Years
-                        </Link>
-                      </div>
+                  </div>
+                  <div className="popular-tags">
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-mortarboard text-muted me-1"></i> MBA
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-moon-stars text-muted me-1"></i>{" "}
+                      Day-shift
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-clock text-muted me-1"></i> Within 30
+                      Days
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href="#!"
+                      className="badge rounded-pill bg-light text-default me-1"
+                    >
+                      <i className="bi bi-broadcast text-muted me-1"></i> Avg at
+                      English
+                    </Link>
+                  </div>
+                </Card.Body>
+                <Card.Footer>
+                  <div className="d-flex align-items-center gap-3 flex-wrap">
+                    <h6 className="mb-0 fw-medium">Skills :</h6>
+                    <div className="popular-tags flex-grow-1">
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        Python
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        Java
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-light text-default me-1"
+                      >
+                        React
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge rounded-pill bg-primary-transparent"
+                      >
+                        <i className="bi bi-plus"></i> More
+                      </Link>
                     </div>
-                  </Card.Footer>
-                </Card>
-              </SwiperSlide>
-            </Swiper>
+                    <div>
+                      <Link
+                        scroll={false}
+                        href="#!"
+                        className="badge badge-md rounded-pill bg-primary-transparent"
+                      >
+                        <i className="bi bi-briefcase me-1"></i>Exp : 5 Years
+                      </Link>
+                    </div>
+                  </div>
+                </Card.Footer>
+              </Card>
+            </div>
           </div>
         </Col>
       </Row>
