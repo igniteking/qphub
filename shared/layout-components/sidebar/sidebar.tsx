@@ -767,7 +767,7 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
             />
             <Image
               width={100}
-              height={100}
+              height={150}
               src={`/logo/main.png`}
               alt="logo"
               className="toggle-logo"
