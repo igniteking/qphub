@@ -1,24 +1,100 @@
-import React from "react";
+import Link from "next/link";
+import React, { useState } from "react";
 import {
+  Button,
   Card,
   Col,
+  Form,
+  InputGroup,
+  Modal,
   Nav,
   OverlayTrigger,
   Row,
   Tab,
   Tooltip,
 } from "react-bootstrap";
+import SalaryModal from "./CandidateInternalDataUpdateModal";
 
 const CandidateInternalData = () => {
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
+  const [monthly1, setMonthly1] = useState<number | "">("");
+  const [yearly1, setYearly1] = useState<number | "">("");
+  const [monthly2, setMonthly2] = useState<number | "">("");
+  const [yearly2, setYearly2] = useState<number | "">("");
+  const [monthly3, setMonthly3] = useState<number | "">("");
+  const [yearly3, setYearly3] = useState<number | "">("");
+
+  const currencyOptions = [
+    { value: "1", label: "USD" },
+    { value: "2", label: "INR" },
+    { value: "3", label: "AED" },
+  ];
+
   return (
     <Row>
+      <SalaryModal
+        show={showModal1}
+        onHide={() => setShowModal1(false)}
+        title="Previous Salary"
+        currencyOptions={currencyOptions}
+        monthly={monthly1}
+        yearly={yearly1}
+        handleMonthlyChange={(e) => {
+          const value = e.target.value ? parseFloat(e.target.value) : "";
+          setMonthly1(value);
+          setYearly1(value !== "" ? value * 12 : "");
+        }}
+        handleYearlyChange={(e) => {
+          const value = e.target.value ? parseFloat(e.target.value) : "";
+          setYearly1(value);
+          setMonthly1(value !== "" ? value / 12 : "");
+        }}
+      />
+      <SalaryModal
+        show={showModal2}
+        onHide={() => setShowModal2(false)}
+        title="Current Salary"
+        currencyOptions={currencyOptions}
+        monthly={monthly2}
+        yearly={yearly2}
+        handleMonthlyChange={(e) => {
+          const value = e.target.value ? parseFloat(e.target.value) : "";
+          setMonthly2(value);
+          setYearly2(value !== "" ? value * 12 : "");
+        }}
+        handleYearlyChange={(e) => {
+          const value = e.target.value ? parseFloat(e.target.value) : "";
+          setYearly2(value);
+          setMonthly2(value !== "" ? value / 12 : "");
+        }}
+      />
+      <SalaryModal
+        show={showModal3}
+        onHide={() => setShowModal3(false)}
+        title="Expected Salary"
+        currencyOptions={currencyOptions}
+        monthly={monthly3}
+        yearly={yearly3}
+        handleMonthlyChange={(e) => {
+          const value = e.target.value ? parseFloat(e.target.value) : "";
+          setMonthly3(value);
+          setYearly3(value !== "" ? value * 12 : "");
+        }}
+        handleYearlyChange={(e) => {
+          const value = e.target.value ? parseFloat(e.target.value) : "";
+          setYearly3(value);
+          setMonthly3(value !== "" ? value / 12 : "");
+        }}
+      />
       <Col xl={12}>
         <Card className="custom-card">
           <Card.Header>
             <Card.Title>Internal Data</Card.Title>
           </Card.Header>
           <Card.Body>
-            <Tab.Container id="left-tabs-example" defaultActiveKey="second">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Nav
                 className="nav nav-style-1 nav-pills mb-3"
                 defaultActiveKey="first"
@@ -38,24 +114,9 @@ const CandidateInternalData = () => {
                   </span>
                 </Nav.Link>
 
-                {/* <Nav.Link
-                        href="#nav-orders"
-                        eventKey="third"
-                        aria-selected="false"
-                      >
-                        Orders
-                        <span className="badge bg-success ms-1 rounded-pill">
-                          4
-                        </span>
-                      </Nav.Link>
-
-                      <Nav.Link
-                        href="#nav-offers"
-                        eventKey="fourth"
-                        aria-selected="false"
-                      >
-                        Offers
-                      </Nav.Link> */}
+                <Nav.Link href="#nav-cart" eventKey="third">
+                  Notes
+                </Nav.Link>
               </Nav>
               <Tab.Content id="myTabContent">
                 <Tab.Pane role="tabpanel" eventKey="first">
@@ -73,9 +134,10 @@ const CandidateInternalData = () => {
                             className="fw-medium"
                             data-bs-toggle="tooltip"
                             title="Expected"
+                            onClick={() => setShowModal1(true)}
                           >
                             {" "}
-                            $3,678
+                            $3,678 (Last edit Date)
                           </span>
                         </OverlayTrigger>
                       </p>
@@ -90,7 +152,9 @@ const CandidateInternalData = () => {
                   <Row>
                     <Col lg={6}>
                       <p className="mb-0 flex-grow-1">
-                        <span className="text-muted">Package (Yearly) :</span>
+                        <span className="text-muted">
+                          Current Salary (Yearly) :
+                        </span>
                         <OverlayTrigger
                           placement="top"
                           overlay={<Tooltip>Expected</Tooltip>}
@@ -99,9 +163,10 @@ const CandidateInternalData = () => {
                             className="fw-medium"
                             data-bs-toggle="tooltip"
                             title="Expected"
+                            onClick={() => setShowModal2(true)}
                           >
                             {" "}
-                            $3,678
+                            $3,678 (Last edit Date)
                           </span>
                         </OverlayTrigger>
                       </p>
@@ -116,7 +181,9 @@ const CandidateInternalData = () => {
                   <Row>
                     <Col lg={6}>
                       <p className="mb-0 flex-grow-1">
-                        <span className="text-muted">Package (Yearly) :</span>
+                        <span className="text-muted">
+                          Expected Salary (Yearly) :
+                        </span>
                         <OverlayTrigger
                           placement="top"
                           overlay={<Tooltip>Expected</Tooltip>}
@@ -125,9 +192,10 @@ const CandidateInternalData = () => {
                             className="fw-medium"
                             data-bs-toggle="tooltip"
                             title="Expected"
+                            onClick={() => setShowModal3(true)}
                           >
                             {" "}
-                            $3,678
+                            $3,678 (Last edit Date)
                           </span>
                         </OverlayTrigger>
                       </p>
