@@ -30,6 +30,7 @@ const CandidateInternalData = () => {
     { value: "1", label: "USD" },
     { value: "2", label: "INR" },
     { value: "3", label: "AED" },
+    { value: "4", label: "AUD" },
   ];
 
   return (
