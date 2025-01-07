@@ -1,13 +1,13 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, CardBody, CardHeader, CardTitle } from "react-bootstrap";
 
 const ProfileInformation = () => {
   return (
     <Card className="custom-card">
-      <Card.Header>
-        <Card.Title>Candidate Profile Information</Card.Title>
-      </Card.Header>
-      <Card.Body className="p-0 candidate-edu-timeline">
+      <CardHeader>
+        <CardTitle>Candidate Profile Information</CardTitle>
+      </CardHeader>
+      <CardBody className="p-0 candidate-edu-timeline">
         <div className="p-4 border-bottom">
           <h5 className="fw-medium fs-17 d-flex align-items-center gap-2">
             <span className="avatar avatar-rounded bg-primary avatar-sm">
@@ -146,7 +146,7 @@ const ProfileInformation = () => {
             </p>
           </div>
         </div>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

@@ -1,14 +1,14 @@
 import Link from "next/link";
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, CardBody, CardHeader, CardTitle } from "react-bootstrap";
 
 const RecentActivity = () => {
   return (
     <Card className="custom-card">
-      <Card.Header>
-        <Card.Title>RECENT ACTIVITY</Card.Title>
-      </Card.Header>
-      <Card.Body>
+      <CardHeader>
+        <CardTitle>RECENT ACTIVITY</CardTitle>
+      </CardHeader>
+      <CardBody>
         <ul className="widgets-task-list mb-0">
           <li className="">
             <div className="">
@@ -110,7 +110,7 @@ const RecentActivity = () => {
             </div>
           </li>
         </ul>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

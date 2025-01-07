@@ -1,14 +1,14 @@
 import Link from "next/link";
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, CardBody, CardHeader, CardTitle } from "react-bootstrap";
 
 const SkillsCard = () => {
   return (
     <Card className="custom-card">
-      <Card.Header>
-        <Card.Title>Skills</Card.Title>
-      </Card.Header>
-      <Card.Body>
+      <CardHeader>
+        <CardTitle>Skills</CardTitle>
+      </CardHeader>
+      <CardBody>
         <div className="popular-tags">
           <Link
             scroll={false}
@@ -46,7 +46,7 @@ const SkillsCard = () => {
             React
           </Link>
         </div>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

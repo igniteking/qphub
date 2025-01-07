@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { Card, Col } from "react-bootstrap";
+import { Card, CardBody, Col } from "react-bootstrap";
 
 const ShareProfile = () => {
   return (
     <Card className="custom-card border bg-primary-transparent shadow-none">
-      <Card.Body>
+      <CardBody>
         <div className="row align-items-center">
           <Col lg={6}>
             <h5 className="fw-medium mb-0">
@@ -23,7 +23,7 @@ const ShareProfile = () => {
             </Link>
           </Col>
         </div>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

@@ -16,6 +16,7 @@ import ExperianceOverview from "@/components/candidate-details-page/ExperianceOv
 import DetailsCard from "@/components/candidate-details-page/DetailsCard";
 import InternalData from "@/components/candidate-details-page/InternalData";
 import ShareProfile from "@/components/candidate-details-page/ShareProfile";
+import Test from "@/components/candidate-details-page/Test";
 const Candidatedetails = () => {
   return (
     <Fragment>
@@ -66,10 +67,10 @@ const Candidatedetails = () => {
           <SkillsCard />
           <RecentActivity />
           <ToolsUsed />
-          <Location />
-          <Languages />
-          <GetAlerts />
-          <RelatedProfiles />
+          {/* <Location /> */}
+          {/* <Languages /> */}
+          {/* <GetAlerts /> */}
+          {/* <RelatedProfiles /> */}
         </Col>
       </Row>
       {/* End::row-2 */}

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import { Card, CardBody, CardFooter, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 
 const DetailsCard = () => {
   return (
     <Col xl={12}>
       <Card className="custom-card">
-        <Card.Body>
+        <CardBody>
           <div className="btn-list float-end">
             <OverlayTrigger
               placement="top"
@@ -179,8 +179,8 @@ const DetailsCard = () => {
               </p>
             </Col>
           </Row>
-        </Card.Body>
-        <Card.Footer>
+        </CardBody>
+        <CardFooter>
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>1 year bond accepted</Tooltip>}
@@ -220,7 +220,7 @@ const DetailsCard = () => {
               Nationality : Indian
             </Link>
           </OverlayTrigger>
-        </Card.Footer>
+        </CardFooter>
       </Card>
     </Col>
   );
