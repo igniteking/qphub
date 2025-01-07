@@ -23,10 +23,13 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
   handleMonthlyChange,
   handleYearlyChange,
 }) => {
-  const [currencyLogo, setCurrencyLogo] = useState();
-  const handleCurrencyLogo = () => {
-    const logo = getSymbolFromCurrency("USD");
-    setCurrencyLogo(logo);
+  const [currencyLogo, setCurrencyLogo] = useState("");
+
+  const handleCurrencyLogo = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCurrency = event.target.value;
+
+    const logo = getSymbolFromCurrency(selectedCurrency);
+    setCurrencyLogo(logo || "Unknown");
   };
 
   return (
@@ -42,14 +45,13 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
         <h6 className="modal-title">{title}</h6>
       </Modal.Header>
       <Modal.Body>
-        <Form.Select aria-label="Default select example">
+        <Form.Select
+          onChange={handleCurrencyLogo}
+          aria-label="Default select example"
+        >
           <option>Select Currency here</option>
           {currencyOptions.map((option) => (
-            <option
-              key={option.value}
-              onChange={handleCurrencyLogo}
-              value={option.value}
-            >
+            <option key={option.value} value={option.label}>
               {option.label}
             </option>
           ))}
