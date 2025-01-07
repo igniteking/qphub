@@ -9,7 +9,7 @@ import {
   Tab,
   Tooltip,
 } from "react-bootstrap";
-import SalaryModal from "./CandidateInternalDataUpdateModal";
+import SalaryModal from "./DataUpdateModal";
 
 const CandidateInternalData = () => {
   const [showModal1, setShowModal1] = useState(false);

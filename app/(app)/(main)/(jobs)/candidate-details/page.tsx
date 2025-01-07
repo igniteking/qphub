@@ -16,9 +16,10 @@ import {
 } from "react-bootstrap";
 import Seo from "@/shared/layout-components/seo/seo";
 import Pageheader from "@/shared/layout-components/page-header/pageheader";
-import CandidateDetailsCard from "@/components/candidate-details-page/CandidateDetailsCard";
-import CandidateDetailsComment from "@/components/candidate-details-page/CandidateDetailsComment";
-import CandidateInternalData from "@/components/candidate-details-page/CandidateInternalData";
+import CandidateDetailsCard from "@/components/candidate-details-page/DetailsCard";
+import CandidateDetailsComment from "@/components/candidate-details-page/Comment";
+import CandidateInternalData from "@/components/candidate-details-page/InternalData";
+import SkillsCard from "@/components/candidate-details-page/SkillsCard";
 const Candidatedetails = () => {
   return (
     <Fragment>
@@ -297,50 +298,7 @@ const Candidatedetails = () => {
           </Card>
         </Col>
         <Col lg={4}>
-          <Card className="custom-card">
-            <Card.Header>
-              <Card.Title>Skills</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <div className="popular-tags">
-                <Link
-                  scroll={false}
-                  href="#!"
-                  className="badge rounded-pill bg-light text-default me-1"
-                >
-                  HTML
-                </Link>
-                <Link
-                  scroll={false}
-                  href="#!"
-                  className="badge rounded-pill bg-light text-default me-1"
-                >
-                  CSS
-                </Link>
-                <Link
-                  scroll={false}
-                  href="#!"
-                  className="badge rounded-pill bg-light text-default me-1"
-                >
-                  Javascript
-                </Link>
-                <Link
-                  scroll={false}
-                  href="#!"
-                  className="badge rounded-pill bg-light text-default me-1"
-                >
-                  Angular
-                </Link>
-                <Link
-                  scroll={false}
-                  href="#!"
-                  className="badge rounded-pill bg-light text-default me-1"
-                >
-                  React
-                </Link>
-              </div>
-            </Card.Body>
-          </Card>
+          <SkillsCard />
           <Card className="custom-card">
             <Card.Header>
               <Card.Title>RECENT ACTIVITY</Card.Title>
