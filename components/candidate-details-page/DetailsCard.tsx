@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 
-const CandidateDetailsCard = () => {
+const DetailsCard = () => {
   return (
     <Col xl={12}>
       <Card className="custom-card">
@@ -226,4 +226,4 @@ const CandidateDetailsCard = () => {
   );
 };
 
-export default CandidateDetailsCard;
+export default DetailsCard;

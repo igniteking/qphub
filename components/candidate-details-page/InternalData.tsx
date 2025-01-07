@@ -1,5 +1,5 @@
+"use client";
 import React, { useState } from "react";
-import getSymbolFromCurrency from "currency-symbol-map";
 import {
   Card,
   Col,
@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import SalaryModal from "./DataUpdateModal";
 
-const CandidateInternalData = () => {
+const InternalData = () => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
@@ -238,4 +238,4 @@ const CandidateInternalData = () => {
   );
 };
 
-export default CandidateInternalData;
+export default InternalData;
