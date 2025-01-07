@@ -745,30 +745,30 @@ const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
         <div className="main-sidebar-header">
           <Link scroll={false} href="/dashboard/" className="header-logo">
             <Image
-              width={100}
-              height={100}
+              width={70}
+              height={0}
               src={`/logo/main-dark.png`}
               alt="logo"
               className="desktop-logo"
             />
             <Image
-              width={100}
-              height={100}
-              src={`/logo/main-dark.png`}
+              width={30}
+              height={0}
+              src={`/logo/main-fav-sheield.png`}
               alt="logo"
               className="toggle-dark"
             />
             <Image
-              width={100}
-              height={100}
+              width={70}
+              height={0}
               src={`/logo/main.png`}
               alt="logo"
               className="desktop-dark"
             />
             <Image
-              width={100}
-              height={150}
-              src={`/logo/main.png`}
+              width={30}
+              height={0}
+              src={`/logo/main-fav-dark.png`}
               alt="logo"
               className="toggle-logo"
             />
