@@ -1,3 +1,4 @@
+import { currencyOptions } from "@/shared/CurrencyOptions";
 import getSymbolFromCurrency from "currency-symbol-map";
 import React, { useState } from "react";
 import { Modal, Form, Row, Col, InputGroup, Button } from "react-bootstrap";
@@ -6,7 +7,6 @@ interface SalaryModalProps {
   show: boolean;
   onHide: () => void;
   title: string;
-  currencyOptions: { value: string | number; label: string }[];
   monthly: number | "";
   yearly: number | "";
   handleMonthlyChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -17,7 +17,6 @@ const SalaryModal: React.FC<SalaryModalProps> = ({
   show,
   onHide,
   title,
-  currencyOptions,
   monthly,
   yearly,
   handleMonthlyChange,

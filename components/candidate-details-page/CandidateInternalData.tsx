@@ -22,20 +22,12 @@ const CandidateInternalData = () => {
   const [monthly3, setMonthly3] = useState<number | "">("");
   const [yearly3, setYearly3] = useState<number | "">("");
 
-  const currencyOptions = [
-    { value: "1", label: "USD" },
-    { value: "2", label: "INR" },
-    { value: "3", label: "AED" },
-    { value: "4", label: "AUD" },
-  ];
-
   return (
     <Row>
       <SalaryModal
         show={showModal1}
         onHide={() => setShowModal1(false)}
         title="Previous Salary"
-        currencyOptions={currencyOptions}
         monthly={monthly1}
         yearly={yearly1}
         handleMonthlyChange={(e) => {
@@ -53,7 +45,6 @@ const CandidateInternalData = () => {
         show={showModal2}
         onHide={() => setShowModal2(false)}
         title="Current Salary"
-        currencyOptions={currencyOptions}
         monthly={monthly2}
         yearly={yearly2}
         handleMonthlyChange={(e) => {
@@ -71,7 +62,6 @@ const CandidateInternalData = () => {
         show={showModal3}
         onHide={() => setShowModal3(false)}
         title="Expected Salary"
-        currencyOptions={currencyOptions}
         monthly={monthly3}
         yearly={yearly3}
         handleMonthlyChange={(e) => {
