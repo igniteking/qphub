@@ -1,13 +1,13 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, CardBody, CardHeader, CardTitle } from "react-bootstrap";
 
 const Location = () => {
   return (
     <Card className="custom-card">
-      <Card.Header>
-        <Card.Title>Location</Card.Title>
-      </Card.Header>
-      <Card.Body>
+      <CardHeader>
+        <CardTitle>Location</CardTitle>
+      </CardHeader>
+      <CardBody>
         <p>
           <span className="fw-medium">Jaipur : </span>Current / Preferred
         </p>
@@ -17,7 +17,7 @@ const Location = () => {
         <p className="mb-0">
           <span className="fw-medium">Mumbai : </span>Preferred
         </p>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

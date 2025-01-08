@@ -67,7 +67,7 @@ const Candidatedetails = () => {
           <SkillsCard />
           <RecentActivity />
           <ToolsUsed />
-          {/* <Location /> */}
+          <Location />
           {/* <Languages /> */}
           {/* <GetAlerts /> */}
           {/* <RelatedProfiles /> */}
