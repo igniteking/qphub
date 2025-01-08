@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import SalaryModal from "./DataUpdateModal";
+import ComapanyModal from "./ComapanyUpdateModal";
 
 const InternalData = () => {
   const [showModal1, setShowModal1] = useState(false);
@@ -21,6 +22,11 @@ const InternalData = () => {
   const [yearly2, setYearly2] = useState<number | "">("");
   const [monthly3, setMonthly3] = useState<number | "">("");
   const [yearly3, setYearly3] = useState<number | "">("");
+
+  const [showModalComapany1, setShowModalComapany1] = useState(false);
+  const [currentCompany1, setcurrentCompany1] = useState<string>("");
+  const [showModalComapany2, setShowModalComapany2] = useState(false);
+  const [currentCompany2, setcurrentCompany2] = useState<string>("");
 
   return (
     <Row>
@@ -75,6 +81,22 @@ const InternalData = () => {
           setMonthly3(value !== "" ? value / 12 : "");
         }}
       />
+
+      <ComapanyModal
+        show={showModalComapany1}
+        onHide={() => setShowModalComapany1(false)}
+        title="Current Company"
+        currentCompany={currentCompany1}
+        setcurrentCompany={(e) => setcurrentCompany1(e.target.value)}
+      />
+      <ComapanyModal
+        show={showModalComapany2}
+        onHide={() => setShowModalComapany2(false)}
+        title="Previous Company"
+        currentCompany={currentCompany2}
+        setcurrentCompany={(e) => setcurrentCompany2(e.target.value)}
+      />
+
       <Col xl={12}>
         <Card className="custom-card">
           <Card.Header>
@@ -115,7 +137,7 @@ const InternalData = () => {
                         </span>
                         <OverlayTrigger
                           placement="top"
-                          overlay={<Tooltip>Expected</Tooltip>}
+                          overlay={<Tooltip>Click to Edit</Tooltip>}
                         >
                           <span
                             className="fw-medium"
@@ -133,7 +155,20 @@ const InternalData = () => {
                     <Col lg={6}>
                       <p className="mb-0">
                         <span className="text-muted"> Current Comapny :</span>{" "}
-                        <span className="fw-medium"> BIMQP</span>
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Click to Edit</Tooltip>}
+                        >
+                          <span
+                            className="fw-medium"
+                            data-bs-toggle="tooltip"
+                            title="Expected"
+                            onClick={() => setShowModalComapany1(true)}
+                          >
+                            {" "}
+                            BIMQP <i className="bi bi-pencil-square"></i>
+                          </span>
+                        </OverlayTrigger>
                       </p>
                     </Col>
                   </Row>
@@ -162,8 +197,21 @@ const InternalData = () => {
                     </Col>
                     <Col lg={6}>
                       <p className="mb-0">
-                        <span className="text-muted"> Current Comapny :</span>{" "}
-                        <span className="fw-medium"> BIMQP</span>
+                        <span className="text-muted"> Previous Comapny :</span>{" "}
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Click to Edit</Tooltip>}
+                        >
+                          <span
+                            className="fw-medium"
+                            data-bs-toggle="tooltip"
+                            title="Expected"
+                            onClick={() => setShowModalComapany2(true)}
+                          >
+                            {" "}
+                            Quadbim <i className="bi bi-pencil-square"></i>
+                          </span>
+                        </OverlayTrigger>
                       </p>
                     </Col>
                   </Row>
@@ -188,12 +236,6 @@ const InternalData = () => {
                             <i className="bi bi-pencil-square"></i>
                           </span>
                         </OverlayTrigger>
-                      </p>
-                    </Col>
-                    <Col lg={6}>
-                      <p className="mb-0">
-                        <span className="text-muted"> Current Comapny :</span>{" "}
-                        <span className="fw-medium"> BIMQP</span>
                       </p>
                     </Col>
                   </Row>
