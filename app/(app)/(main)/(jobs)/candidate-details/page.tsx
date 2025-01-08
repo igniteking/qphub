@@ -70,7 +70,7 @@ const Candidatedetails = () => {
           <Location />
           <Languages />
           <GetAlerts />
-          {/* <RelatedProfiles /> */}
+          <RelatedProfiles />
         </Col>
       </Row>
       {/* End::row-2 */}

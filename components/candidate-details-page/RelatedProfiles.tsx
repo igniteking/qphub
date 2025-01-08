@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Card, CardBody, CardFooter, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const RelatedProfiles = () => {
   return (
@@ -11,7 +11,7 @@ const RelatedProfiles = () => {
       </p>
       <div className="swiper-related-jobs">
         <Card className="custom-card">
-          <Card.Body>
+          <CardBody>
             <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
               <div>
                 <span className="avatar avatar-lg avatar-rounded">
@@ -146,8 +146,8 @@ const RelatedProfiles = () => {
                 English
               </Link>
             </div>
-          </Card.Body>
-          <Card.Footer>
+          </CardBody>
+          <CardFooter>
             <div className="d-flex align-items-center gap-3 flex-wrap">
               <h6 className="mb-0 fw-medium">Skills :</h6>
               <div className="popular-tags flex-grow-1">
@@ -211,10 +211,10 @@ const RelatedProfiles = () => {
                 </Link>
               </div>
             </div>
-          </Card.Footer>
+          </CardFooter>
         </Card>
         <Card className="custom-card">
-          <Card.Body>
+          <CardBody>
             <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
               <div>
                 <span className="avatar avatar-lg avatar-rounded">
@@ -350,8 +350,8 @@ const RelatedProfiles = () => {
                 English
               </Link>
             </div>
-          </Card.Body>
-          <Card.Footer>
+          </CardBody>
+          <CardFooter>
             <div className="d-flex align-items-center gap-3 flex-wrap">
               <h6 className="mb-0 fw-medium">Skills :</h6>
               <div className="popular-tags flex-grow-1">
@@ -407,10 +407,10 @@ const RelatedProfiles = () => {
                 </Link>
               </div>
             </div>
-          </Card.Footer>
+          </CardFooter>
         </Card>
         <Card className="custom-card">
-          <Card.Body>
+          <CardBody>
             <div className="d-flex mb-3 align-items-center flex-wrap gap-2">
               <div>
                 <span className="avatar avatar-lg avatar-rounded">
@@ -546,8 +546,8 @@ const RelatedProfiles = () => {
                 English
               </Link>
             </div>
-          </Card.Body>
-          <Card.Footer>
+          </CardBody>
+          <CardFooter>
             <div className="d-flex align-items-center gap-3 flex-wrap">
               <h6 className="mb-0 fw-medium">Skills :</h6>
               <div className="popular-tags flex-grow-1">
@@ -590,7 +590,7 @@ const RelatedProfiles = () => {
                 </Link>
               </div>
             </div>
-          </Card.Footer>
+          </CardFooter>
         </Card>
       </div>
     </div>
