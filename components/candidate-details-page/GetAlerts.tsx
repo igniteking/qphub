@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, CardBody } from "react-bootstrap";
 
 const GetAlerts = () => {
   return (
     <Card className="custom-card">
-      <Card.Body>
+      <CardBody>
         <div className="">
           <h5 className="fw-medium mb-3">Get Latest Alerts</h5>
           <p>
@@ -36,7 +36,7 @@ const GetAlerts = () => {
             </Link>
           </label>
         </div>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

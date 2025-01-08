@@ -1,13 +1,13 @@
 import React from "react";
-import { Badge, Button, Card, Col, Row } from "react-bootstrap";
+import { Badge, Button, Card, CardBody, CardHeader, CardTitle, Col, Row } from "react-bootstrap";
 
 const Languages = () => {
   return (
     <Card className="custom-card">
-      <Card.Header>
-        <Card.Title>Languages</Card.Title>
-      </Card.Header>
-      <Card.Body>
+      <CardHeader>
+        <CardTitle>Languages</CardTitle>
+      </CardHeader>
+      <CardBody>
         <Row className="align-items-center">
           <Col
             lg={3}
@@ -180,7 +180,7 @@ const Languages = () => {
             </Button>
           </Col>
         </Row>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

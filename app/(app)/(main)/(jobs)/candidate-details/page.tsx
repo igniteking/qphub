@@ -68,8 +68,8 @@ const Candidatedetails = () => {
           <RecentActivity />
           <ToolsUsed />
           <Location />
-          {/* <Languages /> */}
-          {/* <GetAlerts /> */}
+          <Languages />
+          <GetAlerts />
           {/* <RelatedProfiles /> */}
         </Col>
       </Row>
