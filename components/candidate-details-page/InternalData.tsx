@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import {
   Badge,
+  Button,
   Card,
   Col,
   Nav,
@@ -110,11 +111,7 @@ const InternalData = () => {
                 className="nav nav-style-1 nav-pills mb-3"
                 defaultActiveKey="first"
               >
-                <Nav.Link
-                  eventKey="first"
-                  href="#first"
-                  aria-selected="false"
-                >
+                <Nav.Link eventKey="first" href="#first" aria-selected="false">
                   Salary
                 </Nav.Link>
 
@@ -254,6 +251,7 @@ const InternalData = () => {
                           <th scope="col">Designation</th>
                           <th scope="col">Status</th>
                           <th scope="col">Date</th>
+                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -290,6 +288,16 @@ const InternalData = () => {
                             </Badge>
                           </td>
                           <td>08/01/25</td>
+                          <td>
+                            <div className="hstack gap-2 fs-15">
+                              <a
+                                onClick={() => setShowModalComapany1(true)}
+                                className="btn btn-icon btn-sm btn-light"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </a>
+                            </div>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">
@@ -324,6 +332,16 @@ const InternalData = () => {
                             </Badge>
                           </td>
                           <td>08/01/25</td>
+                          <td>
+                            <div className="hstack gap-2 fs-15">
+                              <a
+                                onClick={() => setShowModalComapany1(true)}
+                                className="btn btn-icon btn-sm btn-light"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </a>
+                            </div>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">
@@ -358,10 +376,23 @@ const InternalData = () => {
                             </Badge>
                           </td>
                           <td>08/01/25</td>
+                          <td>
+                            <div className="hstack gap-2 fs-15">
+                              <a
+                                onClick={() => setShowModalComapany1(true)}
+                                className="btn btn-icon btn-sm btn-light"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </a>
+                            </div>
+                          </td>
                         </tr>
                       </tbody>
                     </Table>
                   </div>
+                  <Button variant="outline-primary" className="col-md-12 mt-2">
+                    Add
+                  </Button>
                 </Tab.Pane>
                 <Tab.Pane role="tabpanel" eventKey="fourth">
                   <EditorComponent />
