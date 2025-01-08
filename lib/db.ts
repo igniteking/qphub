@@ -1,29 +1,18 @@
-import mysql, { Connection, Pool } from "mysql2/promise";
+import mysql from "mysql2/promise";
 
-let pool: Pool;
+// Create a connection pool to your MySQL database
+const pool = mysql.createPool({
+  host: "localhost", // Your MySQL host
+  user: "root", // Your MySQL user
+  password: "", // Your MySQL password
+  database: "zazla", // Replace with your actual database name
+});
 
-export const initDB = () => {
-  if (!pool) {
-    pool = mysql.createPool({
-      host: process.env.DB_HOST || "localhost", // Change as per your setup
-      user: process.env.DB_USER || "root",
-      password: process.env.DB_PASSWORD || "",
-      database: process.env.DB_NAME || "zazla",
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-    });
-  }
-  return pool;
-};
-
-export const executeQuery = async <
-  T extends mysql.RowDataPacket[] | mysql.OkPacket
->(
+// Execute a query
+export const executeQuery = async <T = any>(
   query: string,
   values?: any[]
 ): Promise<T> => {
-  const connection = initDB();
-  const [results] = await connection.execute<T>(query, values);
-  return results;
+  const [results] = await pool.execute(query, values);
+  return results as T;
 };

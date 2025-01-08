@@ -38,7 +38,7 @@ export default function Page() {
         <Col xxl={7} xl={7} className="">
           <div className="row justify-content-center align-items-center h-100">
             <Col xxl={6} xl={9} lg={6} md={6} sm={8} className="col-12">
-              <SignUp afterSignUpUrl={"/dashboard/"} />
+              <SignUp afterSignUpUrl={"/after-signup/"} />
             </Col>
           </div>
         </Col>

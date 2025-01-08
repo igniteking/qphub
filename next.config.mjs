@@ -1,10 +1,9 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
   reactStrictMode: true,
-  trailingSlash: true,
+  trailingSlash: false, // Change this to false temporarily
   swcMinify: true,
   basePath: "",
   assetPrefix: "",
