@@ -124,7 +124,8 @@ const InternalData = () => {
                             onClick={() => setShowModal1(true)}
                           >
                             {" "}
-                            $3,678 (Last edit Date)
+                            $3,678 (Last edit Date){" "}
+                            <i className="bi bi-pencil-square"></i>
                           </span>
                         </OverlayTrigger>
                       </p>
@@ -154,6 +155,7 @@ const InternalData = () => {
                           >
                             {" "}
                             $3,678 (Last edit Date)
+                            <i className="bi bi-pencil-square"></i>
                           </span>
                         </OverlayTrigger>
                       </p>
@@ -183,6 +185,7 @@ const InternalData = () => {
                           >
                             {" "}
                             $3,678 (Last edit Date)
+                            <i className="bi bi-pencil-square"></i>
                           </span>
                         </OverlayTrigger>
                       </p>
