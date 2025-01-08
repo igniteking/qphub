@@ -32,7 +32,8 @@
     "redux-thunk": "^2.4.2",
     "rodal": "^2.1.0",
     "sass": "^1.77.4",
-    "simplebar-react": "^3.2.6"
+    "simplebar-react": "^3.2.6",
+    "suneditor-react": "^3.6.1"
   },
   "devDependencies": {
     "@types/node": "^20",
