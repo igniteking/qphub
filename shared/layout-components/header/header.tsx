@@ -16,9 +16,9 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
   const { signOut } = useClerk();
   const router = useRouter();
 
-  if (!user) {
-    router.push("/sign-in");
-  }
+  // if (!user?.emailAddresses[0]?.emailAddress) {
+  //   router.push("/sign-in");
+  // }
 
   let { basePath } = nextConfig;
 

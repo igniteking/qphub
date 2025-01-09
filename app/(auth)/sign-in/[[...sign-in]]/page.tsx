@@ -1,31 +1,41 @@
 "use client";
 import Loader from "@/components/Loader";
 import Seo from "@/shared/layout-components/seo/seo";
-import { useSignIn } from "@clerk/nextjs";
+import { useSignIn, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const SigninCover = () => {
-  const { isLoaded, signIn } = useSignIn();
+  const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
   const [isLoading, setsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  // Handle Email Sign-In
   const handleEmailSignIn = async () => {
     if (!isLoaded) return;
 
     try {
       setsLoading(true);
-      await signIn.create({ identifier: email, password });
-      router.push("/dashboard/"); // Redirect to dashboard after successful sign-in
+
+      // Attempt to sign in with Clerk
+      const signInResponse = await signIn.create({
+        identifier: email,
+        password,
+      });
+
+      // Set the active session
+      await setActive({ session: signInResponse.createdSessionId });
       setsLoading(false);
+
+      // Redirect to the dashboard
+      router.push("/dashboard");
     } catch (err: any) {
-      setError(err.errors[0]?.message || "Failed to sign in.");
+      setsLoading(false);
+      setError(err.message || "Failed to sign in.");
     }
   };
 
