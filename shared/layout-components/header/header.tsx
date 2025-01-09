@@ -9,10 +9,16 @@ import nextConfig from "@/next.config.mjs";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const Header = ({ local_varaiable, ThemeChanger }: any) => {
   const { user } = useUser();
   const { signOut } = useClerk();
+  const router = useRouter();
+
+  if (!user) {
+    router.push("/sign-in");
+  }
 
   let { basePath } = nextConfig;
 

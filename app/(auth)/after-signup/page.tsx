@@ -12,12 +12,14 @@ const AfterSignUpPage = () => {
       // Make the API call to store the user data
       const saveUserData = async () => {
         try {
-          const response = await fetch("/api/users", {
+          const response = await fetch("/api/signup", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              userId: user.id,
+              userFullName: user.fullName,
               userEmail: user.emailAddresses,
               userFirstName: user.firstName,
               userLastName: user.lastName,
