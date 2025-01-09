@@ -1,9 +1,15 @@
 "use client";
 import Seo from "@/shared/layout-components/seo/seo";
-import { useSignUp } from "@clerk/nextjs";
+import { useSignUp, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment, useCallback, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const TwostepCover = () => {
@@ -31,15 +37,65 @@ const TwostepCover = () => {
     [inputRefs]
   );
 
-  const { isLoaded, signUp } = useSignUp();
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
   const router = useRouter();
-  const [code, setCode] = useState("");
   const [error, setError] = useState("");
+  const [Loading, setsLoading] = useState<boolean>(false);
+  const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
+  const [loading, setLoading] = useState(false);
 
-  // Function to handle OTP submission
+  // This will run when the session is set
+  useEffect(() => {
+    if (sessionId) {
+      const fetchUser = async () => {
+        try {
+          // Wait for the user model to load after session creation
+          if (isUserLoaded && user) {
+            console.log("User loaded:", user);
+            // Proceed with sending data to the API
+            const userData = {
+              userId: user.id,
+              userFullName: user.fullName,
+              userEmail: user.emailAddresses[0]?.emailAddress,
+              userFirstName: user.firstName,
+              userLastName: user.lastName,
+              userProfilePicture: user.imageUrl,
+            };
+
+            const apiResponse = await fetch("/api/save-user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
+
+            const apiResult = await apiResponse.json();
+            if (!apiResponse.ok) {
+              throw new Error(apiResult.message || "Failed to save user data.");
+            }
+
+            // Redirect after successful verification and user save
+            console.log("User verified and saved. Redirecting...");
+            router.push("/dashboard");
+          }
+        } catch (err: any) {
+          console.error("Error fetching user data:", err.message);
+          setError("Failed to fetch user data after session creation.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchUser();
+    }
+  }, [sessionId, isUserLoaded, user]); // Re-run when sessionId, user, or isUserLoaded changes
+
   const handleVerify = async () => {
     if (!isLoaded) return;
 
+    setLoading(true);
     const code =
       (inputRefs.one.current?.value || "") +
       (inputRefs.two.current?.value || "") +
@@ -50,17 +106,25 @@ const TwostepCover = () => {
 
     if (code.length !== 6) {
       console.log("Please enter the complete verification code.");
+      setLoading(false);
       return;
     }
 
     try {
-        console.log("Here....")
-      await signUp.attemptEmailAddressVerification({ code });
-      router.push("/dashboard"); // Redirect on successful verification
+      // Attempt email verification
+      const verification = await signUp.attemptEmailAddressVerification({
+        code,
+      });
+      console.log("Verification response:", verification);
+
+      // Set the active session
+      await setActive({ session: verification.createdSessionId });
+      setSessionId(verification.createdSessionId); // Set session ID to trigger useEffect
     } catch (err: any) {
-      console.log(
-        err.message || "Verification failed. Please try again."
-      );
+      console.error("Error during verification:", err.message);
+      setError("Verification failed.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,9 +214,7 @@ const TwostepCover = () => {
                             type="text"
                             className="form-control form-control-lg text-center"
                             id="four"
-                            onChange={() =>
-                              handleInputChange("four", "five")
-                            }
+                            onChange={() => handleInputChange("four", "five")}
                             ref={inputRefs.four}
                             maxLength={1}
                           />
@@ -162,9 +224,7 @@ const TwostepCover = () => {
                             type="text"
                             className="form-control form-control-lg text-center"
                             id="five"
-                            onChange={() =>
-                              handleInputChange("five", "six")
-                            }
+                            onChange={() => handleInputChange("five", "six")}
                             ref={inputRefs.five}
                             maxLength={1}
                           />
@@ -194,7 +254,7 @@ const TwostepCover = () => {
                         >
                           Did not recieve a code ?
                           <Button
-                          variant="ghost"
+                            variant="ghost"
                             onClick={resendCode}
                             className="text-primary ms-2 d-inline-block fw-medium"
                           >

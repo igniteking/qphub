@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Loader";
 import Seo from "@/shared/layout-components/seo/seo";
 import { SignUp, useSignUp } from "@clerk/nextjs";
 import Link from "next/link";
@@ -13,18 +14,21 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isLoaded) return;
 
     try {
+      setisLoading(true);
       await signUp.create({
         emailAddress: email,
         password,
       });
 
-      await signUp.prepareEmailAddressVerification();
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      setisLoading(false);
       router.push(`/verify-email?email=${encodeURIComponent(email)}`);
     } catch (err: any) {
       setError(err.errors[0]?.message || "Something went wrong!");
@@ -172,7 +176,7 @@ export default function Page() {
                     </div>
                     <div className="d-grid mt-4">
                       <Button type="submit" className="btn btn-lg btn-primary">
-                        Create Account
+                        {isLoading ? <Loader /> : "Create Account"}
                       </Button>
                     </div>
                     <div className="text-center">
@@ -180,7 +184,7 @@ export default function Page() {
                         Already have an account?{" "}
                         <Link
                           scroll={false}
-                          href="/authentication/signin/signin-basic/"
+                          href="/sign-in/"
                           className="text-primary fw-medium"
                         >
                           Sign In
