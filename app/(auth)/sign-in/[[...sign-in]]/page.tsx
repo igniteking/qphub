@@ -222,14 +222,6 @@ const SigninCover = () => {
                       {isLoading ? <Loader /> : "Sign In"}
                     </Button>
                   </div>
-                  <Button
-                    type="button"
-                    className="btn btn-primary btn-wave"
-                    id="liveToastBtn"
-                    onClick={() => setShow(true)}
-                  >
-                    Show live toast
-                  </Button>
                   <div className="text-center">
                     <p className="text-muted mt-3 mb-0">
                       Dont have an account?{" "}
