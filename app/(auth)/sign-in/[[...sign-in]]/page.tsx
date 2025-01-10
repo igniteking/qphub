@@ -101,14 +101,12 @@ const SigninCover = () => {
               <Card className="custom-card shadow-none my-auto border-0">
                 <Card.Body className="p-5">
                   <p className="h4 mb-2 fw-semibold">Sign In</p>
-                  <p className="mb-4 text-muted fw-normal">
-                    Welcome back!{" "}
-                    <ToastNotification
-                      show={show}
-                      setShow={setShow}
-                      message={message}
-                    />
-                  </p>
+                  <p className="mb-4 text-muted fw-normal">Welcome back! </p>
+                  <ToastNotification
+                    show={show}
+                    setShow={setShow}
+                    message={message}
+                  />
                   <div className="row gy-3">
                     <Col xl={12}>
                       <label
