@@ -89,12 +89,12 @@ export default function Page() {
                   <p className="h4 mb-2 fw-semibold">Sign Up</p>
                   <p className="mb-4 text-muted">
                     Join us by creating a free account !{" "}
-                    <ToastNotification
-                      show={show}
-                      setShow={setShow}
-                      message={message}
-                    />
                   </p>
+                  <ToastNotification
+                    show={show}
+                    setShow={setShow}
+                    message={message}
+                  />
                   {error && <p style={{ color: "red" }}>{error}</p>}
                   <Form onSubmit={handleSignup}>
                     <div className="row gy-3">
