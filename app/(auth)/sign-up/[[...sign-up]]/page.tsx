@@ -1,5 +1,6 @@
 "use client";
 import Loader from "@/components/Loader";
+import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
 import { SignUp, useSignUp } from "@clerk/nextjs";
 import Link from "next/link";
@@ -15,6 +16,8 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setisLoading] = useState<boolean>(false);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState<string>("");
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +88,12 @@ export default function Page() {
                 <Card.Body className="p-5">
                   <p className="h4 mb-2 fw-semibold">Sign Up</p>
                   <p className="mb-4 text-muted">
-                    Join us by creating a free account !
+                    Join us by creating a free account !{" "}
+                    <ToastNotification
+                      show={show}
+                      setShow={setShow}
+                      message={message}
+                    />
                   </p>
                   {error && <p style={{ color: "red" }}>{error}</p>}
                   <Form onSubmit={handleSignup}>
