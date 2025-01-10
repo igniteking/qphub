@@ -1,11 +1,20 @@
 "use client";
 import Loader from "@/components/Loader";
+import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
 import { useSignIn, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  Row,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 
 const SigninCover = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -14,6 +23,8 @@ const SigninCover = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState<string>("");
 
   const handleEmailSignIn = async () => {
     if (!isLoaded) return;
@@ -26,7 +37,8 @@ const SigninCover = () => {
         identifier: email,
         password,
       });
-
+      setMessage("Sign in successful.");
+      setShow(true);
       // Set the active session
       await setActive({ session: signInResponse.createdSessionId });
       setsLoading(false);
@@ -90,7 +102,12 @@ const SigninCover = () => {
                 <Card.Body className="p-5">
                   <p className="h4 mb-2 fw-semibold">Sign In</p>
                   <p className="mb-4 text-muted fw-normal">
-                    Welcome back! {signIn?.status}
+                    Welcome back!{" "}
+                    <ToastNotification
+                      show={show}
+                      setShow={setShow}
+                      message={message}
+                    />
                   </p>
                   <div className="row gy-3">
                     <Col xl={12}>
@@ -205,6 +222,14 @@ const SigninCover = () => {
                       {isLoading ? <Loader /> : "Sign In"}
                     </Button>
                   </div>
+                  <Button
+                    type="button"
+                    className="btn btn-primary btn-wave"
+                    id="liveToastBtn"
+                    onClick={() => setShow(true)}
+                  >
+                    Show live toast
+                  </Button>
                   <div className="text-center">
                     <p className="text-muted mt-3 mb-0">
                       Dont have an account?{" "}
