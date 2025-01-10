@@ -27,7 +27,7 @@ const ToastNotification = (props: {
           />
           <strong className="me-auto">Zazla</strong>{" "}
         </Toast.Header>
-        <Toast.Body className=""> {props.message}. </Toast.Body>
+        <Toast.Body className=""> {props.message} </Toast.Body>
       </Toast>
     </ToastContainer>
   );

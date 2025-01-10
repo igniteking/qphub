@@ -22,7 +22,6 @@ const SigninCover = () => {
   const [isLoading, setsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState<string>("");
 
@@ -46,8 +45,9 @@ const SigninCover = () => {
       // Redirect to the dashboard
       router.push("/dashboard");
     } catch (err: any) {
+      setMessage(err.message || "Failed to sign in.");
+      setShow(true);
       setsLoading(false);
-      setError(err.message || "Failed to sign in.");
     }
   };
 
@@ -62,10 +62,12 @@ const SigninCover = () => {
         redirectUrlComplete: "/dashboard", // This is the URL where Clerk will complete the OAuth flow
       });
     } catch (err: any) {
-      setError(err.errors[0]?.message || "GitHub login failed.");
+      setMessage(err.errors[0]?.message || "GitHub login failed.");
+      setShow(true);
     }
   };
   const [passwordshow1, setpasswordshow1] = useState(false);
+
   return (
     <Fragment>
       <Seo title={"Sing In"} />

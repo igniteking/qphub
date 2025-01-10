@@ -14,7 +14,6 @@ export default function Page() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState<string>("");
@@ -29,12 +28,13 @@ export default function Page() {
         emailAddress: email,
         password,
       });
-
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setisLoading(false);
       router.push(`/verify-email?email=${encodeURIComponent(email)}`);
     } catch (err: any) {
-      setError(err.errors[0]?.message || "Something went wrong!");
+      setMessage(err.errors[0]?.message || "Something went wrong!");
+      setShow(true);
+      setisLoading(false);
     }
   };
 
@@ -49,7 +49,8 @@ export default function Page() {
         redirectUrlComplete: "/dashboard",
       });
     } catch (err: any) {
-      setError(err.errors[0]?.message || "GitHub login failed.");
+      setMessage(err.errors[0]?.message || "GitHub login failed.");
+      setShow(true);
     }
   };
   return (
@@ -95,7 +96,6 @@ export default function Page() {
                     setShow={setShow}
                     message={message}
                   />
-                  {error && <p style={{ color: "red" }}>{error}</p>}
                   <Form onSubmit={handleSignup}>
                     <div className="row gy-3">
                       <Col xl={12}>
