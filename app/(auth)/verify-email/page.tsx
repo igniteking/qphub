@@ -1,4 +1,6 @@
 "use client";
+import Loader from "@/components/Loader";
+import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
 import { useSignUp, useUser } from "@clerk/nextjs";
 import Link from "next/link";
@@ -40,10 +42,11 @@ const TwostepCover = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
   const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
   const router = useRouter();
-  const [error, setError] = useState("");
   const [Loading, setsLoading] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState<string>("");
 
   // This will run when the session is set
   useEffect(() => {
@@ -82,7 +85,8 @@ const TwostepCover = () => {
           }
         } catch (err: any) {
           console.error("Error fetching user data:", err.message);
-          setError("Failed to fetch user data after session creation.");
+          setMessage("Failed to fetch user data after session creation.");
+          setShow(true);
         } finally {
           setLoading(false);
         }
@@ -105,7 +109,8 @@ const TwostepCover = () => {
       (inputRefs.six.current?.value || "");
 
     if (code.length !== 6) {
-      console.log("Please enter the complete verification code.");
+      setMessage("Please enter the complete verification code.");
+      setShow(true);
       setLoading(false);
       return;
     }
@@ -120,9 +125,9 @@ const TwostepCover = () => {
       // Set the active session
       await setActive({ session: verification.createdSessionId });
       setSessionId(verification.createdSessionId); // Set session ID to trigger useEffect
-    } catch (err: any) {
-      console.error("Error during verification:", err.message);
-      setError("Verification failed.");
+    } catch (error: any) {
+      setMessage("Unexpected error occured. Verification failed.");
+      setShow(true);
     } finally {
       setLoading(false);
     }
@@ -134,7 +139,10 @@ const TwostepCover = () => {
       await signUp.prepareEmailAddressVerification();
       alert("Verification code resent!");
     } catch (err: any) {
-      setError(err.errors[0]?.message || "Failed to resend verification code!");
+      setMessage(
+        err.errors[0]?.message || "Failed to resend verification code!"
+      );
+      setShow(true);
     }
   };
 
@@ -173,6 +181,11 @@ const TwostepCover = () => {
               <Card className="custom-card shadow-none my-auto border-0">
                 <Card.Body className="p-5">
                   <p className="h4 mb-2 fw-semibold">Verify Your Account</p>
+                  <ToastNotification
+                    setShow={setShow}
+                    show={show}
+                    message={message}
+                  />
                   <p className="mb-4 text-muted fw-normal">
                     Enter the 4 digit code sent to the registered email Id.
                   </p>
@@ -267,8 +280,9 @@ const TwostepCover = () => {
                       <Button
                         onClick={handleVerify}
                         className="btn btn-lg btn-primary"
+                        disabled={loading}
                       >
-                        Verify
+                        {loading ? <Loader /> : "Verify"}
                       </Button>
                     </Col>
                   </Row>
