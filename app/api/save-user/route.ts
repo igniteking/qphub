@@ -50,7 +50,7 @@ export const POST = async (req: Request) => {
   } catch (error) {
     console.error("Error during API request:", error); // Log the error that occurred
     return NextResponse.json(
-      { message: error.message || "Server error" },
+      { message: error || "Server error" },
       { status: 500 }
     );
   }
