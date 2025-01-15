@@ -1,7 +1,10 @@
-import { executeQuery } from "@/lib/db";
+import { neon } from "@neondatabase/serverless";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not defined");
+  }
   try {
     const userData = await req.json(); // Parse the incoming JSON request body
     console.log("Received user data:", userData); // Log the data for debugging
@@ -16,13 +19,10 @@ export const POST = async (req: Request) => {
       userProfilePicture,
     } = userData;
 
-    // SQL query to insert data into the 'users' table
-    const query = `
-      INSERT INTO users (clerk_id, full_name, email, first_name, last_name, profile_picture)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `;
+    // Initialize the Neon client with the database URL
+    const sql = neon(process.env.DATABASE_URL);
 
-    // Values to insert into the database
+    // Define the values to insert into the 'users' table
     const values = [
       userId,
       userFullName,
@@ -32,18 +32,25 @@ export const POST = async (req: Request) => {
       userProfilePicture,
     ];
 
-    // Execute the query and return a response
-    const result = await executeQuery(query, values);
+    // SQL query to insert data into the 'users' table
+    const query = `
+      INSERT INTO users (clerk_id, full_name, email, first_name, last_name, profile_picture)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `;
+
+    // Execute the query and return the result
+    const result = await sql(query, values);
 
     // Return a successful response with the result
     return NextResponse.json(
-      { message: "User data saved successfully", result },
+      { message: "User data saved successfully", result: result },
       { status: 200 }
     );
   } catch (error) {
     console.error("Error during API request:", error); // Log the error that occurred
     return NextResponse.json(
-      { message: error || "Server error" },
+      { message: error.message || "Server error" },
       { status: 500 }
     );
   }

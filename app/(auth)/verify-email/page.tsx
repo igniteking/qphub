@@ -137,7 +137,8 @@ const TwostepCover = () => {
     if (!isLoaded) return;
     try {
       await signUp.prepareEmailAddressVerification();
-      alert("Verification code resent!");
+      setMessage("Verification code resent!");
+      setShow(true);
     } catch (err: any) {
       setMessage(
         err.errors[0]?.message || "Failed to resend verification code!"
@@ -148,7 +149,7 @@ const TwostepCover = () => {
 
   return (
     <Fragment>
-      <Seo title={"TwostepCover"} />
+      <Seo title={"Email Verification"} />
       <div className="row authentication two-step-verification authentication-cover-main mx-0">
         <Col xxl={5} xl={5} lg={12} className="d-xl-block d-none px-0">
           <div className="authentication-cover overflow-hidden">
