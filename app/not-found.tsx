@@ -8,7 +8,7 @@ const Error404 = () => {
     <html>
       <body>
         <Fragment>
-          <Seo title={"Error404"} />
+          <Seo title={"Error 404"} />
           <div className="page error-bg">
             {/* <!-- Start::error-page --> */}
             <div className="error-page">

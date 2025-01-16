@@ -4,7 +4,7 @@ import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
 import { useSignUp, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import React, {
   Fragment,
   useCallback,
@@ -42,7 +42,6 @@ const TwostepCover = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
   const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
   const router = useRouter();
-  const [Loading, setsLoading] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
@@ -146,6 +145,9 @@ const TwostepCover = () => {
       setShow(true);
     }
   };
+
+  const params = useParams();
+  const role = params.role; // Extract 'role' from the URL
 
   return (
     <Fragment>
