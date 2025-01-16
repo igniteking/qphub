@@ -1,6 +1,6 @@
 import { useState } from "react";
 import store from "../../redux/store";
-import { MenuItems } from "@/shared/layout-components/sidebar/nav";
+import { MenuItems } from "@/shared/layout-components/candidate-sidebar/nav";
 export function Dark(actionfunction:any) {
 	const theme = store.getState();
 	actionfunction({

@@ -12,7 +12,7 @@ import nextConfig from "@/next.config.mjs";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Image from "next/image";
 
-const Sidebar = ({ local_varaiable, ThemeChanger }: any) => {
+const HRSidebar = ({ local_varaiable, ThemeChanger }: any) => {
   let { basePath }: any = nextConfig;
 
   const [menuitems, setMenuitems] = useState(MenuItems);
@@ -930,4 +930,4 @@ const mapStateToProps = (state: any) => ({
   local_varaiable: state,
 });
 
-export default connect(mapStateToProps, { ThemeChanger })(Sidebar);
+export default connect(mapStateToProps, { ThemeChanger })(HRSidebar);

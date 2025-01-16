@@ -2,7 +2,6 @@ import mysql from "mysql2/promise"; // Import MySQL with Promise support
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
-  // Ensure your environment variables are set correctly
   if (
     !process.env.MYSQL_HOST ||
     !process.env.MYSQL_USER ||
@@ -17,7 +16,6 @@ export const POST = async (req: Request) => {
     const userData = await req.json(); // Parse the incoming JSON request body
     console.log("Received user data:", userData); // Log the data for debugging
 
-    // Destructure user data from the request body
     const {
       userId,
       userFullName,
@@ -25,9 +23,10 @@ export const POST = async (req: Request) => {
       userFirstName,
       userLastName,
       userProfilePicture,
+      userRole, // Add user role from client
     } = userData;
 
-    // Establish a connection to MySQL database
+    // Establish a connection to the MySQL database
     const connection = await mysql.createConnection({
       host: process.env.MYSQL_HOST,
       user: process.env.MYSQL_USER,
@@ -37,8 +36,8 @@ export const POST = async (req: Request) => {
 
     // SQL query to insert data into the 'users' table
     const query = `
-      INSERT INTO users (clerk_id, full_name, email, first_name, last_name, profile_picture)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO users (clerk_id, full_name, email, first_name, last_name, profile_picture, role)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
     // Execute the query and insert the data into the MySQL database
@@ -49,6 +48,7 @@ export const POST = async (req: Request) => {
       userFirstName,
       userLastName,
       userProfilePicture,
+      userRole, // Insert the role into the database
     ]);
 
     // Close the database connection

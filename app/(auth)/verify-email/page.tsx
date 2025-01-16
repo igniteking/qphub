@@ -4,7 +4,7 @@ import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
 import { useSignUp, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, {
   Fragment,
   useCallback,
@@ -23,7 +23,11 @@ const TwostepCover = () => {
     five: useRef(null),
     six: useRef(null),
   };
+  const searchParams = useSearchParams();
 
+  // Extract query parameters
+  const role = searchParams.get("role");
+  console.log("Role:", role);
   const handleInputChange = useCallback(
     (currentId: any, nextId: any) => {
       const currentInput = inputRefs[currentId].current;
@@ -55,6 +59,7 @@ const TwostepCover = () => {
           // Wait for the user model to load after session creation
           if (isUserLoaded && user) {
             console.log("User loaded:", user);
+
             // Proceed with sending data to the API
             const userData = {
               userId: user.id,
@@ -63,6 +68,7 @@ const TwostepCover = () => {
               userFirstName: user.firstName,
               userLastName: user.lastName,
               userProfilePicture: user.imageUrl,
+              userRole: role === "employee" ? "employee" : "", // Set role based on query parameter
             };
 
             const apiResponse = await fetch("/api/save-user", {
@@ -79,8 +85,10 @@ const TwostepCover = () => {
             }
 
             // Redirect after successful verification and user save
-            console.log("User verified and saved. Redirecting...");
+            setMessage("User verified and saved. Redirecting...");
+            setShow(true);
             router.push("/dashboard");
+            setLoading(false);
           }
         } catch (err: any) {
           console.error("Error fetching user data:", err.message);
@@ -145,9 +153,6 @@ const TwostepCover = () => {
       setShow(true);
     }
   };
-
-  const params = useParams();
-  const role = params.role; // Extract 'role' from the URL
 
   return (
     <Fragment>
