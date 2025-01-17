@@ -43,6 +43,7 @@ const UploadCandidateJson = () => {
           setMessage("Data uploaded successfully!");
           setshowMessage(true);
           setisLoading(false);
+          setShow(false);
         } else {
           const errorData = await response.json();
           setMessage(`Error: ${errorData.error}`);
