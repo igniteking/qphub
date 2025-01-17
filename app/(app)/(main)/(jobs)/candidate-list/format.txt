@@ -1,0 +1,141 @@
+{
+  "Name": "Micheal Khan",
+  "ContactInformation": {
+    "Mobile": "+91-7727084375",
+    "Email": "khanzaidan786@gmail.com",
+    "Location": "Jaipur, Rajasthan, 302002",
+    "LinkedIn": "https://www.linkedin.com/in/micheal-khan/",
+    "GitHub": "https://github.com/igniteking"
+  },
+  "Profile": "Tech-savvy Web Developer contributes specialty in CRMs, LMS, IMS, and other web-related integrations to launch custom-tailored code for website presence. Detailed understanding of modern programming languages and web development practices.",
+  "Education": [
+    {
+      "Degree": "Bachelor of Computer Application (BCA)",
+      "Institution": "NIMS Rajasthan, Jaipur",
+      "StartDate": "July 2021",
+      "EndDate": "Present"
+    },
+    {
+      "Degree": "High School",
+      "Institution": "Jankidevi Public School, Jaipur",
+      "StartDate": "March 2020",
+      "EndDate": "July 2021"
+    }
+  ],
+  "WorkExperience": [
+    {
+      "Role": "Web Development Consultant / Developer",
+      "Company": "Glowworm Renewable Energy Private Limited",
+      "StartDate": "March 2021",
+      "EndDate": "2022",
+      "Responsibilities": [
+        "Developed landing pages, dashboards, and online Learning Management Systems.",
+        "Planned website development with HTML5, Bootstrap, and JavaScript coding.",
+        "Designed security measures such as firewalls and encryption.",
+        "Created user-oriented visuals and features to increase site traffic."
+      ]
+    },
+    {
+      "Role": "Application Developer / Consultant",
+      "Company": "RENIT Private Limited",
+      "StartDate": "March 2023",
+      "EndDate": "September 2023",
+      "Responsibilities": [
+        "Updated old code bases to modern standards.",
+        "Collaborated with project managers on realistic coding milestones.",
+        "Designed customized solutions for client proposals.",
+        "Coordinated database development timelines."
+      ]
+    },
+    {
+      "Role": "Software Developer (Freelancer)",
+      "StartDate": "2019",
+      "EndDate": "Present",
+      "Responsibilities": [
+        "Updated old code bases to modern standards.",
+        "Developed customized solutions for clients.",
+        "Coordinated project timelines with management."
+      ]
+    }
+  ],
+  "Certifications": [
+    {
+      "Certificate": "The Fundamentals of Digital Marketing",
+      "Institution": "Google Digital Unlocked",
+      "Date": "February 2021"
+    },
+    {
+      "Certificate": "Google Analytics for Beginners",
+      "Institution": "Google",
+      "Date": "June 2023"
+    },
+    {
+      "Certificate": "Diploma in Computer Networking",
+      "Institution": "Alison",
+      "Date": "February 2022"
+    },
+    {
+      "Certificate": "Web Page Design Using HTML5 and CSS3",
+      "Institution": "Alison",
+      "Date": "October 2020"
+    },
+    {
+      "Certificate": "Data Analysis with Python",
+      "Institution": "freeCodeCamp",
+      "Date": "June 2021"
+    },
+    {
+      "Certificate": "Responsive Web Design",
+      "Institution": "freeCodeCamp",
+      "Date": "June 2019"
+    }
+  ],
+  "Languages": ["English", "Hindi", "Urdu", "French"],
+  "KeySkills": [
+    "Web Design",
+    "Front-End Coding",
+    "Software Development",
+    "Project Management Tools",
+    "Problem-Solving",
+    "Design Thinking",
+    "Strong Communication"
+  ],
+  "Technologies": [
+    "Flutter Framework",
+    "SQL",
+    "Next.js",
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "PHP 8",
+    "Bootstrap 5",
+    "HTMX / AJAX"
+  ],
+  "Projects": [
+    {
+      "ProjectName": "NIMS University Live Scoring System",
+      "Type": "Live Scoring System",
+      "URL": "https://spardha.nimsuniversity.org/"
+    },
+    {
+      "ProjectName": "Detection Tower",
+      "Type": "AI Detection System",
+      "URL": "https://ai-detection-system.vercel.app/"
+    },
+    {
+      "ProjectName": "RENIT",
+      "Type": "Ad-Listing Web Application",
+      "URL": "https://renit.co.in/"
+    },
+    {
+      "ProjectName": "Bella Bangles",
+      "Type": "E-commerce Website",
+      "URL": "https://www.bellabangles.com/"
+    },
+    {
+      "ProjectName": "PriceWise",
+      "Type": "Web Scraping Tool",
+      "URL": "https://pricewise-two-rho.vercel.app/"
+    }
+  ]
+}

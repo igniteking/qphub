@@ -275,8 +275,8 @@ export const MenuItems: any = [
     type: "sub",
     children: [
       {
-        title: "Add Candidates",
-        path: "/add-candidates/",
+        title: "Candidates List",
+        path: "/candidate-list/",
         type: "link",
         active: false,
         selected: false,
