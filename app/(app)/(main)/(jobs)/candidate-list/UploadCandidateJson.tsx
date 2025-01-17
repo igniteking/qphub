@@ -45,7 +45,7 @@ const UploadCandidateJson = () => {
           setisLoading(false);
           setTimeout(() => {
             setShow(false);
-          }, 2000);
+          }, 1500);
         } else {
           const errorData = await response.json();
           setMessage(`Error: ${errorData.error}`);
