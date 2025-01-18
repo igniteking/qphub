@@ -70,10 +70,8 @@ const CandidatesTable = () => {
             <th scope="col">Mobile</th>
             <th scope="col">Location</th>
             <th scope="col">Vacancies</th>
-            <th scope="col">Status</th>
-            <th scope="col">Job Type</th>
-            <th scope="col">Posted Date</th>
-            <th scope="col">Expires on</th>
+            <th scope="col">Last Updated On</th>
+            <th scope="col">Created On</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
