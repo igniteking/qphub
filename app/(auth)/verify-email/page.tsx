@@ -11,6 +11,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  Suspense,
 } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
@@ -23,18 +24,17 @@ const TwostepCover = () => {
     five: useRef(null),
     six: useRef(null),
   };
-  const searchParams = useSearchParams();
 
-  // Extract query parameters
+  // Wrap in Suspense to fix the useSearchParams issue
+  const searchParams = useSearchParams();
   const role = searchParams.get("role");
   console.log("Role:", role);
+
   const handleInputChange = useCallback(
     (currentId: any, nextId: any) => {
       const currentInput = inputRefs[currentId].current;
-
       if (currentInput && currentInput.value.length === 1) {
         const nextInput = inputRefs[nextId] ? inputRefs[nextId].current : null;
-
         if (nextInput) {
           nextInput.focus();
         }
@@ -51,16 +51,12 @@ const TwostepCover = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState<string>("");
 
-  // This will run when the session is set
   useEffect(() => {
     if (sessionId) {
       const fetchUser = async () => {
         try {
-          // Wait for the user model to load after session creation
           if (isUserLoaded && user) {
             console.log("User loaded:", user);
-
-            // Proceed with sending data to the API
             const userData = {
               userId: user.id,
               userFullName: user.fullName,
@@ -68,7 +64,7 @@ const TwostepCover = () => {
               userFirstName: user.firstName,
               userLastName: user.lastName,
               userProfilePicture: user.imageUrl,
-              userRole: role === "employee" ? "employee" : "", // Set role based on query parameter
+              userRole: role === "employee" ? "employee" : "",
             };
 
             const apiResponse = await fetch("/api/save-user", {
@@ -84,7 +80,6 @@ const TwostepCover = () => {
               throw new Error(apiResult.message || "Failed to save user data.");
             }
 
-            // Redirect after successful verification and user save
             setMessage("User verified and saved. Redirecting...");
             setShow(true);
             router.push("/dashboard");
@@ -101,7 +96,7 @@ const TwostepCover = () => {
 
       fetchUser();
     }
-  }, [sessionId, isUserLoaded, user]); // Re-run when sessionId, user, or isUserLoaded changes
+  }, [sessionId, isUserLoaded, user]);
 
   const handleVerify = async () => {
     if (!isLoaded) return;
@@ -123,15 +118,12 @@ const TwostepCover = () => {
     }
 
     try {
-      // Attempt email verification
       const verification = await signUp.attemptEmailAddressVerification({
         code,
       });
       console.log("Verification response:", verification);
-
-      // Set the active session
       await setActive({ session: verification.createdSessionId });
-      setSessionId(verification.createdSessionId); // Set session ID to trigger useEffect
+      setSessionId(verification.createdSessionId); // Trigger useEffect
     } catch (error: any) {
       setMessage("Unexpected error occured. Verification failed.");
       setShow(true);
@@ -183,7 +175,7 @@ const TwostepCover = () => {
             </div>
           </div>
         </Col>
-        <Col xxl={7} xl={7} className="">
+        <Col xxl={7} xl={7}>
           <div className="row justify-content-center align-items-center h-100">
             <Col xxl={6} xl={9} lg={6} md={6} sm={8} className="col-12">
               <Card className="custom-card shadow-none my-auto border-0">
@@ -273,7 +265,7 @@ const TwostepCover = () => {
                           className="form-check-label text-muted fw-normal fs-12"
                           htmlFor="defaultCheck1"
                         >
-                          Did not recieve a code ?
+                          Did not recieve a code ?{" "}
                           <Button
                             variant="ghost"
                             onClick={resendCode}
@@ -290,18 +282,10 @@ const TwostepCover = () => {
                         className="btn btn-lg btn-primary"
                         disabled={loading}
                       >
-                        {loading ? <Loader /> : "Verify"}
+                        {loading ? <Loader /> : "Verify Account"}
                       </Button>
                     </Col>
                   </Row>
-                  <div className="text-center">
-                    <p className="fs-12 text-danger mt-3 mb-0">
-                      <sup>
-                        <i className="ri-asterisk"></i>
-                      </sup>
-                      Don't share the verification code with anyone !
-                    </p>
-                  </div>
                 </Card.Body>
               </Card>
             </Col>
@@ -312,4 +296,10 @@ const TwostepCover = () => {
   );
 };
 
-export default TwostepCover;
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TwostepCover />
+    </Suspense>
+  );
+}

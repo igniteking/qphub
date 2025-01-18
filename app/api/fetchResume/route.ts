@@ -1,5 +1,7 @@
+export const dynamic = 'force-dynamic';  // This forces the route to be dynamic and not statically generated
 import { NextRequest, NextResponse } from "next/server";
 import mysql from "mysql2/promise";
+import { getAuth } from "@clerk/nextjs/server";
 import {
   CandidateData,
   Education,
@@ -9,7 +11,6 @@ import {
   Skill,
   Technology,
 } from "@/shared/types/types";
-import { getAuth } from "@clerk/nextjs/server";
 
 type ResumeData = {
   candidateData: CandidateData[];
@@ -28,10 +29,19 @@ export async function GET(req: NextRequest) {
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
   });
+
   try {
     const { userId: authUserId } = getAuth(req); // Get userId from the request
 
-    // Fetch logged user ID
+    if (!authUserId) {
+      console.error("User not authenticated");
+      return NextResponse.json(
+        { error: "User authentication failed" },
+        { status: 401 }
+      );
+    }
+
+    // Fetch logged user ID from the database
     const [loggedUserResults] = await connection.execute(
       "SELECT id FROM users WHERE clerk_id = ?",
       [authUserId]
@@ -45,7 +55,6 @@ export async function GET(req: NextRequest) {
         { status: 400 }
       );
     }
-    console.log("Logged User ID:", loggedUserId);
 
     // Query all candidate IDs for the logged user
     const [candidateIdResults] = await connection.query(
@@ -67,11 +76,9 @@ export async function GET(req: NextRequest) {
     const candidateIds = (candidateIdResults as mysql.RowDataPacket[]).map(
       (row) => row.candidate_id
     );
-    console.log("Candidate IDs:", candidateIds);
 
     // Fetch data for all candidates
     const candidateDataPromises = candidateIds.map(async (candidateId) => {
-      // Query the candidate data and related information
       const [candidateDataResults] = await connection.query(
         "SELECT * FROM candidate_data WHERE id = ?",
         [candidateId]
@@ -87,10 +94,8 @@ export async function GET(req: NextRequest) {
       };
     });
 
-    // Wait for all data fetching promises to resolve
     const resumeDataArray = await Promise.all(candidateDataPromises);
 
-    // Return the combined data for all candidates
     return NextResponse.json(resumeDataArray);
   } catch (error) {
     console.error("Database error:", error);
