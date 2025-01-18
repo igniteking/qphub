@@ -14,17 +14,15 @@ import Seo from "@/shared/layout-components/seo/seo";
 import { useSignIn, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment, useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Form,
-  Row,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
-
+import React, { Fragment, useState } from "react";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
+// This will be used server-side to generate static params at build time
+export async function generateStaticParams() {
+  return [
+    { signIn: ["default"] },
+    // Add other paths as needed
+  ];
+}
 const SigninCover = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
