@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   CandidateData,
   Education,
@@ -15,17 +15,12 @@ import ToastNotification from "@/components/ToastNotification";
 import CodeBroke from "@/components/CodeBroke";
 
 interface ResumeData {
-  candidateData: CandidateData;
-  education: Education[];
+  candidateData: CandidateData[];
   workExperience: WorkExperience[];
-  certifications: Certification[];
-  projects: Project[];
-  skills: Skill[];
-  technologies: Technology[];
 }
 
 const CandidatesTable = () => {
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const [resumeData, setResumeData] = useState<ResumeData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
@@ -39,7 +34,7 @@ const CandidatesTable = () => {
           throw new Error(`Failed to fetch data: ${response.statusText}`);
         }
         const data = await response.json();
-        setResumeData(data);
+        setResumeData(data); // Set the entire array of candidate data
       } catch (error: any) {
         console.error("Error fetching data:", error.message);
         setMessage(error.message);
@@ -56,104 +51,93 @@ const CandidatesTable = () => {
 
   return (
     <div className="table-responsive">
-      <table className="table table-hover text-nowrap">
-        <thead>
-          <ToastNotification
-            show={showMessage}
-            setShow={setShowMessage}
-            message={message}
-          />
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Mobile</th>
-            <th scope="col">Location</th>
-            <th scope="col">First Role</th>
-            <th scope="col">Last Updated On</th>
-            <th scope="col">Created On</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={11}>
-                <Loader />
-              </td>
-            </tr>
-          ) : (
-            Array.isArray(resumeData?.candidateData) &&
-            resumeData.candidateData.map((item, idx) => (
-              <tr key={idx}>
-                <td>
-                  <div className="d-flex">
-                    <div className="ms-2">
-                      <p className="fw-medium mb-0 d-flex align-items-center">
-                        <a href={`/apps/jobs/jobdetails/${item.id}`}>
-                          {item.name}
-                        </a>{" "}
-                        {/* Assuming `name` and `id` are part of `item` */}
-                      </p>
-                      <p className="fs-12 text-muted mb-0">
-                        <Link
-                          scroll={false}
-                          href={`mailto:${item.mobile}`}
-                          className="fw-medium mb-0"
-                        >
-                          {item.email}
-                        </Link>
-                      </p>{" "}
-                      {/* Assuming `department` is part of `item` */}
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className="d-flex align-items-center">{item.mobile}</div>
-                </td>
-                <td>{item.location}</td>
-                {/* Assuming `applications` is part of `item` */}
-                <td>
-                  {Array.isArray(resumeData?.workExperience) &&
-                    resumeData.workExperience.length > 0 && (
-                      <p>{resumeData.workExperience[0].role}</p>
-                    )}
-                </td>{" "}
-                {/* Assuming `vacancies` is part of `item` */}
-                <td>
-                  <span
-                    className={`badge rounded-pill bg-${item.statusColor}-transparent`}
-                  >
-                    {item.updated_at}
-                  </span>
-                </td>
-                <td>{item.created_at}</td>{" "}
-                <td>
-                  <Link
-                    scroll={false}
-                    href={`/apps/jobs/jobdetails/${item.id}`}
-                    className="btn btn-icon btn-sm btn-primary-light btn-wave waves-effect waves-light me-1"
-                  >
-                    <i className="ri-eye-line"></i>
-                  </Link>
-                  <Link
-                    scroll={false}
-                    href={`#edit/${item.id}`} // Assuming there's an edit page
-                    className="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-1"
-                  >
-                    <i className="ri-edit-line"></i>
-                  </Link>
-                  <Link
-                    scroll={false}
-                    href={`#delete/${item.id}`} // Assuming there's a delete action
-                    className="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"
-                  >
-                    <i className="ri-delete-bin-line"></i>
-                  </Link>
-                </td>
+      <ToastNotification
+        show={showMessage}
+        setShow={setShowMessage}
+        message={message}
+      />
+      {loading ? (
+        <Loader />
+      ) : (
+        resumeData.length > 0 && (
+          <table className="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Location</th>
+                <th scope="col">First Role</th>
+                <th scope="col">Last Updated On</th>
+                <th scope="col">Created On</th>
+                <th scope="col">Action</th>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {resumeData.map((data, idx) =>
+                data.candidateData.map((item) => (
+                  <tr key={item.id}>
+                    <td>
+                      <div className="d-flex">
+                        <div className="ms-2">
+                          <p className="fw-medium mb-0 d-flex align-items-center">
+                            <a href={`/apps/jobs/jobdetails/${item.id}`}>
+                              {item.name}
+                            </a>
+                          </p>
+                          <p className="fs-12 text-muted mb-0">
+                            <Link
+                              scroll={false}
+                              href={`mailto:${item.email}`}
+                              className="fw-medium mb-0"
+                            >
+                              {item.email}
+                            </Link>
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{item.mobile}</td>
+                    <td>{item.location}</td>
+                    <td>
+                      {data.workExperience.length > 0 &&
+                      data.workExperience[0]?.role ? (
+                        <p>{data.workExperience[0].role}</p>
+                      ) : (
+                        <p>No experience available</p>
+                      )}
+                    </td>
+                    <td>{item.updated_at}</td>
+                    <td>{item.created_at}</td>
+                    <td>
+                      <Link
+                        scroll={false}
+                        href={`/apps/jobs/jobdetails/${item.id}`}
+                        className="btn btn-icon btn-sm btn-primary-light btn-wave waves-effect waves-light me-1"
+                      >
+                        <i className="ri-eye-line"></i>
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href={`#edit/${item.id}`}
+                        className="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-1"
+                      >
+                        <i className="ri-edit-line"></i>
+                      </Link>
+                      <Link
+                        scroll={false}
+                        href={`#delete/${item.id}`}
+                        className="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"
+                      >
+                        <i className="ri-delete-bin-line"></i>
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        )
+      )}
     </div>
   );
 };

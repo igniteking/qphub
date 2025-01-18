@@ -1,4 +1,3 @@
-// app/api/fetchResume/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import {
@@ -23,15 +22,13 @@ type ResumeData = {
 };
 
 export async function GET(req: NextRequest) {
-  let connection;
+  const connection = await mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+  });
   try {
-    connection = await mysql.createConnection({
-      host: process.env.MYSQL_HOST,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
-    });
-
     const { userId: authUserId } = getAuth(req); // Get userId from the request
 
     // Fetch logged user ID
@@ -50,63 +47,51 @@ export async function GET(req: NextRequest) {
     }
     console.log("Logged User ID:", loggedUserId);
 
-    // Query candidate ID
+    // Query all candidate IDs for the logged user
     const [candidateIdResults] = await connection.query(
       "SELECT candidate_id FROM resume_json_code WHERE uploaded_by_user_id = ?",
       [loggedUserId]
     );
 
-    const candidateId = (candidateIdResults as mysql.RowDataPacket[])[0]?.candidate_id;
-    if (!candidateId) {
-      console.error("Candidate ID is undefined or null");
+    if (
+      !candidateIdResults ||
+      (candidateIdResults as mysql.RowDataPacket[]).length === 0
+    ) {
+      console.error("No candidate IDs found");
       return NextResponse.json(
-        { error: "Candidate ID not found" },
+        { error: "No candidate IDs found" },
         { status: 400 }
       );
     }
-    console.log("Candidate ID:", candidateId);
 
-    // Query the candidate data and related information
-    const [candidateDataResults] = await connection.query(
-      "SELECT * FROM candidate_data WHERE id = ?",
-      [candidateId]
+    const candidateIds = (candidateIdResults as mysql.RowDataPacket[]).map(
+      (row) => row.candidate_id
     );
-    const [educationResults] = await connection.query(
-      "SELECT * FROM education WHERE candidate_id = ?",
-      [candidateId]
-    );
-    const [workExperienceResults] = await connection.query(
-      "SELECT * FROM work_experience WHERE candidate_id = ?",
-      [candidateId]
-    );
-    const [certificationsResults] = await connection.query(
-      "SELECT * FROM certifications WHERE candidate_id = ?",
-      [candidateId]
-    );
-    const [projectsResults] = await connection.query(
-      "SELECT * FROM projects WHERE candidate_id = ?",
-      [candidateId]
-    );
-    const [skillsResults] = await connection.query(
-      "SELECT * FROM skills WHERE candidate_id = ?",
-      [candidateId]
-    );
-    const [technologiesResults] = await connection.query(
-      "SELECT * FROM technologies WHERE candidate_id = ?",
-      [candidateId]
-    );
+    console.log("Candidate IDs:", candidateIds);
 
-    const resumeData: ResumeData = {
-      candidateData: candidateDataResults as CandidateData[],
-      education: educationResults as Education[],
-      workExperience: workExperienceResults as WorkExperience[],
-      certifications: certificationsResults as Certification[],
-      projects: projectsResults as Project[],
-      skills: skillsResults as Skill[],
-      technologies: technologiesResults as Technology[],
-    };
+    // Fetch data for all candidates
+    const candidateDataPromises = candidateIds.map(async (candidateId) => {
+      // Query the candidate data and related information
+      const [candidateDataResults] = await connection.query(
+        "SELECT * FROM candidate_data WHERE id = ?",
+        [candidateId]
+      );
+      const [workExperienceResults] = await connection.query(
+        "SELECT * FROM work_experience WHERE candidate_id = ?",
+        [candidateId]
+      );
 
-    return NextResponse.json(resumeData);
+      return {
+        candidateData: candidateDataResults as CandidateData[],
+        workExperience: workExperienceResults as WorkExperience[],
+      };
+    });
+
+    // Wait for all data fetching promises to resolve
+    const resumeDataArray = await Promise.all(candidateDataPromises);
+
+    // Return the combined data for all candidates
+    return NextResponse.json(resumeDataArray);
   } catch (error) {
     console.error("Database error:", error);
     return NextResponse.json(

@@ -5,6 +5,8 @@ export interface CandidateData {
   mobile: string;
   location: string;
   profile_summary: string;
+  updated_at: string;
+  created_at: string;
 }
 
 export interface Education {

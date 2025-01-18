@@ -17,7 +17,7 @@ import {
 import UploadCandidateJson from "./UploadCandidateJson";
 import CandidatesTable from "./CandidatesTable";
 
-const Jobslist = async () => {
+const Candidatelist = async () => {
   return (
     <Fragment>
       {/* Page Header */}
@@ -85,27 +85,6 @@ const Jobslist = async () => {
             <CardBody className="p-0">
               <CandidatesTable />
             </CardBody>
-            {/* <CardFooter className="border-top-0">
-              <div className="d-flex align-items-center flex-wrap overflow-auto">
-                <div className="mb-2 mb-sm-0">
-                  Showing <b>1</b> to <b>10</b> of <b>10</b> entries{" "}
-                  <i className="bi bi-arrow-right ms-2 fw-medium"></i>
-                </div>
-                <div className="ms-auto">
-                  <Pagination className="pagination mb-0 overflow-auto">
-                    <Pagination.Item disabled>Previous</Pagination.Item>
-                    <Pagination.Item active>1</Pagination.Item>
-                    <Pagination.Item>2</Pagination.Item>
-                    <Pagination.Item>3</Pagination.Item>
-                    <Pagination.Item>4</Pagination.Item>
-                    <Pagination.Item>5</Pagination.Item>
-                    <Pagination.Item className="pagination-next">
-                      Next
-                    </Pagination.Item>
-                  </Pagination>
-                </div>
-              </div>
-            </CardFooter> */}
           </Card>
         </Col>
       </Row>
@@ -114,4 +93,4 @@ const Jobslist = async () => {
   );
 };
 
-export default Jobslist;
+export default Candidatelist;
