@@ -109,7 +109,7 @@ export const POST = async (req: NextRequest) => {
       if (jsonData.Education) {
         for (const edu of jsonData.Education) {
           await connection.execute(
-            `INSERT INTO education (user_id, degree, specialization, institution, start_date, end_date)
+            `INSERT INTO education (candidate_id, degree, specialization, institution, start_date, end_date)
              VALUES (?, ?, ?, ?, ?, ?)`,
             [
               insertedUserId,
@@ -131,7 +131,7 @@ export const POST = async (req: NextRequest) => {
             : safeValue(work.Responsibilities);
 
           await connection.execute(
-            `INSERT INTO work_experience (user_id, role, company, start_date, end_date, responsibilities)
+            `INSERT INTO work_experience (candidate_id, role, company, start_date, end_date, responsibilities)
              VALUES (?, ?, ?, ?, ?, ?)`,
             [
               insertedUserId,
@@ -149,7 +149,7 @@ export const POST = async (req: NextRequest) => {
       if (jsonData.Certifications !== "not found") {
         for (const cert of jsonData.Certifications) {
           await connection.execute(
-            `INSERT INTO certifications (user_id, certificate, institution, date)
+            `INSERT INTO certifications (candidate_id, certificate, institution, date)
              VALUES (?, ?, ?, ?)`,
             [
               insertedUserId,
@@ -165,7 +165,7 @@ export const POST = async (req: NextRequest) => {
       if (jsonData.Projects !== "not found") {
         for (const project of jsonData.Projects) {
           await connection.execute(
-            `INSERT INTO projects (user_id, project_name, type, url)
+            `INSERT INTO projects (candidate_id, project_name, type, url)
              VALUES (?, ?, ?, ?)`,
             [
               insertedUserId,
@@ -181,7 +181,7 @@ export const POST = async (req: NextRequest) => {
       if (jsonData.KeySkills) {
         for (const skill of jsonData.KeySkills) {
           await connection.execute(
-            `INSERT INTO skills (user_id, skill)
+            `INSERT INTO skills (candidate_id, skill)
              VALUES (?, ?)`,
 
             [insertedUserId, safeValue(skill)]
@@ -193,7 +193,7 @@ export const POST = async (req: NextRequest) => {
       if (jsonData.Technologies !== "not found") {
         for (const tech of jsonData.Technologies) {
           await connection.execute(
-            `INSERT INTO technologies (user_id, technology)
+            `INSERT INTO technologies (candidate_id, technology)
              VALUES (?, ?)`,
             [insertedUserId, safeValue(tech)]
           );
