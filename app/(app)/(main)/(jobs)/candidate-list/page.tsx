@@ -18,7 +18,22 @@ import {
 } from "react-bootstrap";
 import UploadCandidateJson from "./UploadCandidateJson";
 
-const Jobslist = () => {
+const Jobslist = async () => {
+  async function fetchData() {
+    const res = await fetch("/api/fetchMyCandidate", {
+      method: "GET",
+      cache: "no-store", // Avoid caching for dynamic data
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    return res.json();
+  }
+
+  const data = await fetchData();
+  console.log(data);
   return (
     <Fragment>
       {/* Page Header */}
@@ -38,7 +53,7 @@ const Jobslist = () => {
         <Col xl={12}>
           <Card className="custom-card overflow-hidden">
             <CardHeader className="justify-content-between">
-              <CardTitle>All Jobs List</CardTitle>
+              <CardTitle>All My Candidates</CardTitle>
               <div className="d-flex flex-wrap gap-2">
                 <UploadCandidateJson />
                 <div>
@@ -97,8 +112,8 @@ const Jobslist = () => {
                           aria-label="..."
                         />
                       </th>
-                      <th scope="col">Job Title</th>
-                      <th scope="col">Company</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
                       <th scope="col">Department</th>
                       <th scope="col">Applications</th>
                       <th scope="col">Vacancies</th>
