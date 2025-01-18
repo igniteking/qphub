@@ -1,3 +1,4 @@
+"use client";
 import { Joblistdata } from "@/shared/data/dashboards/joblistdata";
 import Link from "next/link";
 import React from "react";
