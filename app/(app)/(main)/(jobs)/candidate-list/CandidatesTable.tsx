@@ -22,6 +22,29 @@ interface ResumeData {
   technologies: Technology[];
 }
 const CandidatesTable = () => {
+  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/fetchResume");
+        if (!response.ok) {
+          throw new Error("Failed to fetch resume data");
+        }
+        const data: ResumeData = await response.json();
+        setResumeData(data);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="table-responsive">
       <table className="table table-hover text-nowrap">
