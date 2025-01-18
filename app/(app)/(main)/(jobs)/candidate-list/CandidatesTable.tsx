@@ -2,7 +2,25 @@
 import { Joblistdata } from "@/shared/data/dashboards/joblistdata";
 import Link from "next/link";
 import React from "react";
-
+import { useEffect, useState } from "react";
+import {
+  CandidateData,
+  Education,
+  WorkExperience,
+  Certification,
+  Project,
+  Skill,
+  Technology,
+} from "@/shared/types/types";
+interface ResumeData {
+  candidateData: CandidateData;
+  education: Education[];
+  workExperience: WorkExperience[];
+  certifications: Certification[];
+  projects: Project[];
+  skills: Skill[];
+  technologies: Technology[];
+}
 const CandidatesTable = () => {
   return (
     <div className="table-responsive">
