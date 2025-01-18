@@ -1,15 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import mysql, { RowDataPacket } from "mysql2/promise";
+// app/api/fetchResume/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import mysql from "mysql2/promise";
 import {
   CandidateData,
   Education,
   WorkExperience,
   Certification,
+  Project,
   Skill,
   Technology,
 } from "@/shared/types/types";
-import { Project } from "next/dist/build/swc";
-// Define the types for the data returned from each table
+import { getAuth } from "@clerk/nextjs/server";
 
 type ResumeData = {
   candidateData: CandidateData[];
@@ -21,70 +22,100 @@ type ResumeData = {
   technologies: Technology[];
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  // MySQL connection configuration
-  const dbConfig = {
-    host: process.env.MYSQL_HOST || "localhost",
-    user: process.env.MYSQL_USER || "root",
-    password: process.env.MYSQL_PASSWORD || "password",
-    database: process.env.MYSQL_DATABASE || "resume_db",
-  };
-
+export async function GET(req: NextRequest) {
+  let connection;
   try {
-    const connection = await mysql.createConnection(dbConfig);
+    connection = await mysql.createConnection({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+    });
 
-    // Fetch data from all tables
-    const [candidateData] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM candidate_data`
+    const { userId: authUserId } = getAuth(req); // Get userId from the request
+
+    // Fetch logged user ID
+    const [loggedUserResults] = await connection.execute(
+      "SELECT id FROM users WHERE clerk_id = ?",
+      [authUserId]
     );
 
-    const [education] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM education`
+    const loggedUserId = (loggedUserResults as mysql.RowDataPacket[])[0]?.id;
+    if (!loggedUserId) {
+      console.error("Logged User ID is undefined or null");
+      return NextResponse.json(
+        { error: "Logged User ID not found" },
+        { status: 400 }
+      );
+    }
+    console.log("Logged User ID:", loggedUserId);
+
+    // Query candidate ID
+    const [candidateIdResults] = await connection.query(
+      "SELECT candidate_id FROM resume_json_code WHERE uploaded_by_user_id = ?",
+      [loggedUserId]
     );
 
-    const [workExperience] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM work_experience`
+    const candidateId = (candidateIdResults as mysql.RowDataPacket[])[0]?.candidate_id;
+    if (!candidateId) {
+      console.error("Candidate ID is undefined or null");
+      return NextResponse.json(
+        { error: "Candidate ID not found" },
+        { status: 400 }
+      );
+    }
+    console.log("Candidate ID:", candidateId);
+
+    // Query the candidate data and related information
+    const [candidateDataResults] = await connection.query(
+      "SELECT * FROM candidate_data WHERE id = ?",
+      [candidateId]
+    );
+    const [educationResults] = await connection.query(
+      "SELECT * FROM education WHERE candidate_id = ?",
+      [candidateId]
+    );
+    const [workExperienceResults] = await connection.query(
+      "SELECT * FROM work_experience WHERE candidate_id = ?",
+      [candidateId]
+    );
+    const [certificationsResults] = await connection.query(
+      "SELECT * FROM certifications WHERE candidate_id = ?",
+      [candidateId]
+    );
+    const [projectsResults] = await connection.query(
+      "SELECT * FROM projects WHERE candidate_id = ?",
+      [candidateId]
+    );
+    const [skillsResults] = await connection.query(
+      "SELECT * FROM skills WHERE candidate_id = ?",
+      [candidateId]
+    );
+    const [technologiesResults] = await connection.query(
+      "SELECT * FROM technologies WHERE candidate_id = ?",
+      [candidateId]
     );
 
-    const [certifications] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM certifications`
-    );
-
-    const [projects] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM projects`
-    );
-
-    const [skills] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM skills`
-    );
-
-    const [technologies] = await connection.query<RowDataPacket[]>(
-      `SELECT * FROM technologies`
-    );
-
-    await connection.end();
-
-    // Combine all data into a single object and cast to your types
     const resumeData: ResumeData = {
-      candidateData: candidateData as CandidateData[],
-      education: education as Education[],
-      workExperience: workExperience as WorkExperience[],
-      certifications: certifications as Certification[],
-      projects: projects as Project[],
-      skills: skills as Skill[],
-      technologies: technologies as Technology[],
+      candidateData: candidateDataResults as CandidateData[],
+      education: educationResults as Education[],
+      workExperience: workExperienceResults as WorkExperience[],
+      certifications: certificationsResults as Certification[],
+      projects: projectsResults as Project[],
+      skills: skillsResults as Skill[],
+      technologies: technologiesResults as Technology[],
     };
 
-    return res.status(200).json(resumeData);
+    return NextResponse.json(resumeData);
   } catch (error) {
     console.error("Database error:", error);
-    return res.status(500).json({ error: "Failed to fetch data" });
+    return NextResponse.json(
+      { error: "Failed to fetch data" },
+      { status: 500 }
+    );
+  } finally {
+    if (connection) {
+      await connection.end(); // Ensure the connection is closed after all queries
+    }
   }
 }

@@ -38,13 +38,13 @@ const CandidatesTable = () => {
       try {
         const response = await fetch("/api/fetchResume");
         if (!response.ok) {
-          throw new Error("Failed to fetch resume data");
+          throw new Error(`Failed to fetch data: ${response.statusText}`);
         }
-        const data: ResumeData = await response.json();
+        const data = await response.json();
         setResumeData(data);
-      } catch (err: any) {
-        setError(err.message);
-        setMessage(err.message);
+      } catch (error: any) {
+        console.error("Error fetching data:", error.message);
+        setError(error.message);
         setShowMessage(true);
       } finally {
         setLoading(false);
@@ -66,19 +66,9 @@ const CandidatesTable = () => {
             message={message}
           />
           <tr>
-            <th scope="row" className="ps-4">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkboxNoLabeljob1"
-                value=""
-                aria-label="..."
-              />
-            </th>
             <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Department</th>
-            <th scope="col">Applications</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Location</th>
             <th scope="col">Vacancies</th>
             <th scope="col">Status</th>
             <th scope="col">Job Type</th>
@@ -95,77 +85,74 @@ const CandidatesTable = () => {
               </td>
             </tr>
           ) : (
-            Joblistdata.map((item, idx) => (
+            Array.isArray(resumeData?.candidateData) &&
+            resumeData.candidateData.map((item, idx) => (
               <tr key={idx}>
-                <td className="ps-4">{item.checked}</td>
                 <td>
                   <div className="d-flex">
-                    <span className="avatar avatar-md avatar-rounded bg-primary bg-opacity-10">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        data-name="Layer 1"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="var(--primary-color)"
-                          d={item.class2}
-                        ></path>
-                      </svg>
-                    </span>
                     <div className="ms-2">
                       <p className="fw-medium mb-0 d-flex align-items-center">
-                        <a href="/apps/jobs/jobdetails/">{item.class}</a>
+                        <a href={`/apps/jobs/jobdetails/${item.id}`}>
+                          {item.name}
+                        </a>{" "}
+                        {/* Assuming `name` and `id` are part of `item` */}
                       </p>
-                      <p className="fs-12 text-muted mb-0">{item.class1}</p>
+                      <p className="fs-12 text-muted mb-0">
+                        <Link
+                          scroll={false}
+                          href={`mailto:${item.mobile}`}
+                          className="fw-medium mb-0"
+                        >
+                          {item.email}
+                        </Link>
+                      </p>{" "}
+                      {/* Assuming `department` is part of `item` */}
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div className="d-flex align-items-center">
-                    <span className="avatar avatar-sm p-1 me-1 bg-light avatar-rounded">
-                      <img src={item.src} alt="" />
-                    </span>
-                    <Link scroll={false} href="#!" className="fw-medium mb-0">
-                      {item.text1}
-                    </Link>
-                  </div>
+                  <div className="d-flex align-items-center">{item.mobile}</div>
                 </td>
-                <td>{item.text3}</td>
-                <td>{item.number}</td>
-                <td>{item.number1}</td>
+                <td>{item.location}</td>
+                {/* Assuming `applications` is part of `item` */}
+                <td>
+                  {Array.isArray(resumeData?.workExperience) &&
+                    resumeData.workExperience.length > 0 && (
+                      <p>First Role: {resumeData.workExperience[0].role}</p>
+                    )}
+                </td>{" "}
+                {/* Assuming `vacancies` is part of `item` */}
                 <td>
                   <span
-                    className={`badge rounded-pill bg-${item.color1}-transparent`}
+                    className={`badge rounded-pill bg-${item.statusColor}-transparent`}
                   >
-                    {item.text}
+                    {item.status}
                   </span>
                 </td>
-                <td>{item.data}</td>
-                <td>{item.data1}</td>
-                <td>
-                  <span className={`badge bg-${item.color1}-transparent`}>
-                    <i className="bi bi-clock me-1"></i>
-                    {item.text2}
-                  </span>
-                </td>
+                <td>{item.jobType}</td>{" "}
+                {/* Assuming `jobType` is part of `item` */}
+                <td>{item.postedDate}</td>{" "}
+                {/* Assuming `postedDate` is part of `item` */}
+                <td>{item.expiryDate}</td>{" "}
+                {/* Assuming `expiryDate` is part of `item` */}
                 <td>
                   <Link
                     scroll={false}
-                    href="/apps/jobs/jobdetails/"
+                    href={`/apps/jobs/jobdetails/${item.id}`}
                     className="btn btn-icon btn-sm btn-primary-light btn-wave waves-effect waves-light me-1"
                   >
                     <i className="ri-eye-line"></i>
                   </Link>
                   <Link
                     scroll={false}
-                    href="#!"
+                    href={`#edit/${item.id}`} // Assuming there's an edit page
                     className="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-1"
                   >
                     <i className="ri-edit-line"></i>
                   </Link>
                   <Link
                     scroll={false}
-                    href="#!"
+                    href={`#delete/${item.id}`} // Assuming there's a delete action
                     className="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"
                   >
                     <i className="ri-delete-bin-line"></i>
