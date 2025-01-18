@@ -1,28 +1,14 @@
-("use client");
-// app/sign-in/[[...sign-in]]/page.tsx
+"use client";
 
-// This will be used server-side to generate static params at build time
-export async function generateStaticParams() {
-  return [
-    { signIn: ["default"] },
-    // Add other paths as needed
-  ];
-}
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
-import { useSignIn, useUser } from "@clerk/nextjs";
+import { useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-// This will be used server-side to generate static params at build time
-export async function generateStaticParams() {
-  return [
-    { signIn: ["default"] },
-    // Add other paths as needed
-  ];
-}
+
 const SigninCover = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
