@@ -1,3 +1,4 @@
+("use client");
 // app/sign-in/[[...sign-in]]/page.tsx
 
 // This will be used server-side to generate static params at build time
@@ -7,7 +8,6 @@ export async function generateStaticParams() {
     // Add other paths as needed
   ];
 }
-("use client");
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
