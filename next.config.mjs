@@ -1,12 +1,13 @@
 const nextConfig = {
+  output: "export",
   typescript: {
     ignoreBuildErrors: true,
   },
   reactStrictMode: true,
-  trailingSlash: false, // Change this to false temporarily
+  trailingSlash: true, // Can be set to false if not required
   swcMinify: true,
   basePath: "",
-  assetPrefix: "",
+  assetPrefix: "./",
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
