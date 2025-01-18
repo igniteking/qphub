@@ -1,7 +1,5 @@
-import { Joblistdata } from "@/shared/data/dashboards/joblistdata";
 import Pageheader from "@/shared/layout-components/page-header/pageheader";
 import Seo from "@/shared/layout-components/seo/seo";
-import Link from "next/link";
 import React, { Fragment } from "react";
 import {
   Card,
@@ -20,21 +18,6 @@ import UploadCandidateJson from "./UploadCandidateJson";
 import CandidatesTable from "./CandidatesTable";
 
 const Jobslist = async () => {
-  async function fetchData() {
-    const res = await fetch("/api/fetchMyCandidate", {
-      method: "GET",
-      cache: "no-store", // Avoid caching for dynamic data
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
-  }
-
-  const data = await fetchData();
-  console.log(data);
   return (
     <Fragment>
       {/* Page Header */}
