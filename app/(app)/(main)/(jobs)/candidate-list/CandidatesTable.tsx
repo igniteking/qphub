@@ -69,7 +69,7 @@ const CandidatesTable = () => {
             <th scope="col">Name</th>
             <th scope="col">Mobile</th>
             <th scope="col">Location</th>
-            <th scope="col">Vacancies</th>
+            <th scope="col">First Role</th>
             <th scope="col">Last Updated On</th>
             <th scope="col">Created On</th>
             <th scope="col">Action</th>
@@ -116,7 +116,7 @@ const CandidatesTable = () => {
                 <td>
                   {Array.isArray(resumeData?.workExperience) &&
                     resumeData.workExperience.length > 0 && (
-                      <p>First Role: {resumeData.workExperience[0].role}</p>
+                      <p>{resumeData.workExperience[0].role}</p>
                     )}
                 </td>{" "}
                 {/* Assuming `vacancies` is part of `item` */}
@@ -124,15 +124,10 @@ const CandidatesTable = () => {
                   <span
                     className={`badge rounded-pill bg-${item.statusColor}-transparent`}
                   >
-                    {item.status}
+                    {item.updated_at}
                   </span>
                 </td>
-                <td>{item.jobType}</td>{" "}
-                {/* Assuming `jobType` is part of `item` */}
-                <td>{item.postedDate}</td>{" "}
-                {/* Assuming `postedDate` is part of `item` */}
-                <td>{item.expiryDate}</td>{" "}
-                {/* Assuming `expiryDate` is part of `item` */}
+                <td>{item.created_at}</td>{" "}
                 <td>
                   <Link
                     scroll={false}
