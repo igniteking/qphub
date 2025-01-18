@@ -1,6 +1,4 @@
 "use client";
-
-import { Joblistdata } from "@/shared/data/dashboards/joblistdata";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import {
@@ -44,7 +42,7 @@ const CandidatesTable = () => {
         setResumeData(data);
       } catch (error: any) {
         console.error("Error fetching data:", error.message);
-        setError(error.message);
+        setMessage(error.message);
         setShowMessage(true);
       } finally {
         setLoading(false);
