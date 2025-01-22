@@ -4,7 +4,9 @@ export default function Home() {
   return (
     <Fragment>
       <html>
-        <body>Landing Page</body>
+        <body>
+          <p>Landing Page</p>
+        </body>
       </html>
     </Fragment>
   );

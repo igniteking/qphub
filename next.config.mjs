@@ -3,10 +3,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: true,
-  trailingSlash: true, // Can be set to false if not required
+  trailingSlash: false,
   swcMinify: true,
-  basePath: "",
-  assetPrefix: "./",
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
@@ -16,6 +14,9 @@ const nextConfig = {
       },
     ],
   },
+  // Remove assetPrefix entirely
+  basePath: "", // Default is an empty string
+  assetPrefix: "", // Default is an empty string
 };
 
 export default nextConfig;
