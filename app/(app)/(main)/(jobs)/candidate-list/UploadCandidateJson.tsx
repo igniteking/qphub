@@ -45,7 +45,6 @@ const UploadCandidateJson = () => {
           setisLoading(false);
           setTimeout(() => {
             setShow(false);
-            window.location.reload(); // This will refresh the page
           }, 1500);
         } else {
           const errorData = await response.json();
