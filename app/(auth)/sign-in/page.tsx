@@ -3,10 +3,10 @@
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
-import { useSignIn } from "@clerk/nextjs";
+import { useSignIn, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const SigninCover = () => {
@@ -17,6 +17,55 @@ const SigninCover = () => {
   const [password, setPassword] = useState<string>("");
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState<string>("");
+  const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
+  const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
+
+  useEffect(() => {
+    if (sessionId) {
+      const fetchUser = async () => {
+        try {
+          if (isUserLoaded && user) {
+            console.log("User loaded:", user);
+            const userData = {
+              userId: user.id,
+              userFullName: user.fullName,
+              userEmail: user.emailAddresses[0]?.emailAddress,
+              userFirstName: user.firstName,
+              userLastName: user.lastName,
+              userProfilePicture: user.imageUrl,
+              userRole: "employee",
+            };
+
+            const apiResponse = await fetch("/api/save-user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
+
+            const apiResult = await apiResponse.json();
+            if (!apiResponse.ok) {
+              throw new Error(apiResult.message || "Failed to save user data.");
+            }
+
+            setMessage("User verified and saved. Redirecting...");
+            setShow(true);
+            router.push("/dashboard");
+            setsLoading(false);
+          }
+        } catch (err: any) {
+          console.error("Error fetching user data:", err.message);
+          setMessage("Failed to fetch user data after session creation.");
+          setShow(true);
+        } finally {
+          setsLoading(false);
+        }
+      };
+
+      fetchUser();
+    }
+  }, [sessionId, isUserLoaded, user]);
 
   const handleEmailSignIn = async () => {
     if (!isLoaded) return;
@@ -49,16 +98,40 @@ const SigninCover = () => {
     if (!isLoaded) return;
 
     try {
+      // Perform GitHub OAuth login with Clerk
       await signIn.authenticateWithRedirect({
         strategy: "oauth_github", // Use GitHub as the OAuth provider
         redirectUrl: "/dashboard", // Redirect to this URL after OAuth flow
         redirectUrlComplete: "/dashboard", // This is the URL where Clerk will complete the OAuth flow
       });
+      setSessionId(signIn.createdSessionId); // Trigger useEffect
     } catch (err: any) {
-      setMessage(err.errors[0]?.message || "GitHub login failed.");
+      setMessage(
+        err.errors[0]?.message || "Failed to resend verification code!"
+      );
       setShow(true);
     }
   };
+
+  const handleGoogleLogin = async () => {
+    if (!isLoaded) return;
+
+    try {
+      // Perform GitHub OAuth login with Clerk
+      await signIn.authenticateWithRedirect({
+        strategy: "oauth_google", // Use GitHub as the OAuth provider
+        redirectUrl: "/dashboard", // Redirect to this URL after OAuth flow
+        redirectUrlComplete: "/dashboard", // This is the URL where Clerk will complete the OAuth flow
+      });
+      setSessionId(signIn.createdSessionId); // Trigger useEffect
+    } catch (err: any) {
+      setMessage(
+        err.errors[0]?.message || "Failed to resend verification code!"
+      );
+      setShow(true);
+    }
+  };
+
   const [passwordshow1, setpasswordshow1] = useState(false);
 
   return (
@@ -177,7 +250,7 @@ const SigninCover = () => {
                   </div>
                   <div className="d-flex align-items-center justify-content-between gap-3 mb-3 flex-wrap">
                     <Button
-                      onClick={handleGitHubLogin}
+                      onClick={handleGoogleLogin}
                       variant=""
                       className="btn btn-light btn-lg btn-w-lg border d-flex align-items-center justify-content-center flex-fill"
                     >
@@ -192,6 +265,7 @@ const SigninCover = () => {
                       </span>
                     </Button>
                     <Button
+                      onClick={handleGitHubLogin}
                       variant=""
                       className="btn btn-light btn-lg btn-w-lg border d-flex align-items-center justify-content-center flex-fill"
                     >
@@ -202,7 +276,7 @@ const SigninCover = () => {
                         />
                       </span>
                       <span className="lh-1 ms-2 fs-13 text-default fw-medium">
-                        Facebook
+                        Github
                       </span>
                     </Button>
                   </div>

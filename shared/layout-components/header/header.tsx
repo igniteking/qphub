@@ -9,85 +9,77 @@ import nextConfig from "@/next.config.mjs";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 
 const Header = ({ local_varaiable, ThemeChanger }: any) => {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const router = useRouter();
 
-  // if (!user?.emailAddresses[0]?.emailAddress) {
-  //   router.push("/sign-in");
-  // }
+  // const initialNotifications = [
+  //   {
+  //     id: "1",
+  //     icon: "ti ti-message-dots fs-5",
+  //     title: "Messages",
+  //     text1: "John Doe messaged you.",
+  //     text2: "",
+  //     text3: "",
+  //     color: "primary",
+  //     class: "",
+  //   },
+  //   {
+  //     id: "2",
+  //     icon: "ti ti-shopping-cart fs-5",
+  //     title: "Orders",
+  //     text1: "Order",
+  //     text2: " #12345",
+  //     text3: "confirmed",
+  //     color: "secondary",
+  //     class: "text-warning me-1",
+  //   },
+  //   {
+  //     id: "3",
+  //     icon: "ti ti-user-circle fs-5",
+  //     title: "Profile",
+  //     text1: "Complete your profile for offers!",
+  //     text2: "",
+  //     text3: "",
+  //     color: "success",
+  //     class: "",
+  //   },
+  //   {
+  //     id: "4",
+  //     icon: "ti ti-gift fs-5",
+  //     title: "Offers",
+  //     text1: "20% off electronics!",
+  //     text2: "",
+  //     text3: "",
+  //     color: "orange",
+  //     class: "",
+  //   },
+  //   {
+  //     id: "5",
+  //     icon: "ti ti-calendar fs-5",
+  //     title: "Events",
+  //     text1: "Webinar in 1 hour!",
+  //     text2: "",
+  //     text3: "",
+  //     color: "info",
+  //     class: "",
+  //   },
+  // ];
 
-  let { basePath } = nextConfig;
+  // const [notifications, setNotifications] = useState([...initialNotifications]);
 
-  const initialNotifications = [
-    {
-      id: "1",
-      icon: "ti ti-message-dots fs-5",
-      title: "Messages",
-      text1: "John Doe messaged you.",
-      text2: "",
-      text3: "",
-      color: "primary",
-      class: "",
-    },
-    {
-      id: "2",
-      icon: "ti ti-shopping-cart fs-5",
-      title: "Orders",
-      text1: "Order",
-      text2: " #12345",
-      text3: "confirmed",
-      color: "secondary",
-      class: "text-warning me-1",
-    },
-    {
-      id: "3",
-      icon: "ti ti-user-circle fs-5",
-      title: "Profile",
-      text1: "Complete your profile for offers!",
-      text2: "",
-      text3: "",
-      color: "success",
-      class: "",
-    },
-    {
-      id: "4",
-      icon: "ti ti-gift fs-5",
-      title: "Offers",
-      text1: "20% off electronics!",
-      text2: "",
-      text3: "",
-      color: "orange",
-      class: "",
-    },
-    {
-      id: "5",
-      icon: "ti ti-calendar fs-5",
-      title: "Events",
-      text1: "Webinar in 1 hour!",
-      text2: "",
-      text3: "",
-      color: "info",
-      class: "",
-    },
-  ];
-
-  const [notifications, setNotifications] = useState([...initialNotifications]);
-
-  const handleNotificationClose = (
-    index: number,
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    if (event) {
-      event.stopPropagation();
-    }
-    const updatedNotifications = [...notifications];
-    updatedNotifications.splice(index, 1);
-    setNotifications(updatedNotifications);
-  };
+  // const handleNotificationClose = (
+  //   index: number,
+  //   event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  // ) => {
+  //   if (event) {
+  //     event.stopPropagation();
+  //   }
+  //   const updatedNotifications = [...notifications];
+  //   updatedNotifications.splice(index, 1);
+  //   setNotifications(updatedNotifications);
+  // };
 
   //full screen
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -351,70 +343,70 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
 
   //cart dropdown
 
-  const cartProduct = [
-    {
-      id: 1,
-      src: "/assets/images/ecommerce/png/30.png",
-      name: "SoundSync Headphones",
-      qty: "2",
-      color: "Ocean Blue",
-      oldpr: "99",
-      newpr: "75",
-      class: "cart-headset",
-    },
-    {
-      id: 2,
-      src: "/assets/images/ecommerce/png/31.png",
-      name: "Western Ladies Bag",
-      qty: "1",
-      color: "Blush Pink",
-      oldpr: "149",
-      newpr: "120",
-      class: "cart-handbag",
-    },
-    {
-      id: 3,
-      src: "/assets/images/ecommerce/png/32.png",
-      name: "Elitr Alarm Clock",
-      qty: "2",
-      color: "Sky Blue",
-      oldpr: "49",
-      newpr: "30",
-      class: "cart-alaramclock",
-    },
-    {
-      id: 4,
-      src: "/assets/images/ecommerce/png/12.png",
-      name: "Aus Polo Assn",
-      qty: "3",
-      color: " Soft Peach",
-      oldpr: "129",
-      newpr: "70",
-      class: "cart-sweatshirt",
-    },
-    {
-      id: 5,
-      src: "/assets/images/ecommerce/png/16.png",
-      name: "Smart Watch",
-      qty: "1",
-      color: "Crimson Red",
-      oldpr: "249",
-      newpr: "200",
-      class: "cart-smartwatch",
-    },
-  ];
+  // const cartProduct = [
+  //   {
+  //     id: 1,
+  //     src: "/assets/images/ecommerce/png/30.png",
+  //     name: "SoundSync Headphones",
+  //     qty: "2",
+  //     color: "Ocean Blue",
+  //     oldpr: "99",
+  //     newpr: "75",
+  //     class: "cart-headset",
+  //   },
+  //   {
+  //     id: 2,
+  //     src: "/assets/images/ecommerce/png/31.png",
+  //     name: "Western Ladies Bag",
+  //     qty: "1",
+  //     color: "Blush Pink",
+  //     oldpr: "149",
+  //     newpr: "120",
+  //     class: "cart-handbag",
+  //   },
+  //   {
+  //     id: 3,
+  //     src: "/assets/images/ecommerce/png/32.png",
+  //     name: "Elitr Alarm Clock",
+  //     qty: "2",
+  //     color: "Sky Blue",
+  //     oldpr: "49",
+  //     newpr: "30",
+  //     class: "cart-alaramclock",
+  //   },
+  //   {
+  //     id: 4,
+  //     src: "/assets/images/ecommerce/png/12.png",
+  //     name: "Aus Polo Assn",
+  //     qty: "3",
+  //     color: " Soft Peach",
+  //     oldpr: "129",
+  //     newpr: "70",
+  //     class: "cart-sweatshirt",
+  //   },
+  //   {
+  //     id: 5,
+  //     src: "/assets/images/ecommerce/png/16.png",
+  //     name: "Smart Watch",
+  //     qty: "1",
+  //     color: "Crimson Red",
+  //     oldpr: "249",
+  //     newpr: "200",
+  //     class: "cart-smartwatch",
+  //   },
+  // ];
 
-  const [cartItems, setCartItems] = useState([...cartProduct]);
-  const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
-  const handleRemove = (
-    itemId: number,
-    event: { stopPropagation: () => void }
-  ) => {
-    event.stopPropagation();
-    const updatedCart = cartItems.filter((item) => item.id !== itemId);
-    setCartItems(updatedCart);
-    setCartItemCount(updatedCart.length);
-  };
+  // const [cartItems, setCartItems] = useState([...cartProduct]);
+  // const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
+  // const handleRemove = (
+  //   itemId: number,
+  //   event: { stopPropagation: () => void }
+  // ) => {
+  //   event.stopPropagation();
+  //   const updatedCart = cartItems.filter((item) => item.id !== itemId);
+  //   setCartItems(updatedCart);
+  //   setCartItemCount(updatedCart.length);
+  // };
   //Search Functionality
 
   //Media screen Modal
@@ -522,9 +514,9 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
             {/* End::header-element */}
 
             {/* Start::header-element */}
-            <Dropdown className="header-element country-selector dropdown custom-dropdown">
-              {/* Start::header-link|dropdown-toggle */}
-              <Dropdown.Toggle
+            {/* <Dropdown className="header-element country-selector dropdown custom-dropdown"> */}
+            {/* Start::header-link|dropdown-toggle */}
+            {/* <Dropdown.Toggle
                 variant=""
                 href="#!"
                 className="header-link dropdown-toggle"
@@ -605,9 +597,9 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                     strokeWidth="16"
                   />
                 </svg>
-              </Dropdown.Toggle>
-              {/* End::header-link|dropdown-toggle */}
-              <Dropdown.Menu
+              </Dropdown.Toggle> */}
+            {/* End::header-link|dropdown-toggle */}
+            {/* <Dropdown.Menu
                 as="ul"
                 className="main-header-dropdown dropdown-menu dropdown-menu-end"
                 data-popper-placement="none"
@@ -748,8 +740,8 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                     Русский
                   </Link>
                 </li>
-              </Dropdown.Menu>
-            </Dropdown>
+              </Dropdown.Menu> */}
+            {/* </Dropdown> */}
             {/* End::header-element */}
 
             {/* Start::header-element */}
@@ -803,9 +795,9 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
             {/* End::header-element */}
 
             {/* Start::header-element */}
-            <Dropdown className="header-element cart-dropdown dropdown">
-              {/* Start::header-link|dropdown-toggle */}
-              <Dropdown.Toggle
+            {/* <Dropdown className="header-element cart-dropdown dropdown"> */}
+            {/* Start::header-link|dropdown-toggle */}
+            {/* <Dropdown.Toggle
                 variant=""
                 href="#!"
                 className="header-link dropdown-toggle"
@@ -832,10 +824,10 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                 >
                   {cartItemCount}
                 </span>
-              </Dropdown.Toggle>
-              {/* End::header-link|dropdown-toggle */}
-              {/* Start::main-header-dropdown */}
-              <Dropdown.Menu
+              </Dropdown.Toggle> */}
+            {/* End::header-link|dropdown-toggle */}
+            {/* Start::main-header-dropdown */}
+            {/* <Dropdown.Menu
                 align="end"
                 className="main-header-dropdown  dropdown-menu-end"
                 data-popper-placement="none"
@@ -950,15 +942,15 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                     </span>
                   </div>
                 </div>
-              </Dropdown.Menu>
-              {/* End::main-header-dropdown */}
-            </Dropdown>
+              </Dropdown.Menu> */}
+            {/* End::main-header-dropdown */}
+            {/* </Dropdown> */}
             {/* End::header-element */}
 
             {/* Start::header-element */}
-            <Dropdown className="header-element notifications-dropdown d-xl-block d-none dropdown">
-              {/* Start::header-link|dropdown-toggle */}
-              <Dropdown.Toggle
+            {/* <Dropdown className="header-element notifications-dropdown d-xl-block d-none dropdown"> */}
+            {/* Start::header-link|dropdown-toggle */}
+            {/* <Dropdown.Toggle
                 variant=""
                 href="#!"
                 className="header-link dropdown-toggle no-caret"
@@ -982,11 +974,11 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                   <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
                 </svg>
                 <span className="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span>
-              </Dropdown.Toggle>
-              {/* End::header-link|dropdown-toggle */}
+              </Dropdown.Toggle> */}
+            {/* End::header-link|dropdown-toggle */}
 
-              {/* Start::main-header-dropdown */}
-              <Dropdown.Menu
+            {/* Start::main-header-dropdown */}
+            {/* <Dropdown.Menu
                 align="end"
                 as="ul"
                 className="main-header-dropdown  dropdown-menu-end"
@@ -1077,9 +1069,9 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                     <h6 className="fw-medium mt-3">No New Notifications</h6>
                   </div>
                 </div>
-              </Dropdown.Menu>
-              {/* End::main-header-dropdown */}
-            </Dropdown>
+              </Dropdown.Menu> */}
+            {/* End::main-header-dropdown */}
+            {/* </Dropdown> */}
             {/* End::header-element */}
 
             {/* Start::header-element */}
