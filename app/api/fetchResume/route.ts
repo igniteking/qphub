@@ -1,25 +1,9 @@
+export const dynamic = "force-dynamic";
+
 import { NextRequest, NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import { getAuth } from "@clerk/nextjs/server";
-import {
-  CandidateData,
-  Education,
-  WorkExperience,
-  Certification,
-  Project,
-  Skill,
-  Technology,
-} from "@/shared/types/types";
-
-type ResumeData = {
-  candidateData: CandidateData[];
-  education: Education[];
-  workExperience: WorkExperience[];
-  certifications: Certification[];
-  projects: Project[];
-  skills: Skill[];
-  technologies: Technology[];
-};
+import { CandidateData, WorkExperience } from "@/shared/types/types";
 
 export async function GET(req: NextRequest) {
   const connection = await mysql.createConnection({
