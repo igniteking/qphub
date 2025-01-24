@@ -2,7 +2,7 @@
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
-import { SignUp, useSignUp } from "@clerk/nextjs";
+import { useSignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useState } from "react";

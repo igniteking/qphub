@@ -67,13 +67,16 @@ const TwostepCover = () => {
               userRole: role === "employee" ? "employee" : "",
             };
 
-            const apiResponse = await fetch("/api/save-user", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
-            });
+            const apiResponse = await fetch(
+              `${process.env.MYSQL_URL}/save-user.php`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+              }
+            );
 
             const apiResult = await apiResponse.json();
             if (!apiResponse.ok) {
