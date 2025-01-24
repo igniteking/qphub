@@ -7,20 +7,21 @@ import EmployeeSidebar from "@/shared/layout-components/employee-sidebar/sidebar
 import HRSidebar from "@/shared/layout-components/hr-sidebar/sidebar";
 import Switcher from "@/shared/layout-components/switcher/switcher";
 import React, { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 const Layout = ({ children }: any) => {
   const [lateLoad, setLateLoad] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null); // State to store user role
-
+  const { user } = useUser();
   useEffect(() => {
     setLateLoad(true);
 
-    const clerkId = "user_2rhmsyILNR4Yx0UpssfdVV2085n";
+    const clerkId = user?.id; // Get the Clerk user ID
 
     // Assuming you have an API or logic to get the user role
     const fetchUserRole = async () => {
       try {
-        const response = await fetch(`/api/getUserRole?clerk_id=${clerkId}`); // Replace with actual API endpoint
+        const response = await fetch(`/getUserRole?clerk_id=${clerkId}`); // Replace with actual API endpoint
         const data = await response.json();
         if (data?.role) {
           setUserRole(data.role); // Set the user role
