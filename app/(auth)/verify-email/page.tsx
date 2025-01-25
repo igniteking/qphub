@@ -68,7 +68,7 @@ const TwostepCover = () => {
             };
 
             const apiResponse = await fetch(
-              `${process.env.MYSQL_URL}/save-user.php`,
+              `${process.env.MYSQL_URL}/saveUser.php`,
               {
                 method: "POST",
                 headers: {

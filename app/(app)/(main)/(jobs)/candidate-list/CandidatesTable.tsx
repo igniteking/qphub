@@ -1,18 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  CandidateData,
-  Education,
-  WorkExperience,
-  Certification,
-  Project,
-  Skill,
-  Technology,
-} from "@/shared/types/types";
+import { CandidateData, WorkExperience } from "@/shared/types/types";
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import CodeBroke from "@/components/CodeBroke";
+import { useUser } from "@clerk/nextjs";
 
 interface ResumeData {
   candidateData: CandidateData[];
@@ -25,11 +18,22 @@ const CandidatesTable = () => {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
   const [showMessage, setShowMessage] = useState(false);
+  const { user } = useUser(); // Get the user object from Clerk
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/fetchResume");
+        const clerkId = user?.id; // Get the Clerk ID
+
+        if (!clerkId) {
+          console.error("Clerk ID is undefined or empty.");
+          return;
+        }
+
+        // Construct the URL for the API call
+        const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/fetchResume.php?clerk_id=${clerkId}`;
+
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`Failed to fetch data: ${response.statusText}`);
         }
@@ -45,7 +49,7 @@ const CandidatesTable = () => {
     };
 
     fetchData();
-  }, []);
+  }, [user]);
 
   if (error) return <CodeBroke />;
 

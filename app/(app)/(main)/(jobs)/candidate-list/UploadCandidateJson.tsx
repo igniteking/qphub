@@ -1,6 +1,7 @@
 "use client";
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
+import { useUser } from "@clerk/nextjs";
 import React, { Fragment, useState } from "react";
 import { Button, Form, Offcanvas } from "react-bootstrap";
 
@@ -10,28 +11,40 @@ const UploadCandidateJson = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [message, setMessage] = useState<string>("");
-  const [isLoading, setisLoading] = useState<boolean>(false);
-  const [showMessage, setshowMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const { user } = useUser(); // Get the user object from Clerk
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    setisLoading(true);
     // Create FormData object from the form
     const formData = new FormData(e.currentTarget);
     const jsonData = formData.get("candidate-json") as string;
 
     if (jsonData === "") {
       setMessage("Please enter the JSON data and try again.");
-      setshowMessage(true);
-      setisLoading(false);
+      setShowMessage(true);
+      setIsLoading(false);
     } else {
       try {
         // Parse JSON to validate the structure
         const parsedData = JSON.parse(jsonData);
 
+        const clerkId = user?.id; // Get the Clerk ID
+
+        if (!clerkId) {
+          console.error("Clerk ID is undefined or empty.");
+          return;
+        }
+
+        // Construct the URL for the API call
+        const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/upload-resume-data.php?clerk_id=${clerkId}`;
+        console.log("POST URL:", url);
+
         // Send data to the API
-        const response = await fetch("/api/upload-resume-data", {
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -41,24 +54,26 @@ const UploadCandidateJson = () => {
 
         if (response.ok) {
           setMessage("Data uploaded successfully!");
-          setshowMessage(true);
-          setisLoading(false);
+          setShowMessage(true);
+          setIsLoading(false);
           setTimeout(() => {
             setShow(false);
           }, 1500);
         } else {
           const errorData = await response.json();
-          setMessage(`Error: ${errorData.error}`);
-          setshowMessage(true);
-          setisLoading(false);
+          setMessage(`Error: ${errorData.sqlMessage}`);
+          setShowMessage(true);
+          setIsLoading(false);
         }
       } catch (err) {
-        setMessage("Invalid JSON format. Please correct it and try again.");
-        setshowMessage(true);
-        setisLoading(false);
+        console.error("Error during fetch:", err); // Log fetch errors
+        setMessage("Error parsing JSON: " + err);
+        setShowMessage(true);
+        setIsLoading(false);
       }
     }
   };
+
   return (
     <Fragment>
       <Button
@@ -91,7 +106,7 @@ const UploadCandidateJson = () => {
         <Offcanvas.Body className="p-0">
           <ToastNotification
             show={showMessage}
-            setShow={setshowMessage}
+            setShow={setShowMessage}
             message={message}
           />
           <Form onSubmit={handleSubmit} autoComplete="off">
