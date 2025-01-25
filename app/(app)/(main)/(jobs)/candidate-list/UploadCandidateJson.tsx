@@ -80,6 +80,7 @@ const UploadCandidateJson = () => {
       <Button
         variant="primary"
         type="button"
+        className="btn btn-primary-light btn-sm"
         data-bs-toggle="offcanvas"
         onClick={handleShow}
         data-bs-target="#offcanvasRight"
