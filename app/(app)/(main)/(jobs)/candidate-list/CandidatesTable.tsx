@@ -8,7 +8,7 @@ import CodeBroke from "@/components/CodeBroke";
 import { useUser } from "@clerk/nextjs";
 
 interface ResumeData {
-  candidateData: CandidateData[];
+  candidateData: CandidateData; // Change this to an object instead of an array
   workExperience: WorkExperience[];
 }
 
@@ -68,76 +68,70 @@ const CandidatesTable = () => {
             <thead>
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">Location</th>
-                <th scope="col">First Role</th>
-                <th scope="col">Last Updated On</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Job Role</th>
                 <th scope="col">Created On</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              {resumeData.map((data, idx) =>
-                data.candidateData.map((item) => (
-                  <tr key={item.id}>
-                    <td>
-                      <div className="d-flex">
-                        <div className="ms-2">
-                          <p className="fw-medium mb-0 d-flex align-items-center">
-                            <a href={`/apps/jobs/jobdetails/${item.id}`}>
-                              {item.name}
-                            </a>
-                          </p>
-                          <p className="fs-12 text-muted mb-0">
-                            <Link
-                              scroll={false}
-                              href={`mailto:${item.email}`}
-                              className="fw-medium mb-0"
-                            >
-                              {item.email}
-                            </Link>
-                          </p>
-                        </div>
+              {resumeData.map((data, idx) => (
+                <tr key={data.candidateData.id}>
+                  <td>
+                    <div className="d-flex">
+                      <div className="ms-2">
+                        <p className="fw-medium mb-0 d-flex align-items-center">
+                          <a href={`/apps/jobs/jobdetails/${data.candidateData.id}`}>
+                            {data.candidateData.name}
+                          </a>
+                        </p>
+                        <p className="fs-12 text-muted mb-0">
+                          <Link
+                            scroll={false}
+                            href={`mailto:${data.candidateData.email}`}
+                            className="fw-medium mb-0"
+                          >
+                            {data.candidateData.email}
+                          </Link>
+                        </p>
                       </div>
-                    </td>
-                    <td>{item.mobile}</td>
-                    <td>{item.location}</td>
-                    <td>
-                      {data.workExperience.length > 0 &&
-                      data.workExperience[0]?.role ? (
-                        <p>{data.workExperience[0].role}</p>
-                      ) : (
-                        <p>No experience available</p>
-                      )}
-                    </td>
-                    <td>{item.updated_at}</td>
-                    <td>{item.created_at}</td>
-                    <td>
-                      <Link
-                        scroll={false}
-                        href={`/apps/jobs/jobdetails/${item.id}`}
-                        className="btn btn-icon btn-sm btn-primary-light btn-wave waves-effect waves-light me-1"
-                      >
-                        <i className="ri-eye-line"></i>
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href={`#edit/${item.id}`}
-                        className="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-1"
-                      >
-                        <i className="ri-edit-line"></i>
-                      </Link>
-                      <Link
-                        scroll={false}
-                        href={`#delete/${item.id}`}
-                        className="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"
-                      >
-                        <i className="ri-delete-bin-line"></i>
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              )}
+                    </div>
+                  </td>
+                  <td>{data.candidateData.mobile}</td>
+                  <td>
+                    {data.workExperience.length > 0 &&
+                    data.workExperience[0]?.role ? (
+                      <p>{data.workExperience[0].role}</p>
+                    ) : (
+                      <p>No experience available</p>
+                    )}
+                  </td>
+                  <td>{data.candidateData.created_at}</td>
+                  <td>
+                    <Link
+                      scroll={false}
+                      href={`/apps/jobs/jobdetails/${data.candidateData.id}`}
+                      className="btn btn-icon btn-sm btn-primary-light btn-wave waves-effect waves-light me-1"
+                    >
+                      <i className="ri-eye-line"></i>
+                    </Link>
+                    {/* <Link
+                      scroll={false}
+                      href={`#edit/${data.candidateData.id}`}
+                      className="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-1"
+                    >
+                      <i className="ri-edit-line"></i>
+                    </Link>
+                    <Link
+                      scroll={false}
+                      href={`#delete/${data.candidateData.id}`}
+                      className="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"
+                    >
+                      <i className="ri-delete-bin-line"></i>
+                    </Link> */}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         )

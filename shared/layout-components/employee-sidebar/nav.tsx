@@ -240,36 +240,36 @@ const badge3 = (
 );
 
 export const MenuItems: any = [
-  {
-    menutitle: "MAIN",
-  },
+  // {
+  //   menutitle: "MAIN",
+  // },
+
+  // {
+  //   icon: DashboardIcon,
+  //   badgetxt: "",
+  //   title: "Dashboard",
+  //   type: "sub",
+  //   active: false,
+  //   selected: false,
+  //   children: [
+  //     {
+  //       path: "/dashboard/",
+  //       type: "link",
+  //       active: false,
+  //       selected: false,
+  //       dirchange: false,
+  //       title: "Dashboard",
+  //     },
+  //   ],
+  // },
 
   {
-    icon: DashboardIcon,
-    badgetxt: "",
-    title: "Dashboard",
-    type: "sub",
-    active: false,
-    selected: false,
-    children: [
-      {
-        path: "/dashboard/",
-        type: "link",
-        active: false,
-        selected: false,
-        dirchange: false,
-        title: "Dashboard",
-      },
-    ],
-  },
-
-  {
-    menutitle: "Jobs",
+    menutitle: "Uploads",
   },
 
   {
     icon: NestedmenuIcon,
-    title: "Jobs",
+    title: "My Uploads",
     selected: false,
     active: false,
     type: "sub",
