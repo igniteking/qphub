@@ -2,6 +2,8 @@ import Pageheader from "@/shared/layout-components/page-header/pageheader";
 import Seo from "@/shared/layout-components/seo/seo";
 import React, { Fragment } from "react";
 import {
+  Alert,
+  AlertHeading,
   Card,
   CardBody,
   CardHeader,
@@ -23,6 +25,16 @@ const Candidatelist = async () => {
       {/* Page Header */}
       <Seo title={"Candidate list"} />
       <Pageheader
+        customElements={
+          <Alert variant="danger">
+            <AlertHeading>Oh snap! You got an error!</AlertHeading>
+            <p>
+              Change this and that and try again. Duis mollis, est non commodo
+              luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
+              elit. Cras mattis consectetur purus sit amet fermentum.
+            </p>
+          </Alert>
+        }
         Heading="Candidate list"
         Pages={[
           { title: "zazla", active: true },
