@@ -2,7 +2,7 @@
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
-import { SignUp, useSignUp } from "@clerk/nextjs";
+import { useSignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useState } from "react";
@@ -45,8 +45,8 @@ export default function Page() {
     try {
       await signUp.authenticateWithRedirect({
         strategy: "oauth_github", // Use GitHub as the OAuth provider
-        redirectUrl: "/dashboard", // Redirect on successful login
-        redirectUrlComplete: "/dashboard",
+        redirectUrl: "/candidate-list", // Redirect on successful login
+        redirectUrlComplete: "/candidate-list",
       });
     } catch (err: any) {
       setMessage(err.errors[0]?.message || "GitHub login failed.");

@@ -85,7 +85,7 @@ const TwostepCover = () => {
 
             setMessage("User verified and saved. Redirecting...");
             setShow(true);
-            router.push("/dashboard");
+            router.push("/candidate-list");
             setLoading(false);
           }
         } catch (err: any) {

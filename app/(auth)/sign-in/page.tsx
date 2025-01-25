@@ -3,10 +3,10 @@
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
-import { useSignIn, useUser } from "@clerk/nextjs";
+import { useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const SigninCover = () => {
@@ -17,55 +17,7 @@ const SigninCover = () => {
   const [password, setPassword] = useState<string>("");
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState<string>("");
-  const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
   const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
-
-  useEffect(() => {
-    if (sessionId) {
-      const fetchUser = async () => {
-        try {
-          if (isUserLoaded && user) {
-            console.log("User loaded:", user);
-            const userData = {
-              userId: user.id,
-              userFullName: user.fullName,
-              userEmail: user.emailAddresses[0]?.emailAddress,
-              userFirstName: user.firstName,
-              userLastName: user.lastName,
-              userProfilePicture: user.imageUrl,
-              userRole: "employee",
-            };
-
-            const apiResponse = await fetch("/api/save-user", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
-            });
-
-            const apiResult = await apiResponse.json();
-            if (!apiResponse.ok) {
-              throw new Error(apiResult.message || "Failed to save user data.");
-            }
-
-            setMessage("User verified and saved. Redirecting...");
-            setShow(true);
-            router.push("/dashboard");
-            setsLoading(false);
-          }
-        } catch (err: any) {
-          console.error("Error fetching user data:", err.message);
-          setMessage("Failed to fetch user data after session creation.");
-          setShow(true);
-        } finally {
-          setsLoading(false);
-        }
-      };
-
-      fetchUser();
-    }
-  }, [sessionId, isUserLoaded, user]);
 
   const handleEmailSignIn = async () => {
     if (!isLoaded) return;
@@ -85,7 +37,7 @@ const SigninCover = () => {
       setsLoading(false);
 
       // Redirect to the dashboard
-      router.push("/dashboard");
+      router.push("/candidate-list");
     } catch (err: any) {
       setMessage(err.message || "Failed to sign in.");
       setShow(true);
