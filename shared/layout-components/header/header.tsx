@@ -428,22 +428,22 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
               <div className="horizontal-logo">
                 <Link scroll={false} href="/dashboard/" className="header-logo">
                   <img
-                    src={`/logo/main-fav-sheield.png`}
+                    src={`/qphub-logo/icon.png`}
                     alt="logo"
                     className="desktop-logo"
                   />
                   <img
-                    src={`/logo/main-fav-dark.png`}
+                    src={`/qphub-logo/icon.png`}
                     alt="logo"
                     className="toggle-logo"
                   />
                   <img
-                    src={`/logo/main-fav-sheield.png`}
+                    src={`/qphub-logo/icon.png`}
                     alt="logo"
                     className="desktop-dark"
                   />
                   <img
-                    src={`/logo/main-fav-sheield.png`}
+                    src={`/qphub-logo/icon.png`}
                     alt="logo"
                     className="toggle-dark"
                   />
