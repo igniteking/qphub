@@ -97,7 +97,7 @@ const CandidatesTable = () => {
                       </div>
                     </div>
                   </td>
-                  <td>{data.candidateData.mobile}</td>
+                  <td>{data.candidateData.designation}</td>
                   <td>
                     {data.workExperience.length > 0 &&
                     data.workExperience[0]?.role ? (

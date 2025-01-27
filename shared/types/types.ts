@@ -1,4 +1,5 @@
 export interface CandidateData {
+  designation: string;
   id: number;
   name: string;
   email: string;

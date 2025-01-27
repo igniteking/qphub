@@ -43,8 +43,7 @@ const NumberButton = () => {
 
   return (
     <button className="btn btn-secondary-light btn-wave btn-sm">
-      <i className="bi bi-cloud-upload align-middle"></i>{" "}
-      {loading ? <Loader /> : numberOfResumeUploaded !== null ? numberOfResumeUploaded : "No data"}
+      {loading ? <Loader /> : numberOfResumeUploaded !== null ? (<><i className="bi bi-cloud-upload align-middle"></i> {numberOfResumeUploaded}</>) : "No data"}
     </button>
   );
 };
