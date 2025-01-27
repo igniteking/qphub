@@ -26,7 +26,7 @@ const Candidatelist = async () => {
       <Pageheader
         Heading="Candidate list"
         Pages={[
-          { title: "zazla", active: true },
+          { title: "qpHub", active: true },
           { title: "Jobs", active: true },
           { title: "Candidate list", active: false },
         ]}
