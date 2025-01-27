@@ -745,30 +745,30 @@ const EmployeeSidebar = ({ local_varaiable, ThemeChanger }: any) => {
         <div className="main-sidebar-header">
           <Link scroll={false} href="/dashboard/" className="header-logo">
             <Image
-              width={70}
-              height={0}
-              src={`/logo/main-dark.png`}
+              width={100}
+              height={100}
+              src={`/qphub-logo/logo.png`}
               alt="logo"
               className="desktop-logo"
             />
             <Image
-              width={30}
-              height={0}
-              src={`/logo/main-fav-sheield.png`}
+              width={40}
+              height={50}
+              src={`/qphub-logo/icon.png`}
               alt="logo"
               className="toggle-dark"
             />
             <Image
-              width={70}
+              width={100}
               height={0}
-              src={`/logo/main.png`}
+              src={`/qphub-logo/logo.png`}
               alt="logo"
               className="desktop-dark"
             />
             <Image
               width={30}
               height={0}
-              src={`/logo/main-fav-dark.png`}
+              src={`/qphub-logo/icon.png`}
               alt="logo"
               className="toggle-logo"
             />

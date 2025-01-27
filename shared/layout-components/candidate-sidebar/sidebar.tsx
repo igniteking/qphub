@@ -747,28 +747,28 @@ const CandidateSidebar = ({ local_varaiable, ThemeChanger }: any) => {
             <Image
               width={70}
               height={0}
-              src={`/logo/main-dark.png`}
+              src={`/qphub-logo/icon.png`}
               alt="logo"
               className="desktop-logo"
             />
             <Image
               width={30}
               height={0}
-              src={`/logo/main-fav-sheield.png`}
+              src={`/qphub-logo/icon.png`}
               alt="logo"
               className="toggle-dark"
             />
             <Image
               width={70}
               height={0}
-              src={`/logo/main.png`}
+              src={`/qphub-logo/icon.png`}
               alt="logo"
               className="desktop-dark"
             />
             <Image
               width={30}
               height={0}
-              src={`/logo/main-fav-dark.png`}
+              src={`/qphub-logo/icon.png`}
               alt="logo"
               className="toggle-logo"
             />
