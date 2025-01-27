@@ -30,7 +30,11 @@ export default function Page() {
       });
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setisLoading(false);
-      router.push(`/verify-email?email=${encodeURIComponent(email)}&&role=${encodeURIComponent("employee")}`);
+      router.push(
+        `/verify-email?email=${encodeURIComponent(
+          email
+        )}&&role=${encodeURIComponent("employee")}`
+      );
     } catch (err: any) {
       setMessage(err.errors[0]?.message || "Something went wrong!");
       setShow(true);
@@ -53,6 +57,7 @@ export default function Page() {
       setShow(true);
     }
   };
+
   return (
     <Fragment>
       <Seo title={"Employee Sign Up"} />
@@ -60,9 +65,9 @@ export default function Page() {
         <Col xxl={5} xl={5} lg={12} className="d-xl-block d-none px-0">
           <div className="authentication-cover overflow-hidden">
             <div className="authentication-cover-logo">
-              <Link scroll={false} href="/">
+              <Link scroll={false} href="#">
                 <img
-                  src="../../../assets/images/brand-logos/desktop-dark.png"
+                  src="../../../qphub-logo/logo.png"
                   alt=""
                   className="authentication-brand desktop-dark"
                 />

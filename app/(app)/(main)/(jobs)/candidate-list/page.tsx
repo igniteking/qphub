@@ -30,6 +30,7 @@ const Candidatelist = async () => {
           { title: "Jobs", active: true },
           { title: "Candidate list", active: false },
         ]}
+        customElements={<NumberButton />}
       />
       {/* Page Header Close */}
 
