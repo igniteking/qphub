@@ -67,16 +67,15 @@ const TwostepCover = () => {
               userRole: role === "employee" ? "employee" : "",
             };
 
-            const apiResponse = await fetch(
-              `${process.env.MYSQL_URL}/saveUser.php`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userData),
-              }
-            );
+            const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/saveUser.php`;
+
+            const apiResponse = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
 
             const apiResult = await apiResponse.json();
             if (!apiResponse.ok) {
@@ -156,7 +155,7 @@ const TwostepCover = () => {
         <Col xxl={5} xl={5} lg={12} className="d-xl-block d-none px-0">
           <div className="authentication-cover overflow-hidden">
             <div className="authentication-cover-logo">
-            <Link scroll={false} href="#">
+              <Link scroll={false} href="#">
                 <img
                   src="../../../qphub-logo/logo.png"
                   alt=""
