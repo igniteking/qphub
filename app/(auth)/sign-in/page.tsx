@@ -93,9 +93,9 @@ const SigninCover = () => {
         <Col xxl={5} xl={5} lg={12} className="d-xl-block d-none px-0">
           <div className="authentication-cover overflow-hidden">
             <div className="authentication-cover-logo">
-              <Link scroll={false} href="/dashboards/sales/">
+              <Link scroll={false} href="#">
                 <img
-                  src="../../../assets/images/brand-logos/desktop-dark.png"
+                  src="../../../qphub-logo/logo.png"
                   alt=""
                   className="authentication-brand desktop-dark"
                 />
