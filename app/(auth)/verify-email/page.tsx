@@ -59,12 +59,17 @@ const TwostepCover = () => {
             console.log("User loaded:", user);
             const userData = {
               userId: user.id,
-              userFullName: user.fullName,
+              userFullName: user.fullName || null, // Explicit null for optional field
               userEmail: user.emailAddresses[0]?.emailAddress,
-              userFirstName: user.firstName,
-              userLastName: user.lastName,
-              userProfilePicture: user.imageUrl,
-              userRole: role === "employee" ? "employee" : "HR",
+              userFirstName: user.firstName || "", // Ensure non-null string
+              userLastName: user.lastName || "", // Ensure non-null string
+              userProfilePicture: user.imageUrl || null,
+              userRole:
+                role === "employee"
+                  ? "employee"
+                  : role === "developer"
+                  ? "developer"
+                  : "HR", // Match enum values
             };
 
             const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/saveUser.php`;
@@ -77,6 +82,15 @@ const TwostepCover = () => {
               body: JSON.stringify(userData),
             });
 
+            // Handle non-JSON responses
+            if (
+              !apiResponse.headers
+                .get("content-type")
+                ?.includes("application/json")
+            ) {
+              throw new Error(`Invalid response: ${await apiResponse.text()}`);
+            }
+
             const apiResult = await apiResponse.json();
             if (!apiResponse.ok) {
               throw new Error(apiResult.message || "Failed to save user data.");
@@ -85,11 +99,10 @@ const TwostepCover = () => {
             setMessage("User verified and saved. Redirecting...");
             setShow(true);
             router.push("/candidate-list");
-            setLoading(false);
           }
         } catch (err: any) {
-          console.error("Error fetching user data:", err.message);
-          setMessage("Failed to fetch user data after session creation.");
+          console.error("Error saving user:", err);
+          setMessage(err.message || "Failed to save user data");
           setShow(true);
         } finally {
           setLoading(false);
@@ -98,7 +111,7 @@ const TwostepCover = () => {
 
       fetchUser();
     }
-  }, [sessionId, isUserLoaded, user]);
+  }, [sessionId, isUserLoaded, user, role, router]);
 
   const handleVerify = async () => {
     if (!isLoaded) return;
