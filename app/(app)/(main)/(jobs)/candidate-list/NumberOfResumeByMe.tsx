@@ -3,7 +3,7 @@ import Loader from "@/components/Loader";
 import { useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 
-const NumberButton = () => {
+const NumberOfResumeByMe = () => {
   const { user } = useUser(); // Get the user object from Clerk
   const [loading, setLoading] = useState(true);
 
@@ -48,4 +48,4 @@ const NumberButton = () => {
   );
 };
 
-export default NumberButton;
+export default NumberOfResumeByMe;

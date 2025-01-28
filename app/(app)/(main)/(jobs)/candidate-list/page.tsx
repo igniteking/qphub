@@ -16,7 +16,8 @@ import {
 } from "react-bootstrap";
 import UploadCandidateJson from "./UploadCandidateJson";
 import CandidatesTable from "./CandidatesTable";
-import NumberButton from "./number";
+import NumberOfResumeByMe from "./NumberOfResumeByMe";
+import CopyPrompt from "./CopyPrompt";
 
 const Candidatelist = async () => {
   return (
@@ -30,7 +31,8 @@ const Candidatelist = async () => {
           { title: "Jobs", active: true },
           { title: "Candidate list", active: false },
         ]}
-        customElements={<NumberButton />}
+        show={true}
+        customElements={<CopyPrompt />}
       />
       {/* Page Header Close */}
 
@@ -41,7 +43,7 @@ const Candidatelist = async () => {
             <CardHeader className="justify-content-between">
               <CardTitle>All My Candidates</CardTitle>
               <div className="d-flex flex-wrap gap-2">
-                <NumberButton />
+                <NumberOfResumeByMe />
                 <UploadCandidateJson />
                 <div>
                   <FormControl
