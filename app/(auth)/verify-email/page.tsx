@@ -64,7 +64,7 @@ const TwostepCover = () => {
               userFirstName: user.firstName,
               userLastName: user.lastName,
               userProfilePicture: user.imageUrl,
-              userRole: role === "employee" ? "employee" : "",
+              userRole: role === "employee" ? "employee" : "HR",
             };
 
             const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/saveUser.php`;
