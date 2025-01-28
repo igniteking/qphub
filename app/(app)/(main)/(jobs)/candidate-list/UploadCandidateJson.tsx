@@ -15,63 +15,82 @@ const UploadCandidateJson = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { user } = useUser(); // Get the user object from Clerk
 
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Create FormData object from the form
-    const formData = new FormData(e.currentTarget);
-    const jsonData = formData.get("candidate-json") as string;
+    const formData = new FormData(e.currentTarget); // Extract form data
+    const jsonData = formData.get("candidate-json") as string; // Get the JSON string
 
-    if (jsonData === "") {
+    if (!jsonData || jsonData.trim() === "") {
       setMessage("Please enter the JSON data and try again.");
       setShowMessage(true);
       setIsLoading(false);
-    } else {
-      try {
-        // Parse JSON to validate the structure
-        const parsedData = JSON.parse(jsonData);
+      return;
+    }
 
-        const clerkId = user?.id; // Get the Clerk ID
+    if (!file) {
+      setMessage("Please select a file to upload.");
+      setShowMessage(true);
+      setIsLoading(false);
+      return;
+    }
 
-        if (!clerkId) {
-          console.error("Clerk ID is undefined or empty.");
-          return;
-        }
+    try {
+      // Validate and parse JSON data
+      const parsedData = JSON.parse(jsonData);
 
-        // Construct the URL for the API call
-        const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/upload-resume-data.php?clerk_id=${clerkId}`;
-        console.log("POST URL:", url);
-
-        // Send data to the API
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(parsedData),
-        });
-
-        if (response.ok) {
-          setMessage("Data uploaded successfully!");
-          setShowMessage(true);
-          setIsLoading(false);
-          setTimeout(() => {
-            setShow(false);
-            window.location.reload();
-          }, 1500);
-        } else {
-          const errorData = await response.json();
-          setMessage(`Error: ${errorData.sqlMessage}`);
-          setShowMessage(true);
-          setIsLoading(false);
-        }
-      } catch (err) {
-        console.error("Error during fetch:", err); // Log fetch errors
-        setMessage("Error parsing JSON: " + err);
+      const clerkId = user?.id; // Replace with actual logic to retrieve Clerk ID
+      if (!clerkId) {
+        setMessage("Clerk ID is missing. Please log in again.");
         setShowMessage(true);
         setIsLoading(false);
+        return;
       }
+
+      // Prepare FormData for upload
+      const uploadData = new FormData();
+      uploadData.append("json", JSON.stringify(parsedData)); // Stringify JSON
+      uploadData.append("file", file); // Attach the file
+      uploadData.append("clerk_id", clerkId); // Append Clerk ID
+
+      // Define the API endpoint
+      const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/upload-resume-data.php`;
+
+      // Make POST request to the PHP script
+      const response = await fetch(url, {
+        method: "POST",
+        body: uploadData,
+      });
+
+      const result = await response.json(); // Parse the response
+
+      if (response.ok) {
+        setMessage("Data and file uploaded successfully!");
+        setShowMessage(true);
+        setTimeout(() => {
+          setShow(false);
+          window.location.reload();
+        }, 1500);
+      } else {
+        // Display error from server response
+        setMessage(`Error: ${result.error || "An unknown error occurred."}`);
+        setShowMessage(true);
+      }
+    } catch (err) {
+      console.error("Error during submission:", err);
+      setMessage("Error: Invalid JSON format or server error.");
+      setShowMessage(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -131,6 +150,14 @@ const UploadCandidateJson = () => {
                   rows={25}
                 />
               </div>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Label>Attach Resume</Form.Label>
+                <Form.Control
+                  onChange={handleFileChange}
+                  type="file"
+                  size="lg"
+                />
+              </Form.Group>
               <Button
                 variant="primary"
                 className="col-md-12 btn btn-lg btn-primary"
