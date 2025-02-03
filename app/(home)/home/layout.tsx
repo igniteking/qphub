@@ -62,7 +62,7 @@ const Layout = ({ children, ThemeChanger }: any) => {
           <header>
             <Navbar expand="lg" className="bg-body-tertiary">
               <Container fluid>
-                <NavbarBrand href="#">
+                <NavbarBrand href="/home">
                   <Image
                     width={100}
                     height={100}
@@ -77,7 +77,7 @@ const Layout = ({ children, ThemeChanger }: any) => {
                     style={{ maxHeight: "100px" }}
                     navbarScroll
                   >
-                    <NavLink href="/landing">Home</NavLink>
+                    <NavLink href="/home">Home</NavLink>
                   </Nav>
                   <Link href={"/employee-sign-up/"}>
                     <Button variant="outline-primary">Employee Sign Up</Button>
