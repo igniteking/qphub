@@ -5,6 +5,7 @@ import Landingsidebar from "@/shared/layout-components/landingsidebar/landingsid
 import { ThemeChanger } from "@/shared/redux/action";
 import store from "@/shared/redux/store";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
 import {
@@ -78,10 +79,14 @@ const Layout = ({ children, ThemeChanger }: any) => {
                   >
                     <NavLink href="/landing">Home</NavLink>
                   </Nav>
-                  <Button variant="outline-primary">Employee Sign Up</Button>
-                  <Button variant="outline-secondary" className="m-2">
-                    Login
-                  </Button>
+                  <Link href={"/employee-sign-up/"}>
+                    <Button variant="outline-primary">Employee Sign Up</Button>
+                  </Link>
+                  <Link href={"/sign-in"}>
+                    <Button variant="outline-secondary" className="m-2">
+                      Login
+                    </Button>
+                  </Link>
                 </NavbarCollapse>
               </Container>
             </Navbar>
