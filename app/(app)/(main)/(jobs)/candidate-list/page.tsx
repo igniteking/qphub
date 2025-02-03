@@ -45,15 +45,15 @@ const Candidatelist = async () => {
               <div className="d-flex flex-wrap gap-2">
                 <NumberOfResumeByMe />
                 <UploadCandidateJson />
-                <div>
+                {/* <div>
                   <FormControl
                     className="form-control form-control-sm"
                     type="text"
                     placeholder="Search Here"
                     aria-label=".form-control-sm example"
                   />
-                </div>
-                <Dropdown>
+                </div> */}
+                {/* <Dropdown>
                   <DropdownToggle
                     variant=""
                     href="#!"
@@ -84,7 +84,7 @@ const Candidatelist = async () => {
                       <DropdownItem href="#!">Oldest</DropdownItem>
                     </li>
                   </DropdownMenu>
-                </Dropdown>
+                </Dropdown> */}
               </div>
             </CardHeader>
             <CardBody className="p-0">
