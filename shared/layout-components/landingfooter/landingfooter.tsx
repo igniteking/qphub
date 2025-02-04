@@ -10,8 +10,8 @@ const Landingfooter = () => {
             <div className="container">
                 <Row>
                     <Col lg={6} className="text-lg-start text-center">
-                        <span className="text-fixed-white op-7 fs-14"> © Copyright <span id="year">2024</span> <a
-                            href="#!" className="text-primary fs-15 fw-semibold">Mamix</a>.
+                        <span className="text-fixed-white op-7 fs-14"> © Copyright <span id="year">2025</span> <a
+                            href="#!" className="text-primary fs-15 fw-semibold">QP-Hub</a>.
                         </span>
                     </Col>
                     <Col lg={6} className="text-lg-end text-center">

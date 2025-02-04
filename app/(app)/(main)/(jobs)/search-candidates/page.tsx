@@ -66,7 +66,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="c-1"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="c-1">
                       R &amp; D
@@ -95,7 +95,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="c-3"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="c-3">
                       Business Process
@@ -110,7 +110,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="c-4"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="c-4">
                       Consulting
@@ -188,7 +188,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="available-1"
-                      defaultChecked
+                      
                     />
                     <Form.Label
                       className="form-check-label"
@@ -245,7 +245,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="bond-1"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="bond-1">
                       1 Year
@@ -293,7 +293,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="languages-1"
-                      defaultChecked
+                      
                     />
                     <Form.Label
                       className="form-check-label"
@@ -350,7 +350,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="j-1"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="j-1">
                       Full Time
@@ -365,7 +365,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="j-2"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="j-2">
                       Part Time
@@ -380,7 +380,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="j-3"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="j-3">
                       Internship
@@ -448,7 +448,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="q-2"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="q-2">
                       10th Pass and Above
@@ -477,7 +477,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="q-4"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="q-4">
                       Diploma and Graduate
@@ -511,7 +511,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="s-1"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="s-1">
                       HTML5
@@ -526,7 +526,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="s-2"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="s-2">
                       Javascript
@@ -555,7 +555,7 @@ const Searchcandidate = ({ local_varaiable }: any) => {
                       type="checkbox"
                       value=""
                       id="s-4"
-                      defaultChecked
+                      
                     />
                     <Form.Label className="form-check-label" htmlFor="s-4">
                       CSS3

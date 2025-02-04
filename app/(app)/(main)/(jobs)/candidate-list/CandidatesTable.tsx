@@ -81,7 +81,7 @@ const CandidatesTable = () => {
                     <div className="d-flex">
                       <div className="ms-2">
                         <p className="fw-medium mb-0 d-flex align-items-center">
-                          <a href={`/apps/jobs/jobdetails/${data.candidateData.id}`}>
+                          <a href={`mailto:${data.candidateData.email}`}>
                             {data.candidateData.name}
                           </a>
                         </p>
@@ -110,7 +110,12 @@ const CandidatesTable = () => {
                   <td>
                     <Link
                       scroll={false}
-                      href={`/apps/jobs/jobdetails/${data.candidateData.id}`}
+                      target="_blank"
+                      href={
+                        data.candidateData.resume_file !== ""
+                          ? `https://api.bimqp.com/${data.candidateData.resume_file}`
+                          : "#"
+                      }
                       className="btn btn-icon btn-sm btn-primary-light btn-wave waves-effect waves-light me-1"
                     >
                       <i className="ri-eye-line"></i>

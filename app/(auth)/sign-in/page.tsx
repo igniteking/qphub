@@ -3,10 +3,10 @@
 import Loader from "@/components/Loader";
 import ToastNotification from "@/components/ToastNotification";
 import Seo from "@/shared/layout-components/seo/seo";
-import { useSignIn } from "@clerk/nextjs";
+import { useAuth, useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 
 const SigninCover = () => {
@@ -18,6 +18,13 @@ const SigninCover = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState<string>("");
   const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
+  const { userId } = useAuth();
+
+  useEffect(() => {
+    if (userId) {
+      router.push("/dashboard");
+    }
+  }, [userId, router]);
 
   const handleEmailSignIn = async () => {
     if (!isLoaded) return;

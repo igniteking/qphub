@@ -1,4 +1,5 @@
 export interface CandidateData {
+  resume_file: string;
   designation: string;
   id: number;
   name: string;

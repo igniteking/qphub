@@ -1158,51 +1158,6 @@ const Header = ({ local_varaiable, ThemeChanger }: any) => {
                 aria-labelledby="mainHeaderProfile"
               >
                 <li>
-                  <Link
-                    className="dropdown-item d-flex align-items-center"
-                    href="#!"
-                  >
-                    <i className="ti ti-user me-2 fs-18 text-primary"></i>
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item d-flex align-items-center"
-                    href="#!"
-                  >
-                    <i className="ti ti-mail me-2 fs-18 text-secondary"></i>
-                    Inbox
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item d-flex align-items-center"
-                    href="#!"
-                  >
-                    <i className="ti ti-checklist me-2 fs-18 text-success"></i>
-                    Task Manager
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item d-flex align-items-center"
-                    href="#!"
-                  >
-                    <i className="ti ti-settings me-2 fs-18 text-orange"></i>
-                    Settings
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item d-flex align-items-center"
-                    href="#!"
-                  >
-                    <i className="ti ti-headset me-2 fs-18 text-info"></i>
-                    Support
-                  </Link>
-                </li>
-                <li>
                   <button
                     className="dropdown-item d-flex align-items-center"
                     onClick={() => signOut({ redirectUrl: "/sign-in/" })}
