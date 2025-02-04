@@ -22,7 +22,7 @@ const SigninCover = () => {
 
   useEffect(() => {
     if (userId) {
-      router.push("/dashboard");
+      router.push("/candidate-list");
     }
   }, [userId, router]);
 
