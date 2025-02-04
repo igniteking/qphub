@@ -10,8 +10,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const RootLayout = ({ children }: any) => {
   return (
     <>
-      {/* <Analytics />
-      <SpeedInsights /> */}
+      <Analytics />
+      <SpeedInsights />
       <Provider store={store}>
         <ClerkProvider>{children}</ClerkProvider>
       </Provider>
