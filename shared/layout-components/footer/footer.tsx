@@ -8,9 +8,9 @@ const Footer = () => {
         <div className="container">
           <span className="text-muted">
             {" "}
-            Copyright © <span id="year">2024 </span>
+            Copyright © <span id="year">2025 </span>
             <Link scroll={false} href="#!" className="text-dark fw-medium">
-              zazla
+              qphub
             </Link>
             . Designed with{" "}
             <span className="bi bi-heart-fill text-danger"></span> by
