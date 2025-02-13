@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { CandidateData, WorkExperience } from "@/shared/types/types";
@@ -8,7 +9,7 @@ import CodeBroke from "@/components/CodeBroke";
 import { useUser } from "@clerk/nextjs";
 
 interface ResumeData {
-  candidateData: CandidateData; // Change this to an object instead of an array
+  candidateData: CandidateData | null;
   workExperience: WorkExperience[];
 }
 
@@ -18,40 +19,42 @@ const CandidatesTable = () => {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
   const [showMessage, setShowMessage] = useState(false);
-  const { user } = useUser(); // Get the user object from Clerk
+  const { isLoaded, user } = useUser();
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     const fetchData = async () => {
+      if (!user?.id) {
+        setError("User authentication failed. No user ID found.");
+        setLoading(false);
+        return;
+      }
+
       try {
-        const clerkId = user?.id; // Get the Clerk ID
-
-        if (!clerkId) {
-          console.error("Clerk ID is undefined or empty.");
-          return;
-        }
-
-        // Construct the URL for the API call
-        const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/fetchResume.php?clerk_id=${clerkId}`;
+        const url = `${process.env.NEXT_PUBLIC_MYSQL_URL}/fetchResume.php?clerk_id=${user.id}`;
+        console.log("Fetching from URL:", url);
 
         const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
-        }
         const data = await response.json();
-        setResumeData(data); // Set the entire array of candidate data
-      } catch (error: any) {
-        console.error("Error fetching data:", error.message);
-        setMessage(error.message);
-        setShowMessage(true);
+
+        if (!response.ok || data.error) {
+          throw new Error(data.error || `Server error: ${response.status}`);
+        }
+
+        setResumeData(data);
+      } catch (err: any) {
+        console.error("Error fetching data:", err.message);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [user]);
+  }, [isLoaded, user]);
 
-  if (error) return <CodeBroke />;
+  if (error) return <CodeBroke errorMessage={error} />;
 
   return (
     <div className="table-responsive">
@@ -76,43 +79,40 @@ const CandidatesTable = () => {
             </thead>
             <tbody>
               {resumeData.map((data, idx) => (
-                <tr key={data.candidateData.id}>
+                <tr key={idx}>
                   <td>
                     <div className="d-flex">
                       <div className="ms-2">
                         <p className="fw-medium mb-0 d-flex align-items-center">
-                          <a href={`mailto:${data.candidateData.email}`}>
-                            {data.candidateData.name}
+                          <a href={`mailto:${data.candidateData?.email}`}>
+                            {data.candidateData?.name || "N/A"}
                           </a>
                         </p>
                         <p className="fs-12 text-muted mb-0">
                           <Link
                             scroll={false}
-                            href={`mailto:${data.candidateData.email}`}
+                            href={`mailto:${data.candidateData?.email}`}
                             className="fw-medium mb-0"
                           >
-                            {data.candidateData.email}
+                            {data.candidateData?.email || "N/A"}
                           </Link>
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td>{data.candidateData.designation}</td>
+                  <td>{data.candidateData?.designation || "N/A"}</td>
                   <td>
-                    {data.workExperience.length > 0 &&
-                    data.workExperience[0]?.role ? (
-                      <p>{data.workExperience[0].role}</p>
-                    ) : (
-                      <p>No experience available</p>
-                    )}
+                    {data.workExperience.length > 0
+                      ? data.workExperience[0].role
+                      : "No experience"}{" "}
                   </td>
-                  <td>{data.candidateData.created_at}</td>
+                  <td>{data.candidateData?.created_at || "N/A"}</td>
                   <td>
                     <Link
                       scroll={false}
                       target="_blank"
                       href={
-                        data.candidateData.resume_file !== ""
+                        data.candidateData?.resume_file
                           ? `https://api.bimqp.com/${data.candidateData.resume_file}`
                           : "#"
                       }
