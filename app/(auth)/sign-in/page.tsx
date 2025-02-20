@@ -95,7 +95,7 @@ const SigninCover = () => {
 
   return (
     <Fragment>
-      <Seo title={"Sing In"} />
+      <Seo title={"Sign In"} />
       <div className="row authentication authentication-cover-main mx-0">
         <Col xxl={5} xl={5} lg={12} className="d-xl-block d-none px-0">
           <div className="authentication-cover overflow-hidden">
